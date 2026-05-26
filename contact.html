@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — House of Navi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Page shell ── */
+    .contact-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .contact-page .page-footer {
+      position: static;
+      padding: clamp(20px, 3vh, 36px) clamp(28px, 6vw, 72px);
+    }
+
+    /* ── Coordinates — top right, below nav ── */
+    .contact-coords {
+      position: absolute;
+      top: clamp(64px, 8vh, 92px);
+      right: clamp(28px, 6vw, 72px);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.38);
+      z-index: 20;
+    }
+
+    /* ── Two-column main content ── */
+    .contact-content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 4vw, 64px);
+      padding: clamp(110px, 14vh, 160px) clamp(28px, 6vw, 72px) clamp(24px, 4vh, 48px);
+      align-items: stretch;
+    }
+
+    /* ── Left column ── */
+    .contact-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.5;
+      margin: 0;
+    }
+
+    .contact-lower {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-title {
+      font-family: var(--ff-display);
+      font-size: clamp(80px, 10vw, 148px);
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(16px, 2.5vh, 28px) 0;
+    }
+
+    .contact-body {
+      font-family: var(--ff-body);
+      font-size: clamp(13px, 1.1vw, 15px);
+      font-weight: 400;
+      line-height: 1.78;
+      color: rgba(245, 221, 213, 0.75);
+      max-width: 380px;
+      margin: 0 0 clamp(20px, 3.5vh, 36px) 0;
+    }
+
+    /* STORIES FIRST · FUNDING FOLLOWS tagline */
+    .contact-tagline {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.45;
+    }
+
+    .contact-tagline::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: rgba(245, 221, 213, 0.28);
+      flex-shrink: 0;
+    }
+
+    /* ── Right column — contact list ── */
+    .contact-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .contact-item {
+      padding: clamp(12px, 1.8vh, 20px) 0;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.1);
+    }
+
+    .contact-item:first-child {
+      border-top: 1px solid rgba(245, 221, 213, 0.1);
+    }
+
+    .contact-item__label {
+      display: block;
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.38);
+      margin-bottom: 5px;
+    }
+
+    .contact-item__value {
+      display: block;
+      font-family: var(--ff-body);
+      font-size: clamp(12px, 1.1vw, 14px);
+      font-weight: 400;
+      color: rgba(245, 221, 213, 0.82);
+      text-decoration: none;
+      line-height: 1.5;
+      transition: color 0.2s ease;
+    }
+
+    a.contact-item__value:hover {
+      color: var(--navi-first-light);
+    }
+
+    /* ── Footer ── */
+    .contact-footer-meta {
+      margin: 0;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.4);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+      .contact-left {
+        justify-content: flex-start;
+        gap: var(--space-md);
+      }
+      .contact-coords {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .contact-title {
+        font-size: clamp(64px, 14vw, 96px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture-stack">
+    <div class="texture" style="background-image: url('brand/assets/textures/texture-croc.png');"></div>
+    <div class="scrim"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+
+    <main class="page-content contact-page">
+
+      <header class="page-header">
+        <a href="index.html" class="navi-logo">
+          <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
+        </a>
+        <nav class="navi-nav">
+          <a href="index.html" class="navi-nav-link">Landing</a>
+          <a href="projects.html" class="navi-nav-link">Projects</a>
+          <a href="get-involved.html" class="navi-nav-link">Get Involved</a>
+          <a href="about.html" class="navi-nav-link">About</a>
+          <a href="contact.html" class="navi-nav-link is-current">Contact</a>
+        </nav>
+      </header>
+
+      <div class="contact-content">
+
+        <!-- Left column -->
+        <div class="contact-left">
+          <p class="contact-eyebrow reveal">CONTACT</p>
+          <div class="contact-lower">
+            <h1 class="contact-title reveal reveal-delay-1">Say hello.</h1>
+            <p class="contact-body reveal reveal-delay-2">Whether you're a donor, a fellow non-profit, a photographer with time to give, or a stranger who simply wants to know more — we'd love to hear from you.</p>
+            <p class="contact-tagline reveal reveal-delay-3">STORIES FIRST · FUNDING FOLLOWS</p>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="contact-right reveal reveal-delay-2">
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-item__label">General</span>
+              <a href="mailto:hello@houseofnavi.com" class="contact-item__value">hello@houseofnavi.com</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item__label">Post</span>
+              <span class="contact-item__value">The Sir Francis · Unit 307<br>34 High Level Road<br>Greenpoint · Cape Town · 8005</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item__label">In Motion</span>
+              <a href="https://instagram.com/houseofnavi" class="contact-item__value" target="_blank" rel="noopener">@houseofnavi · Instagram</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <footer class="page-footer">
+        <p class="contact-footer-meta">The door is open</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <a href="get-involved.html#donate" class="navi-pill">
+    <span class="navi-pill__heart">♥</span>
+    Support
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) el.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Involved — House of Navi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Page shell ── */
+    .gi-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .gi-page .page-footer {
+      position: static;
+      padding: clamp(20px, 3vh, 36px) clamp(28px, 6vw, 72px);
+    }
+
+    /* ── Hero ── */
+    .gi-hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(110px, 16vh, 180px) clamp(28px, 6vw, 160px) clamp(16px, 2vh, 32px);
+    }
+
+    .gi-eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.5;
+      margin: 0 0 clamp(10px, 1.5vh, 18px) 0;
+    }
+
+    .gi-title {
+      font-family: var(--ff-display);
+      font-size: clamp(80px, 11.5vw, 160px);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(20px, 3vh, 36px) 0;
+    }
+
+    /* Tagline with decorative lines */
+    .gi-tagline {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.5;
+    }
+
+    .gi-tagline::before,
+    .gi-tagline::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 1px;
+      background: rgba(245, 221, 213, 0.3);
+    }
+
+    /* ── Three ways section ── */
+    .gi-ways {
+      padding: clamp(24px, 4vh, 48px) clamp(28px, 6vw, 72px) 0;
+    }
+
+    .gi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+    }
+
+    /* ── Individual way card ── */
+    .gi-way {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gi-way__num {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      font-style: italic;
+      letter-spacing: 0.06em;
+      color: var(--navi-warm-sand);
+      opacity: 0.8;
+      margin-bottom: clamp(8px, 1.2vh, 14px);
+      display: block;
+    }
+
+    .gi-way__title {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.0;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(10px, 1.5vh, 16px) 0;
+    }
+
+    .gi-way__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(13px, 1.1vw, 15px);
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.75);
+      margin: 0 0 clamp(14px, 2.5vh, 28px) 0;
+      flex: 1;
+    }
+
+    .gi-way__cta {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.65;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.28);
+      transition: opacity 0.2s ease, border-color 0.2s ease;
+      width: fit-content;
+    }
+
+    .gi-way__cta::after {
+      content: '→';
+      font-size: 11px;
+    }
+
+    .gi-way__cta:hover {
+      opacity: 1;
+      border-color: rgba(245, 221, 213, 0.65);
+    }
+
+    /* ── Footer ── */
+    .gi-footer-meta {
+      margin: 0;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.45);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .gi-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+      .gi-hero {
+        padding-top: 120px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gi-title {
+        font-size: clamp(60px, 14vw, 96px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="texture-stack">
+    <div class="texture" style="background-image: url('brand/assets/textures/dried_river.png');"></div>
+    <div class="scrim"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+
+    <main class="page-content gi-page">
+
+      <header class="page-header">
+        <a href="index.html" class="navi-logo">
+          <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
+        </a>
+        <nav class="navi-nav">
+          <a href="index.html" class="navi-nav-link">Landing</a>
+          <a href="projects.html" class="navi-nav-link">Projects</a>
+          <a href="get-involved.html" class="navi-nav-link is-current">Get Involved</a>
+          <a href="about.html" class="navi-nav-link">About</a>
+          <a href="contact.html" class="navi-nav-link">Contact</a>
+        </nav>
+      </header>
+
+      <section class="gi-hero">
+        <p class="gi-eyebrow reveal">GET INVOLVED</p>
+        <h1 class="gi-title reveal reveal-delay-1">Walk with us.</h1>
+        <p class="gi-tagline reveal reveal-delay-2">A SPOTLIGHT · NOT A SOLUTION</p>
+      </section>
+
+      <section class="gi-ways" id="donate">
+        <div class="gi-grid">
+
+          <article class="gi-way reveal reveal-delay-1">
+            <span class="gi-way__num">I</span>
+            <h2 class="gi-way__title">Donate</h2>
+            <p class="gi-way__desc">Direct, transparent funding to the projects we walk with. No middle layer, no overhead skim — every contribution carries a name, a place, a thank-you.</p>
+            <a href="#donate" class="gi-way__cta">Walk with us</a>
+          </article>
+
+          <article class="gi-way reveal reveal-delay-2">
+            <span class="gi-way__num">II</span>
+            <h2 class="gi-way__title">Partner</h2>
+            <p class="gi-way__desc">Whether you're a brand, foundation, photographer, or fellow non-profit — there is almost always a way to multiply what we can do together. Tell us yours.</p>
+            <a href="contact.html" class="gi-way__cta">Start the conversation</a>
+          </article>
+
+          <article class="gi-way reveal reveal-delay-3">
+            <span class="gi-way__num">III</span>
+            <h2 class="gi-way__title">Spread the word.</h2>
+            <p class="gi-way__desc">A spotlight only works when it's pointed somewhere. Share a story, send a film, post a photo, or simply tell one person about the people doing this work.</p>
+            <a href="projects.html" class="gi-way__cta">See the stories</a>
+          </article>
+
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <p class="gi-footer-meta">Three ways in · Pick whichever fits</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <a href="get-involved.html#donate" class="navi-pill">
+    <span class="navi-pill__heart">♥</span>
+    Support
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) el.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

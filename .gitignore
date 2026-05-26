@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Design reference files (not needed in production)
+brand/assets/designs/
+brand/assets/guidelines/
+
+# Skills repo (separate git repository)
+skills/
+
+# Unused textures
+brand/assets/textures/texture-tree-roots.jpg
+brand/assets/textures/elephant_olive_texture_2880x1800_correct_scale.jpg
+
+# Editor
+.vscode/
+*.swp
