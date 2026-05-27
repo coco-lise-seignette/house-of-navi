@@ -9,6 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Stronger scrim for legibility on warm elephant texture */
+    .texture-stack .scrim {
+      background: rgba(20, 4, 0, 0.72) !important;
+    }
+
     /* ── Reveal animations ── */
     .reveal {
       opacity: 0;
@@ -64,7 +69,7 @@
 
     .projects-title {
       font-family: var(--ff-display);
-      font-size: clamp(72px, 9vw, 120px);
+      font-size: clamp(56px, 7.5vw, 108px);
       line-height: 0.92;
       letter-spacing: -0.02em;
       color: var(--navi-first-light);
@@ -198,6 +203,36 @@
       border-color: rgba(245, 221, 213, 0.65);
     }
 
+    /* ── Card status label ── */
+    .project-card__status {
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-warm-sand);
+      opacity: 0.75;
+      margin: 0 0 clamp(10px, 1.5vh, 16px) 0;
+    }
+
+    /* ── Multiple CTAs (column 3) ── */
+    .project-card__cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* ── CTA plain (non-link, e.g. Coming Soon) ── */
+    .project-card__cta--plain {
+      cursor: default;
+      opacity: 0.38;
+      border-bottom-color: transparent;
+    }
+    .project-card__cta--plain:hover {
+      opacity: 0.38;
+      border-color: transparent;
+    }
+
     /* ── Footer metadata ── */
     .projects-footer-meta {
       margin: 0;
@@ -232,6 +267,13 @@
       }
     }
   </style>
+  <style>
+    /* ── Scroll unlock ── */
+    html, body { height: auto !important; min-height: 100vh; overflow-y: auto !important; }
+    .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
+    main { position: relative; z-index: 10; }
+  </style>
 </head>
 <body>
   <div class="texture-stack">
@@ -239,8 +281,9 @@
     <div class="scrim"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
+  </div>
 
-    <main class="page-content projects-page">
+  <main class="page-content projects-page">
 
       <header class="page-header">
         <a href="index.html" class="navi-logo">
@@ -259,7 +302,7 @@
         <p class="eyebrow reveal">THE WORK</p>
         <div class="projects-hero__grid">
           <h1 class="projects-title reveal reveal-delay-1">Projects</h1>
-          <p class="projects-intro reveal reveal-delay-2">Carefully curated, locally led. Each project is a person, a place, and a quiet promise to show up — for as long as it takes.</p>
+          <p class="projects-intro reveal reveal-delay-2">Stories rooted in humanity. From healthcare and conservation to education and community led development, each project exists to bring visibility, connection, and meaningful support to initiatives already creating change on the ground.</p>
         </div>
       </section>
 
@@ -275,7 +318,8 @@
             </div>
             <h2 class="project-card__title">Mkasanga Community Clinic</h2>
             <p class="project-card__location">South Luangwa · Zambia</p>
-            <p class="project-card__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.</p>
+            <p class="project-card__desc">A community built clinic on the edge of the wild. Mkasanga sits six to eight hours from the nearest hospital, with roads often cut off during the rains. Pregnant mothers, children, and families currently travel extreme distances for basic care. The clinic is already halfway built by the local community. The mission now is to help complete it.</p>
+            <p class="project-card__status">In Motion</p>
             <a href="#" class="project-card__cta">Read the Story</a>
           </article>
 
@@ -283,35 +327,39 @@
             <div class="project-card__meta">
               <span class="project-card__num">№ 02</span>
               <span class="project-card__rule-line"></span>
-              <span class="project-card__cat">Education</span>
+              <span class="project-card__cat">Coming Soon</span>
             </div>
-            <h2 class="project-card__title">Lower Zambezi Schools</h2>
-            <p class="project-card__location">Lower Zambezi · Zambia</p>
-            <p class="project-card__desc">A network of village schools led by local teachers, supported by the wildlife concessions whose livelihoods depend on the river that runs past every classroom.</p>
-            <a href="#" class="project-card__cta">Read the Story</a>
+            <h2 class="project-card__title">Next Story Loading</h2>
+            <p class="project-card__location">Africa</p>
+            <p class="project-card__desc">We are currently developing the next House of Navi project alongside local communities and long term partners.</p>
+            <p class="project-card__status">Listening</p>
+            <span class="project-card__cta project-card__cta--plain">Coming Soon</span>
           </article>
 
           <article class="project-card reveal reveal-delay-3">
             <div class="project-card__meta">
               <span class="project-card__num">№ 03</span>
               <span class="project-card__rule-line"></span>
-              <span class="project-card__cat">Conservation</span>
+              <span class="project-card__cat">Get Involved</span>
             </div>
-            <h2 class="project-card__title">Black Rhino Expansion</h2>
-            <p class="project-card__location">KwaZulu-Natal · South Africa</p>
-            <p class="project-card__desc">Returning the black rhino to ancestral range, hand-in-hand with the communities that live alongside them. Conservation and community — the same conversation.</p>
-            <a href="#" class="project-card__cta">Read the Story</a>
+            <h2 class="project-card__title">Want to get involved?</h2>
+            <p class="project-card__desc">Whether you are a donor, filmmaker, organisation, brand, or creative partner, we are always open to collaborating with people who believe in the power of storytelling and human connection.</p>
+            <p class="project-card__status">Open</p>
+            <div class="project-card__cta-group">
+              <a href="get-involved.html#donate" class="project-card__cta">Donate</a>
+              <a href="contact.html" class="project-card__cta">Become a Partner</a>
+              <a href="projects.html" class="project-card__cta">Share the Story</a>
+            </div>
           </article>
 
         </div>
       </section>
 
       <footer class="page-footer">
-        <p class="projects-footer-meta">3 Active Projects · Zambia · South Africa</p>
+        <p class="projects-footer-meta">03 Projects · In Motion · In Listening</p>
       </footer>
 
-    </main>
-  </div>
+  </main>
 
   <a href="get-involved.html#donate" class="navi-pill">
     <span class="navi-pill__heart">♥</span>
@@ -326,6 +374,20 @@
     }, { threshold: 0.08 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    ;(function () {
+      var lastY = 0;
+      var nav = document.querySelector('.navi-nav');
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        if (y > lastY && y > 60) {
+          nav.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
+      }, { passive: true });
+    }());
   </script>
 </body>
 </html>

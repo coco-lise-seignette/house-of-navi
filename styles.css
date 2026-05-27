@@ -119,6 +119,13 @@ a {
 .navi-nav {
   display: flex;
   gap: clamp(24px, 2vw, 40px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.navi-nav.nav-hidden {
+  transform: translateY(-60px);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .navi-nav-link {

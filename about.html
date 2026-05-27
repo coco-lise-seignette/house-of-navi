@@ -9,6 +9,47 @@
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* ── Scroll unlock — override styles.css height:100% on html/body ── */
+    html,
+    body {
+      height: auto !important;
+      min-height: 100vh;
+      overflow-y: auto !important;
+    }
+
+    /* ── Texture background stays pinned full-screen while content scrolls ── */
+    .texture-stack {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    /* ── All content sections float above the fixed texture ── */
+    main,
+    .about-hero,
+    .about-section,
+    .about-signature-section {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── Stronger scrim for dark knuckles texture ── */
+    .texture-stack .scrim {
+      background: rgba(20, 4, 0, 0.70) !important;
+    }
+
+    /* ── Fixed header while page scrolls ── */
+    .page-header {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
     /* ── Reveal animations ── */
     .reveal {
       opacity: 0;
@@ -18,6 +59,7 @@
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.22s; }
     .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
@@ -27,32 +69,15 @@
     .about-page {
       display: flex;
       flex-direction: column;
+    }
+
+    /* ── Hero: full viewport, single column ── */
+    .about-hero {
       min-height: 100vh;
-    }
-
-    .about-page .page-footer {
-      position: static;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: clamp(20px, 3vh, 36px) clamp(28px, 6vw, 72px);
-    }
-
-    /* ── Main two-column content ── */
-    .about-content {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(32px, 4vw, 72px);
-      padding: clamp(110px, 15vh, 170px) clamp(28px, 6vw, 72px) clamp(24px, 4vh, 48px);
-      align-items: stretch;
-    }
-
-    /* ── Left column ── */
-    .about-headline-col {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
+      padding: clamp(110px, 15vh, 170px) clamp(28px, 6vw, 72px) clamp(56px, 8vh, 80px);
     }
 
     .about-eyebrow {
@@ -68,12 +93,12 @@
 
     .about-title {
       font-family: var(--ff-display);
-      font-size: clamp(44px, 5.8vw, 88px);
-      line-height: 1.06;
+      font-size: clamp(48px, 6.5vw, 96px);
+      line-height: 1.04;
       letter-spacing: -0.02em;
       color: var(--navi-first-light);
       margin: 0;
-      font-style: normal;
+      max-width: 1100px;
     }
 
     .about-title__highlight {
@@ -98,72 +123,109 @@
 
     .about-tagline {
       font-family: var(--ff-body);
-      font-size: 10px;
+      font-size: var(--fs-cap);
       font-weight: 600;
       letter-spacing: 0.32em;
       text-transform: uppercase;
       color: var(--navi-first-light);
-      opacity: 0.45;
+      opacity: 0.62;
     }
 
-    /* ── Right column — body text ── */
-    .about-body-col {
+    /* ── Scrollable sections ── */
+    .about-section {
+      padding: clamp(56px, 9vh, 110px) clamp(28px, 6vw, 72px);
+    }
+
+    /* ── Section 1: Mission copy ── */
+    .about-mission-lead {
+      font-family: var(--ff-display);
+      font-size: var(--fs-h2);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(28px, 4vh, 44px) 0;
+    }
+
+    .about-mission-body p {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.2vw, 16px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(16px, 2.2vh, 24px) 0;
+      max-width: 680px;
+    }
+
+    .about-mission-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Section 2: Pillars ── */
+    .about-section-eyebrow {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.5;
+      margin: 0 0 clamp(32px, 5vh, 56px) 0;
+    }
+
+    .about-pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vh, 56px) clamp(40px, 6vw, 80px);
+    }
+
+    .about-pillar {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding-top: clamp(0px, 4vh, 48px);
     }
 
-    .about-body p {
+    .about-pillar__rule {
+      width: 24px;
+      height: 1px;
+      background: rgba(245, 221, 213, 0.28);
+      margin-bottom: clamp(14px, 2vh, 20px);
+    }
+
+    .about-pillar__title {
+      font-family: var(--ff-display);
+      font-size: clamp(24px, 2.4vw, 32px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(10px, 1.4vh, 14px) 0;
+    }
+
+    .about-pillar__desc {
       font-family: var(--ff-body);
       font-size: clamp(13px, 1.1vw, 15px);
       font-weight: 400;
-      line-height: 1.82;
-      color: rgba(245, 221, 213, 0.82);
-      margin: 0 0 clamp(14px, 2.2vh, 22px) 0;
+      line-height: 1.7;
+      color: var(--navi-first-light);
+      margin: 0;
     }
 
-    .about-signature {
-      font-family: var(--ff-script) !important;
-      font-size: clamp(18px, 1.6vw, 22px) !important;
-      font-weight: 400 !important;
-      color: rgba(245, 221, 213, 0.65) !important;
-      margin-top: clamp(8px, 1.2vh, 14px) !important;
-      margin-bottom: 0 !important;
-      line-height: 1.4 !important;
+    /* ── Signature section ── */
+    .about-signature-section {
+      padding: clamp(30px, 4.5vh, 54px) clamp(28px, 6vw, 72px) clamp(72px, 12vh, 120px);
     }
 
-    /* ── Footer ── */
-    .about-footer-left,
-    .about-footer-right {
-      font-family: var(--ff-body);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(245, 221, 213, 0.45);
+    .about-page-signature {
+      font-family: var(--ff-script);
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 400;
+      color: rgba(245, 221, 213, 0.55);
+      line-height: 1.4;
       margin: 0;
     }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
-      .about-content {
+      .about-pillars-grid {
         grid-template-columns: 1fr;
-        align-items: start;
-      }
-      .about-headline-col {
-        justify-content: flex-start;
-        gap: var(--space-md);
-      }
-      .about-tagline-row {
-        margin-top: var(--space-md);
-      }
-      .about-body-col {
-        padding-top: 0;
-      }
-      .about-page .page-footer {
-        flex-direction: column;
-        gap: 8px;
+        gap: var(--space-lg);
       }
     }
 
@@ -175,59 +237,87 @@
   </style>
 </head>
 <body>
+  <!-- Fixed texture background -->
   <div class="texture-stack">
     <div class="texture" style="background-image: url('brand/assets/textures/texture-knuckles.jpg');"></div>
     <div class="scrim"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
+  </div>
 
-    <main class="page-content about-page">
+  <!-- Scrollable content -->
+  <main class="page-content about-page">
 
-      <header class="page-header">
-        <a href="index.html" class="navi-logo">
-          <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
-        </a>
-        <nav class="navi-nav">
-          <a href="index.html" class="navi-nav-link">Landing</a>
-          <a href="projects.html" class="navi-nav-link">Projects</a>
-          <a href="get-involved.html" class="navi-nav-link">Get Involved</a>
-          <a href="about.html" class="navi-nav-link is-current">About</a>
-          <a href="contact.html" class="navi-nav-link">Contact</a>
-        </nav>
-      </header>
+    <header class="page-header">
+      <a href="index.html" class="navi-logo">
+        <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
+      </a>
+      <nav class="navi-nav">
+        <a href="index.html" class="navi-nav-link">Landing</a>
+        <a href="projects.html" class="navi-nav-link">Projects</a>
+        <a href="get-involved.html" class="navi-nav-link">Get Involved</a>
+        <a href="about.html" class="navi-nav-link is-current">About</a>
+        <a href="contact.html" class="navi-nav-link">Contact</a>
+      </nav>
+    </header>
 
-      <div class="about-content">
+    <!-- ── Hero: full viewport ── -->
+    <section class="about-hero">
+      <p class="about-eyebrow reveal">ABOUT</p>
+      <h1 class="about-title reveal reveal-delay-1">The world does not need more noise. <em class="about-title__highlight">It needs deeper connection.</em></h1>
+    </section>
 
-        <div class="about-headline-col">
-          <div>
-            <p class="about-eyebrow reveal">ABOUT</p>
-            <h1 class="about-title reveal reveal-delay-1">
-              We arrive with a spotlight, <em class="about-title__highlight">not a solution.</em>
-            </h1>
-          </div>
-          <div class="about-tagline-row reveal reveal-delay-2">
-            <span class="about-tagline-rule"></span>
-            <span class="about-tagline">THE NAVI PROMISE</span>
-          </div>
+    <!-- ── Section 1: Mission body copy ── -->
+    <section class="about-section">
+      <h2 class="about-mission-lead reveal">Stories can change the world.</h2>
+      <div class="about-mission-body">
+        <p class="reveal reveal-delay-1">House of Navi is a South African non profit storytelling platform connecting underrepresented communities, environmental initiatives, and grassroots projects to global awareness and meaningful support.</p>
+        <p class="reveal reveal-delay-2">Through cinematic storytelling and creative campaigns we help make invisible stories visible, creating a bridge between people and the projects that need them most.</p>
+        <p class="reveal reveal-delay-2">Because awareness creates connection. And connection creates action.</p>
+        <p class="reveal reveal-delay-2">We believe stories have the power to move far beyond the people who first tell them. One honest story can travel across borders, shift perspective, mobilise support, and create real world change.</p>
+        <p class="reveal reveal-delay-2">House of Navi collaborates with local communities, filmmakers, organisations, and changemakers to create films and campaigns that amplify initiatives already creating change on the ground.</p>
+        <p class="reveal reveal-delay-2">From remote villages to fragile ecosystems, we work to bring visibility to stories that matter.</p>
+      </div>
+    </section>
+
+    <!-- ── Signature ── -->
+    <section class="about-signature-section">
+      <p class="about-page-signature reveal">— the House of Navi team</p>
+    </section>
+
+    <!-- ── Section 2: What We Do ── -->
+    <section class="about-section">
+      <p class="about-section-eyebrow reveal">STORYTELLING FOR IMPACT</p>
+      <div class="about-pillars-grid">
+
+        <div class="about-pillar reveal reveal-delay-1">
+          <span class="about-pillar__rule"></span>
+          <h3 class="about-pillar__title">Documentary &amp; Film</h3>
+          <p class="about-pillar__desc">We create emotionally grounded films that connect audiences to real human experiences.</p>
         </div>
 
-        <div class="about-body-col reveal reveal-delay-2">
-          <div class="about-body">
-            <p>House of Navi is a South African non-profit shining a light on carefully curated local projects across the continent — and connecting them to the donors, storytellers and changemakers who can help carry them forward.</p>
-            <p>We don't lead with statistics. We lead with the people on the ground, and the work already in motion, and we let the rest of the world catch up. Stories first. Funding follows.</p>
-            <p>Conservation and community are not separate conversations. They are the same one — and we will keep listening for as long as it takes.</p>
-            <p class="about-signature">— the House of Navi team</p>
-          </div>
+        <div class="about-pillar reveal reveal-delay-2">
+          <span class="about-pillar__rule"></span>
+          <h3 class="about-pillar__title">Awareness Campaigns</h3>
+          <p class="about-pillar__desc">Creative campaigns designed to raise visibility, funding, and long term support.</p>
+        </div>
+
+        <div class="about-pillar reveal reveal-delay-3">
+          <span class="about-pillar__rule"></span>
+          <h3 class="about-pillar__title">Community Partnerships</h3>
+          <p class="about-pillar__desc">We collaborate directly with local initiatives and grassroots organisations already creating change.</p>
+        </div>
+
+        <div class="about-pillar reveal reveal-delay-4">
+          <span class="about-pillar__rule"></span>
+          <h3 class="about-pillar__title">Fundraising &amp; Activation</h3>
+          <p class="about-pillar__desc">From donor campaigns to creative activations, we help turn awareness into real world action.</p>
         </div>
 
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <p class="about-footer-left">Founded 2024 · Cape Town, South Africa</p>
-      </footer>
-
-    </main>
-  </div>
+  </main>
 
   <a href="get-involved.html#donate" class="navi-pill">
     <span class="navi-pill__heart">♥</span>
@@ -242,6 +332,20 @@
     }, { threshold: 0.08 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    ;(function () {
+      var lastY = 0;
+      var nav = document.querySelector('.navi-nav');
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        if (y > lastY && y > 60) {
+          nav.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
+      }, { passive: true });
+    }());
   </script>
 </body>
 </html>

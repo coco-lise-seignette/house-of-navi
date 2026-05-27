@@ -60,7 +60,7 @@
 
     .gi-title {
       font-family: var(--ff-display);
-      font-size: clamp(80px, 11.5vw, 160px);
+      font-size: clamp(60px, 8.2vw, 118px);
       line-height: 0.9;
       letter-spacing: -0.02em;
       color: var(--navi-first-light);
@@ -88,6 +88,30 @@
       width: 48px;
       height: 1px;
       background: rgba(245, 221, 213, 0.3);
+    }
+
+    /* ── Intro paragraph below tagline ── */
+    .gi-intro {
+      font-family: var(--ff-body);
+      font-size: clamp(13px, 1.1vw, 15px);
+      font-weight: 400;
+      line-height: 1.78;
+      color: rgba(245, 221, 213, 0.72);
+      max-width: 680px;
+      text-align: center;
+      margin: clamp(20px, 3vh, 36px) 0 0 0;
+    }
+
+    /* ── Closing line ── */
+    .gi-closing {
+      padding: clamp(28px, 4vh, 48px) clamp(28px, 6vw, 72px) clamp(24px, 4vh, 40px);
+      font-family: var(--ff-body);
+      font-size: clamp(13px, 1.1vw, 15px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.7;
+      color: rgba(245, 221, 213, 0.55);
+      text-align: center;
     }
 
     /* ── Three ways section ── */
@@ -192,6 +216,13 @@
       }
     }
   </style>
+  <style>
+    /* ── Scroll unlock ── */
+    html, body { height: auto !important; min-height: 100vh; overflow-y: auto !important; }
+    .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
+    main { position: relative; z-index: 10; }
+  </style>
 </head>
 <body>
   <div class="texture-stack">
@@ -199,8 +230,9 @@
     <div class="scrim"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
+  </div>
 
-    <main class="page-content gi-page">
+  <main class="page-content gi-page">
 
       <header class="page-header">
         <a href="index.html" class="navi-logo">
@@ -218,7 +250,8 @@
       <section class="gi-hero">
         <p class="gi-eyebrow reveal">GET INVOLVED</p>
         <h1 class="gi-title reveal reveal-delay-1">Walk with us.</h1>
-        <p class="gi-tagline reveal reveal-delay-2">A SPOTLIGHT · NOT A SOLUTION</p>
+        <p class="gi-tagline reveal reveal-delay-2">Making hope visible</p>
+        <p class="gi-intro reveal reveal-delay-3">Support stories that create real impact. Your support helps fund storytelling campaigns, community initiatives, documentary productions, and awareness projects connected to real people and places. Every donation contributes toward visibility, resources, and long term support for projects already creating change on the ground. We are committed to transparent, ethical, and accountable use of funds. Whenever possible, project updates and campaign progress will be shared directly with supporters and partners.</p>
       </section>
 
       <section class="gi-ways" id="donate">
@@ -227,33 +260,30 @@
           <article class="gi-way reveal reveal-delay-1">
             <span class="gi-way__num">I</span>
             <h2 class="gi-way__title">Donate</h2>
-            <p class="gi-way__desc">Direct, transparent funding to the projects we walk with. No middle layer, no overhead skim — every contribution carries a name, a place, a thank-you.</p>
-            <a href="#donate" class="gi-way__cta">Walk with us</a>
+            <p class="gi-way__desc">Help fund active projects, documentary storytelling, and community led initiatives.</p>
+            <a href="#donate" class="gi-way__cta">Donate Now</a>
           </article>
 
           <article class="gi-way reveal reveal-delay-2">
             <span class="gi-way__num">II</span>
-            <h2 class="gi-way__title">Partner</h2>
-            <p class="gi-way__desc">Whether you're a brand, foundation, photographer, or fellow non-profit — there is almost always a way to multiply what we can do together. Tell us yours.</p>
-            <a href="contact.html" class="gi-way__cta">Start the conversation</a>
+            <h2 class="gi-way__title">Become A Partner</h2>
+            <p class="gi-way__desc">Collaborate as a brand, organisation, foundation, creative partner, or long term supporter.</p>
+            <a href="contact.html" class="gi-way__cta">Start the Conversation</a>
           </article>
 
           <article class="gi-way reveal reveal-delay-3">
             <span class="gi-way__num">III</span>
-            <h2 class="gi-way__title">Spread the word.</h2>
-            <p class="gi-way__desc">A spotlight only works when it's pointed somewhere. Share a story, send a film, post a photo, or simply tell one person about the people doing this work.</p>
-            <a href="projects.html" class="gi-way__cta">See the stories</a>
+            <h2 class="gi-way__title">Share The Story</h2>
+            <p class="gi-way__desc">Awareness matters. Sometimes sharing a story is the thing that changes everything.</p>
+            <a href="projects.html" class="gi-way__cta">See the Stories</a>
           </article>
 
         </div>
       </section>
 
-      <footer class="page-footer">
-        <p class="gi-footer-meta">Three ways in · Pick whichever fits</p>
-      </footer>
+      <p class="gi-closing reveal">Every project starts with people already doing the work. We are simply here to help the world see them.</p>
 
-    </main>
-  </div>
+  </main>
 
   <a href="get-involved.html#donate" class="navi-pill">
     <span class="navi-pill__heart">♥</span>
@@ -268,6 +298,20 @@
     }, { threshold: 0.08 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    ;(function () {
+      var lastY = 0;
+      var nav = document.querySelector('.navi-nav');
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        if (y > lastY && y > 60) {
+          nav.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
+      }, { passive: true });
+    }());
   </script>
 </body>
 </html>

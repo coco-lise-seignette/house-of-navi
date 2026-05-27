@@ -85,7 +85,7 @@
 
     .contact-title {
       font-family: var(--ff-display);
-      font-size: clamp(80px, 10vw, 148px);
+      font-size: clamp(60px, 8.2vw, 118px);
       line-height: 0.88;
       letter-spacing: -0.02em;
       color: var(--navi-first-light);
@@ -205,6 +205,13 @@
       }
     }
   </style>
+  <style>
+    /* ── Scroll unlock ── */
+    html, body { height: auto !important; min-height: 100vh; overflow-y: auto !important; }
+    .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
+    main { position: relative; z-index: 10; }
+  </style>
 </head>
 <body>
   <div class="texture-stack">
@@ -212,8 +219,9 @@
     <div class="scrim"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
+  </div>
 
-    <main class="page-content contact-page">
+  <main class="page-content contact-page">
 
       <header class="page-header">
         <a href="index.html" class="navi-logo">
@@ -235,8 +243,8 @@
           <p class="contact-eyebrow reveal">CONTACT</p>
           <div class="contact-lower">
             <h1 class="contact-title reveal reveal-delay-1">Say hello.</h1>
-            <p class="contact-body reveal reveal-delay-2">Whether you're a donor, a fellow non-profit, a photographer with time to give, or a stranger who simply wants to know more — we'd love to hear from you.</p>
-            <p class="contact-tagline reveal reveal-delay-3">STORIES FIRST · FUNDING FOLLOWS</p>
+            <p class="contact-body reveal reveal-delay-2">Whether you have a project, an idea, a partnership, a question, or simply stumbled across us somewhere on the internet and felt curious, we would genuinely love to hear from you.</p>
+            <p class="contact-tagline reveal reveal-delay-3">A small house for big stories.</p>
           </div>
         </div>
 
@@ -248,8 +256,16 @@
               <a href="mailto:hello@houseofnavi.com" class="contact-item__value">hello@houseofnavi.com</a>
             </li>
             <li class="contact-item">
+              <span class="contact-item__label">Partnerships</span>
+              <a href="mailto:partners@houseofnavi.com" class="contact-item__value">partners@houseofnavi.com</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item__label">Press</span>
+              <a href="mailto:press@houseofnavi.com" class="contact-item__value">press@houseofnavi.com</a>
+            </li>
+            <li class="contact-item">
               <span class="contact-item__label">Post</span>
-              <span class="contact-item__value">The Sir Francis · Unit 307<br>34 High Level Road<br>Greenpoint · Cape Town · 8005</span>
+              <span class="contact-item__value">Studio 4, 24 Bree St · Cape Town · 8001</span>
             </li>
             <li class="contact-item">
               <span class="contact-item__label">In Motion</span>
@@ -260,12 +276,8 @@
 
       </div>
 
-      <footer class="page-footer">
-        <p class="contact-footer-meta">The door is open</p>
-      </footer>
 
-    </main>
-  </div>
+  </main>
 
   <a href="get-involved.html#donate" class="navi-pill">
     <span class="navi-pill__heart">♥</span>
@@ -280,6 +292,20 @@
     }, { threshold: 0.08 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    ;(function () {
+      var lastY = 0;
+      var nav = document.querySelector('.navi-nav');
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        if (y > lastY && y > 60) {
+          nav.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
+      }, { passive: true });
+    }());
   </script>
 </body>
 </html>
