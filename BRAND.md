@@ -324,4 +324,4 @@ SVG icons live in `brand/assets/icons/`. Eight glyphs: sun · eye · vessel · b
 
 ---
 
-*House of Navi · BRAND.md v1.0 · May 2026 · NPC 2026/246813/08 · hello@houseofnavi.org*
+*House of Navi · BRAND.md v1.0 · May 2026 · NPC 2026/246813/08 · hello@houseofnavi.com*
