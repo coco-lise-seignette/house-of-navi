@@ -205,26 +205,38 @@
 </head>
 <body>
 
-  <div class="grain-overlay"></div>
+  <!-- ── Scroll progress ── -->
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
 
-  <header class="fixed-header">
-    <a href="index.html" class="navi-logo">
-      <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
-    </a>
-    <nav class="navi-nav">
-      <a href="index.html"        class="navi-nav-link is-active">Landing</a>
-      <a href="projects.html"     class="navi-nav-link">Projects</a>
-      <a href="get-involved.html" class="navi-nav-link">Get Involved</a>
-      <a href="about.html"        class="navi-nav-link">About</a>
-      <a href="contact.html"      class="navi-nav-link">Contact</a>
-    </nav>
-  </header>
+  <!-- ── Nav ── -->
+  <nav class="navi-nav" id="nav">
+    <div class="navi-nav__left">
+      <a href="index.html" class="navi-logo">
+        <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
+      </a>
+    </div>
+    <div class="navi-links" id="naviLinks">
+      <a href="index.html" class="navi-link is-current">Landing</a>
+      <a href="projects.html" class="navi-link">Projects</a>
+      <a href="get-involved.html" class="navi-link">Get Involved</a>
+      <a href="about.html" class="navi-link">About</a>
+      <a href="contact.html" class="navi-link">Contact</a>
+    </div>
+    <button class="navi-hamburger" id="naviHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-  <a href="get-involved.html#donate" class="navi-pill">
-    <span>♥</span> Support
-  </a>
+  <!-- ── Mobile menu ── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-menu__link">Landing</a>
+    <a href="projects.html" class="mobile-menu__link">Projects</a>
+    <a href="get-involved.html" class="mobile-menu__link">Get Involved</a>
+    <a href="about.html" class="mobile-menu__link">About</a>
+    <a href="contact.html" class="mobile-menu__link">Contact</a>
+  </div>
 
-  <section id="landing" class="page-section">
+<section id="landing" class="page-section">
     <div class="section-scrim"></div>
     <div class="section-vignette"></div>
 

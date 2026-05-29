@@ -237,8 +237,39 @@
   </style>
 </head>
 <body>
-  <!-- Fixed texture background -->
-  <div class="texture-stack">
+
+  <!-- ── Scroll progress ── -->
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
+
+  <!-- ── Nav ── -->
+  <nav class="navi-nav" id="nav">
+    <div class="navi-nav__left">
+      <a href="index.html" class="navi-logo">
+        <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
+      </a>
+    </div>
+    <div class="navi-links" id="naviLinks">
+      <a href="index.html" class="navi-link">Landing</a>
+      <a href="projects.html" class="navi-link">Projects</a>
+      <a href="get-involved.html" class="navi-link">Get Involved</a>
+      <a href="about.html" class="navi-link is-current">About</a>
+      <a href="contact.html" class="navi-link">Contact</a>
+    </div>
+    <button class="navi-hamburger" id="naviHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── Mobile menu ── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-menu__link">Landing</a>
+    <a href="projects.html" class="mobile-menu__link">Projects</a>
+    <a href="get-involved.html" class="mobile-menu__link">Get Involved</a>
+    <a href="about.html" class="mobile-menu__link">About</a>
+    <a href="contact.html" class="mobile-menu__link">Contact</a>
+  </div>
+
+<div class="texture-stack">
     <div class="texture" style="background-image: url('brand/assets/textures/texture-knuckles.jpg');"></div>
     <div class="scrim"></div>
     <div class="vignette"></div>
