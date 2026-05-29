@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mkasanga Community Clinic — House of Navi</title>
+  <meta name="description" content="A community-built clinic on the edge of South Luangwa. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -166,9 +167,9 @@
       align-items: center;
       gap: 14px;
       font-family: var(--ff-body);
-      font-size: var(--fs-cap);
+      font-size: clamp(13px, 1.1vw, 16px);
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--navi-mid-dune);
       margin-bottom: clamp(20px, 3vh, 32px);
@@ -579,7 +580,7 @@
 
     .story__right p {
       font-family: var(--ff-body);
-      font-size: clamp(15px, 1.2vw, 17px);
+      font-size: clamp(16px, 1.3vw, 18px);
       font-weight: 400;
       line-height: 1.85;
       color: rgba(245, 221, 213, 0.78);
@@ -626,7 +627,7 @@
 
     .progress__phase-label {
       font-family: var(--ff-body);
-      font-size: clamp(13px, 1.1vw, 15px);
+      font-size: clamp(15px, 1.2vw, 17px);
       font-weight: 500;
       color: rgba(245, 221, 213, 0.75);
       letter-spacing: 0.02em;
@@ -797,13 +798,73 @@
     }
     .stat-strip__note {
       font-family: var(--ff-body);
-      font-size: clamp(13px, 1vw, 15px);
+      font-size: clamp(15px, 1.1vw, 16px);
       color: rgba(245, 221, 213, 0.45);
       line-height: 1.7;
       margin: 0;
       max-width: 600px;
       padding-top: 28px;
       border-top: 1px solid rgba(245, 221, 213, 0.07);
+    }
+
+    /* ── GEOGRAPHIC: isolation callout ── */
+    .isolation-bar {
+      background: var(--bg-6);
+      border-top: 1px solid rgba(217, 144, 122, 0.15);
+      border-bottom: 1px solid rgba(217, 144, 122, 0.15);
+    }
+    .isolation-bar__inner {
+      display: grid;
+      grid-template-columns: auto 1px 1fr;
+      gap: clamp(28px, 4vw, 64px);
+      align-items: center;
+      padding: clamp(28px, 4vh, 44px) clamp(24px, 8vw, 120px);
+    }
+    .isolation-bar__stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .isolation-bar__num {
+      font-family: var(--ff-display);
+      font-size: clamp(56px, 7vw, 100px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--navi-first-light);
+    }
+    .isolation-bar__unit {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+    }
+    .isolation-bar__divider {
+      width: 1px;
+      height: 56px;
+      background: rgba(217, 144, 122, 0.2);
+      align-self: center;
+    }
+    .isolation-bar__headline {
+      font-family: var(--ff-body);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 700;
+      color: var(--navi-first-light);
+      margin-bottom: 8px;
+    }
+    .isolation-bar__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.1vw, 15px);
+      line-height: 1.72;
+      color: rgba(245, 221, 213, 0.55);
+      margin: 0;
+      max-width: 580px;
+    }
+    @media (max-width: 768px) {
+      .isolation-bar__inner { grid-template-columns: 1fr; gap: 16px; }
+      .isolation-bar__divider { display: none; }
     }
 
     /* ── GEOGRAPHIC: two-column editorial ── */
@@ -831,26 +892,28 @@
       display: flex;
       gap: 18px;
       align-items: flex-start;
-      padding: clamp(16px, 2.5vh, 24px) 0;
-      border-bottom: 1px solid rgba(245, 221, 213, 0.07);
+      padding: clamp(18px, 2.8vh, 28px) 0;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.09);
     }
-    .geo-item:first-child { border-top: 1px solid rgba(245, 221, 213, 0.07); }
+    .geo-item:first-child { border-top: 1px solid rgba(245, 221, 213, 0.09); }
+    /* Geo icons get terracotta tint to signal danger */
+    .geo-item [data-lucide] { stroke: var(--navi-mid-dune); opacity: 0.9; margin-top: 2px; }
     .geo-item h4 {
       font-family: var(--ff-body);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--navi-first-light);
-      margin: 0 0 5px;
+      margin: 0 0 6px;
     }
     .geo-item p {
       font-family: var(--ff-body);
-      font-size: 13px;
+      font-size: 15px;
       line-height: 1.7;
       color: rgba(245, 221, 213, 0.52);
       margin: 0;
     }
 
-    /* ── HEALTH: full-width rows ── */
+    /* ── HEALTH: full-width rows — escalating urgency ── */
     .health-rows {
       display: flex;
       flex-direction: column;
@@ -858,42 +921,47 @@
     }
     .health-row {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 300px 1fr;
       gap: clamp(24px, 4vw, 64px);
       align-items: baseline;
-      padding: clamp(16px, 2.5vh, 22px) 0;
-      border-bottom: 1px solid rgba(245, 221, 213, 0.07);
+      padding: clamp(18px, 2.8vh, 28px) 0 clamp(18px, 2.8vh, 28px) 16px;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.09);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s;
     }
-    .health-row:first-child { border-top: 1px solid rgba(245, 221, 213, 0.07); }
+    .health-row:first-child { border-top: 1px solid rgba(245, 221, 213, 0.09); }
+    .health-row:hover { border-left-color: var(--navi-mid-dune); }
     .health-row__left {
       display: flex;
       align-items: center;
       gap: 12px;
       font-family: var(--ff-body);
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--navi-first-light);
     }
+    /* Health icons carry warning colour */
+    .health-row__left [data-lucide] { stroke: var(--navi-mid-dune); flex-shrink: 0; }
     .health-row__desc {
       font-family: var(--ff-body);
-      font-size: 13px;
-      line-height: 1.72;
-      color: rgba(245, 221, 213, 0.52);
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.65);
       margin: 0;
     }
 
     /* ── HOSPITAL: quote + small steps ── */
     .hospital-quote {
-      font-family: var(--ff-body);
-      font-size: clamp(18px, 1.8vw, 26px);
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3.2vw, 52px);
       font-weight: 400;
-      font-style: italic;
-      line-height: 1.6;
-      color: rgba(245, 221, 213, 0.65);
-      margin: 0 0 clamp(40px, 6vh, 64px);
-      padding-left: clamp(20px, 2vw, 32px);
-      border-left: 2px solid rgba(217, 144, 122, 0.45);
-      max-width: 780px;
+      font-style: normal;
+      line-height: 1.2;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(48px, 7vh, 72px);
+      padding-left: clamp(24px, 2.5vw, 40px);
+      border-left: 3px solid var(--navi-mid-dune);
+      max-width: 100%;
     }
     .hospital-steps {
       display: grid;
@@ -902,46 +970,257 @@
     }
     .hospital-step {
       padding: clamp(16px, 2vw, 24px);
-      border: 1px solid rgba(245, 221, 213, 0.07);
-      background: rgba(245, 221, 213, 0.02);
+      border: 1px solid rgba(217, 144, 122, 0.12);
+      background: rgba(217, 144, 122, 0.03);
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
-    .hospital-step [data-lucide] { margin-bottom: 4px; }
+    .hospital-step [data-lucide] { stroke: var(--navi-mid-dune); opacity: 0.7; margin-bottom: 4px; }
     .hospital-step__num {
       font-family: var(--ff-body);
       font-size: 9px;
       font-weight: 700;
       letter-spacing: 0.2em;
-      color: rgba(245, 221, 213, 0.2);
+      color: rgba(217, 144, 122, 0.4);
     }
     .hospital-step__title {
       font-family: var(--ff-body);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--navi-first-light);
       margin: 0;
     }
     .hospital-step__desc {
       font-family: var(--ff-body);
-      font-size: 12px;
+      font-size: 14px;
       line-height: 1.65;
       color: rgba(245, 221, 213, 0.45);
       margin: 0;
     }
 
+    /* ════════════════════════════════════════
+       NAV — breadcrumb + hamburger
+    ════════════════════════════════════════ */
+    .navi-nav__left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navi-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .navi-breadcrumb__link {
+      color: rgba(245,221,213,0.4);
+      transition: color 0.2s;
+    }
+    .navi-breadcrumb__link:hover { color: rgba(245,221,213,0.75); }
+    .navi-breadcrumb__sep { color: rgba(245,221,213,0.2); font-size: 12px; }
+    .navi-breadcrumb__current { color: rgba(245,221,213,0.65); }
+
+    /* Hamburger — hidden on desktop */
+    .navi-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .navi-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--navi-first-light);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .navi-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .navi-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .navi-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(10,2,0,0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.is-open { opacity: 1; pointer-events: all; }
+    .mobile-menu__link {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 7vw, 52px);
+      color: rgba(245,221,213,0.6);
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+      padding: 8px 0;
+    }
+    .mobile-menu__link:hover { color: var(--navi-first-light); }
+
+    /* ════════════════════════════════════════
+       GALLERY — clickable affordance
+    ════════════════════════════════════════ */
+    .gallery__item-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s ease;
+    }
+    .gallery__item-overlay svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(245,221,213,0);
+      transition: stroke 0.3s ease, transform 0.3s ease;
+    }
+    .gallery__item:hover .gallery__item-overlay {
+      background: rgba(0,0,0,0.28);
+    }
+    .gallery__item:hover .gallery__item-overlay svg {
+      stroke: rgba(245,221,213,0.9);
+      transform: scale(1.1);
+    }
+    /* Always-visible subtle indicator bottom-right */
+    .gallery__item-overlay::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(245,221,213,0.2);
+      border-radius: 50%;
+      transition: border-color 0.3s;
+    }
+    .gallery__item:hover .gallery__item-overlay::after {
+      border-color: rgba(245,221,213,0.6);
+    }
+
+    @media (max-width: 600px) {
+      .navi-hamburger { display: flex; }
+      .navi-links { display: none; }
+      .navi-breadcrumb { display: none; }
+    }
+
+    /* ════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════ */
+    .page-cta {
+      text-align: center;
+      padding: clamp(72px, 12vh, 120px) clamp(24px, 8vw, 120px);
+    }
+    .page-cta__eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+      margin-bottom: 20px;
+    }
+    .page-cta__heading {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 4vw, 60px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin-bottom: 24px;
+    }
+    .page-cta__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.65);
+      max-width: 560px;
+      margin: 0 auto clamp(36px, 5vh, 56px);
+    }
+    .page-cta__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .page-cta__btn {
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 100px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+    }
+    .page-cta__btn--primary {
+      background: var(--navi-clay-cream);
+      color: var(--navi-blood-dune);
+      box-shadow: 0 8px 32px rgba(40,8,0,0.3);
+    }
+    .page-cta__btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(40,8,0,0.4);
+    }
+    .page-cta__btn--secondary {
+      color: rgba(245, 221, 213, 0.6);
+    }
+    .page-cta__btn--secondary:hover { color: var(--navi-first-light); }
+
+    /* ════════════════════════════════════════
+       FOCUS STATES — accessibility
+    ════════════════════════════════════════ */
+    :focus-visible {
+      outline: 2px solid var(--navi-mid-dune);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    .navi-pill:focus-visible,
+    .page-cta__btn--primary:focus-visible {
+      outline: 2px solid var(--navi-blood-dune);
+      outline-offset: 4px;
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
     @media (max-width: 900px) {
       .stat-strip { grid-template-columns: 1fr 1fr; gap: 24px; }
       .stat-strip__divider { display: none; }
       .geo-layout { grid-template-columns: 1fr; }
       .geo-left { position: static; }
-      .health-row { grid-template-columns: 1fr; gap: 6px; }
+      .health-row { grid-template-columns: 1fr; gap: 6px; padding-left: 12px; }
       .hospital-steps { grid-template-columns: 1fr 1fr; }
+      .hero__copy {
+        width: 100%;
+        left: 0;
+        justify-content: flex-end;
+        padding-bottom: clamp(40px, 6vh, 64px);
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+      }
+      .hero__title { font-size: clamp(36px, 7vw, 56px); }
     }
     @media (max-width: 600px) {
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .hospital-steps { grid-template-columns: 1fr; }
+      .hero__title { font-size: clamp(30px, 9vw, 44px); }
+      .hero__reel-thumb { display: none; }
+      .page-cta__heading { font-size: clamp(26px, 7vw, 36px); }
+      .navi-pill { padding: 11px 18px; font-size: 12px; }
     }
 
     /* ════════════════════════════════════════
@@ -955,6 +1234,108 @@
     }
 
     .cpv__panel { overflow: hidden; }
+
+    /* Static (non-accordion) vision panel */
+    .cpv__panel--static .cpv__static-header {
+      border-top: 1px solid rgba(245, 221, 213, 0.12);
+      padding: 18px 0;
+    }
+    .cpv__panel--static .cpv__trigger-label {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.75);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .cpv__panel--static .cpv__trigger-sub {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      color: rgba(245, 221, 213, 0.3);
+      display: block;
+    }
+
+    /* Panel inline slider */
+    .panel-slider {
+      position: relative;
+      width: 100%;
+      background: #0a0200;
+    }
+    .panel-slider__img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+    .panel-slider__track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .panel-slider__track img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    /* Controls bar below the image — always visible */
+    .panel-slider__controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0 4px;
+      gap: 12px;
+    }
+    .panel-slider__btn {
+      background: none;
+      border: 1px solid rgba(245,221,213,0.22);
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .panel-slider__btn:hover {
+      border-color: var(--navi-first-light);
+      background: rgba(245,221,213,0.06);
+    }
+    .panel-slider__btn:active { background: rgba(245,221,213,0.1); }
+    .panel-slider__btn svg { width: 16px; height: 16px; stroke: rgba(245,221,213,0.75); }
+    .panel-slider__dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+    }
+    .panel-slider__dot {
+      height: 2px;
+      width: 24px;
+      background: rgba(245,221,213,0.18);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.25s, width 0.25s;
+    }
+    .panel-slider__dot.is-active {
+      background: var(--navi-mid-dune);
+      width: 36px;
+    }
+    .panel-slider__label {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,221,213,0.28);
+      white-space: nowrap;
+    }
 
     .cpv__hero {
       width: 100%;
@@ -1028,7 +1409,7 @@
     .cpv__writeup { padding: 16px 0 20px; }
     .cpv__writeup p {
       font-family: var(--ff-body);
-      font-size: clamp(13px, 1vw, 14px);
+      font-size: clamp(15px, 1.1vw, 16px);
       line-height: 1.78;
       color: rgba(245, 221, 213, 0.65);
       margin: 0 0 10px;
@@ -1162,17 +1543,18 @@
     /* full-bleed header bar */
     .gallery__header {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      padding: clamp(24px, 3.5vh, 36px) clamp(24px, 8vw, 120px);
+      padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) clamp(36px, 5vh, 56px);
       border-bottom: 1px solid rgba(245, 221, 213, 0.08);
       margin-bottom: 2px;
     }
 
-    .gallery__header-inner {
+    .gallery__header-right {
       display: flex;
-      align-items: baseline;
-      gap: 24px;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
     }
 
     .gallery__eyebrow {
@@ -1206,7 +1588,7 @@
     .gallery__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: 380px 300px 420px 320px 320px;
+      grid-template-rows: repeat(2, 340px);
       gap: 2px;
     }
 
@@ -1214,7 +1596,7 @@
       position: relative;
       overflow: hidden;
       background: #0e0400;
-      cursor: pointer;
+      cursor: zoom-in;
     }
     .gallery__item img {
       width: 100%;
@@ -1225,14 +1607,70 @@
     }
     .gallery__item:hover img { transform: scale(1.04); }
 
-    /* Row 1 */
-    .gallery__item:nth-child(1) { grid-column: span 2; }
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 600;
+      background: rgba(0,0,0,0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.is-open { opacity: 1; pointer-events: all; }
 
-    /* Row 3 full-width */
-    .gallery__item:nth-child(6) { grid-column: span 3; }
+    .lightbox__img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox__img.is-loading { opacity: 0; }
 
-    /* Row 5 last item */
-    .gallery__item:nth-child(11) { grid-column: span 2; }
+    .lightbox__btn {
+      position: fixed;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(245,221,213,0.6);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .lightbox__btn:hover { color: var(--navi-first-light); }
+    .lightbox__btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .lightbox__close { top: 24px; right: 28px; gap: 8px;
+      font-family: var(--ff-body); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; }
+    .lightbox__prev { left: 24px; top: 50%; transform: translateY(-50%); }
+    .lightbox__next { right: 24px; top: 50%; transform: translateY(-50%); }
+
+    .lightbox__counter {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: rgba(245,221,213,0.35);
+    }
 
     .gallery__caption {
       margin-top: 16px;
@@ -1247,8 +1685,31 @@
        FOOTER
     ════════════════════════════════════════ */
     .page-footer {
-      padding: clamp(24px, 4vh, 40px) clamp(24px, 8vw, 120px);
+      padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) clamp(32px, 4vh, 48px);
       border-top: 1px solid rgba(245, 221, 213, 0.08);
+    }
+    .page-footer__closing {
+      text-align: center;
+      padding-bottom: clamp(36px, 5vh, 56px);
+      margin-bottom: clamp(24px, 3vh, 36px);
+      border-bottom: 1px solid rgba(245, 221, 213, 0.07);
+    }
+    .page-footer__tagline {
+      font-family: var(--ff-display);
+      font-size: clamp(24px, 3vw, 42px);
+      color: rgba(245, 221, 213, 0.55);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .page-footer__subline {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.25);
+    }
+    .page-footer__bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1276,6 +1737,52 @@
       letter-spacing: 0.24em;
       text-transform: uppercase;
       color: rgba(245, 221, 213, 0.28);
+    }
+
+    /* ════════════════════════════════════════
+       SECTION BACKGROUNDS — replaces inline styles
+    ════════════════════════════════════════ */
+    .section--story    { background: linear-gradient(to bottom, var(--bg-0) 0%, var(--bg-1) 80px, var(--bg-1) 100%); }
+    .section--resilience { background: linear-gradient(to bottom, var(--bg-1) 0%, var(--bg-2) 80px, var(--bg-2) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--geographic { background: linear-gradient(to bottom, var(--bg-2) 0%, var(--bg-3) 80px, var(--bg-3) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--health     { background: linear-gradient(to bottom, var(--bg-3) 0%, var(--bg-4) 80px, var(--bg-4) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--hospital   { background: linear-gradient(to bottom, var(--bg-4) 0%, var(--bg-5) 80px, var(--bg-5) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--cpv        { background: linear-gradient(to bottom, var(--bg-5) 0%, var(--bg-6) 80px, var(--bg-6) 100%); padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px); }
+    .section--gallery    { background: var(--bg-7); }
+
+    /* ════════════════════════════════════════
+       SCROLL PROGRESS BAR
+    ════════════════════════════════════════ */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--navi-mid-dune);
+      z-index: 999;
+      transition: width 0.1s linear;
+    }
+
+    /* ════════════════════════════════════════
+       NAV — backdrop on scroll
+    ════════════════════════════════════════ */
+    .navi-nav.is-scrolled {
+      background: rgba(8, 2, 0, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* ════════════════════════════════════════
+       STORY PULL QUOTE
+    ════════════════════════════════════════ */
+    .story__pullquote {
+      font-family: var(--ff-display);
+      font-size: clamp(22px, 2.4vw, 36px);
+      line-height: 1.2;
+      color: var(--navi-first-light);
+      margin: clamp(28px, 4vh, 40px) 0;
+      padding-left: clamp(18px, 2vw, 28px);
+      border-left: 2px solid var(--navi-mid-dune);
     }
 
     /* ════════════════════════════════════════
@@ -1326,55 +1833,72 @@
 
       .gallery__grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 260px 260px 300px 260px 260px 260px;
+        grid-template-rows: repeat(3, 260px);
       }
-      .gallery__item:nth-child(6) { grid-column: span 2; }
-      .gallery__item:nth-child(11) { grid-column: span 1; }
     }
 
     @media (max-width: 600px) {
       .navi-links { display: none; }
       .gallery__grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(11, 280px);
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 240px);
       }
-      .gallery__item:nth-child(1),
-      .gallery__item:nth-child(6),
-      .gallery__item:nth-child(11) { grid-column: span 1; }
     }
 
   </style>
 </head>
 <body>
 
+  <!-- ── Scroll progress ── -->
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
+
   <!-- ── Nav ── -->
   <nav class="navi-nav" id="nav">
-    <a href="index.html" class="navi-logo">
-      <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="44">
-    </a>
-    <div class="navi-links">
+    <div class="navi-nav__left">
+      <a href="index.html" class="navi-logo">
+        <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="44">
+      </a>
+      <div class="navi-breadcrumb" aria-label="Breadcrumb">
+        <a href="projects.html" class="navi-breadcrumb__link">Projects</a>
+        <span class="navi-breadcrumb__sep" aria-hidden="true">›</span>
+        <span class="navi-breadcrumb__current">Mkasanga</span>
+      </div>
+    </div>
+    <div class="navi-links" id="naviLinks" role="navigation" aria-label="Main navigation">
       <a href="index.html" class="navi-link">Landing</a>
-      <a href="projects.html" class="navi-link is-current">Projects</a>
+      <a href="projects.html" class="navi-link">Projects</a>
       <a href="get-involved.html" class="navi-link">Get Involved</a>
       <a href="about.html" class="navi-link">About</a>
       <a href="contact.html" class="navi-link">Contact</a>
     </div>
+    <button class="navi-hamburger" id="naviHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- ── Mobile menu overlay ── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-menu__link">Landing</a>
+    <a href="projects.html" class="mobile-menu__link">Projects</a>
+    <a href="get-involved.html" class="mobile-menu__link">Get Involved</a>
+    <a href="about.html" class="mobile-menu__link">About</a>
+    <a href="contact.html" class="mobile-menu__link">Contact</a>
+  </div>
 
   <!-- ════════════════════════════════════════
        HERO
   ════════════════════════════════════════ -->
   <section class="hero">
-    <div class="hero__portrait">
+    <div class="hero__portrait" role="img" aria-label="Black and white portrait of an elder woman from Mkasanga village, looking upward">
       <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY_HERO%20IMAGE.jpg" alt="Mkasanga Community Elder">
     </div>
     <div class="hero__copy">
-      <p class="hero__eyebrow">Project № 01 · Mkasanga</p>
+      <p class="hero__eyebrow">Mkasanga Community Clinic</p>
       <h1 class="hero__title">We're here to make sure they're heard.</h1>
       <p class="hero__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.</p>
       <button class="hero__reel-btn" id="reelBtn">
         <div class="hero__reel-thumb">
-          <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Showreel thumbnail">
+          <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Showreel thumbnail">
           <div class="hero__reel-thumb-play">
             <div class="hero__reel-thumb-play-circle">
               <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
@@ -1392,7 +1916,7 @@
   <!-- ════════════════════════════════════════
        STORY WRITE-UP
   ════════════════════════════════════════ -->
-  <section class="story" style="background:linear-gradient(to bottom, var(--bg-0) 0%, var(--bg-1) 80px, var(--bg-1) 100%);">
+  <section class="story section--story">
     <div class="story__inner">
 
       <div class="story__left reveal">
@@ -1407,7 +1931,10 @@
 
       <div class="story__right reveal reveal-delay-1">
         <p>Mkasanga sits at the edge of South Luangwa — one of Africa's last great wilderness areas, and one of its most isolated communities. The nearest hospital is six to eight hours away on a good day. During the rains, the roads close entirely. <em>Pregnant mothers travel alone. Children with fevers wait.</em></p>
-        <p>The people of Mkasanga didn't wait for outside help. They started building their own clinic — by hand, with local materials, on the belief that <strong>their community deserved basic care</strong>. It's already half-built. What they need now is for the rest of the world to notice.</p>
+
+        <blockquote class="story__pullquote">Already half-built by the people who need it.</blockquote>
+
+        <p>The people of Mkasanga didn't wait for outside help. They started building their own clinic — by hand, with local materials, on the belief that <strong>their community deserved basic care</strong>. What they need now is for the rest of the world to notice.</p>
         <p>House of Navi arrived with a spotlight, not a script. We're walking with Mkasanga for as long as it takes — documenting the build, amplifying the voices behind it, and connecting them to the donors and partners who believe what we believe: that <em>stories come first, and funding follows</em>.</p>
       </div>
 
@@ -1417,86 +1944,102 @@
   <!-- ════════════════════════════════════════
        CLINIC PROGRESS + VISION (expandable panels)
   ════════════════════════════════════════ -->
-  <section class="cpv reveal" style="background:linear-gradient(to bottom, var(--bg-5) 0%, var(--bg-6) 80px, var(--bg-6) 100%);padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px);">
+  <div class="isolation-bar reveal">
+    <div class="isolation-bar__inner">
+      <div class="isolation-bar__stat">
+        <span class="isolation-bar__num">5</span>
+        <span class="isolation-bar__unit">months</span>
+      </div>
+      <div class="isolation-bar__divider"></div>
+      <div class="isolation-bar__body">
+        <p class="isolation-bar__headline">Every year, Mkasanga becomes an island.</p>
+        <p class="isolation-bar__desc">December through April, the Luangwa River rises. Bridges wash away. Roads submerge. The village is completely cut off — no emergency vehicle in, no one out.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="cpv reveal section--cpv">
 
     <div class="cpv__panels">
 
-      <!-- PROGRESS PANEL -->
-      <div class="cpv__panel" id="panelProgress">
-        <button class="cpv__trigger" data-panel="panelProgress">
-          <div class="cpv__trigger-left">
-            <span class="cpv__trigger-label">Clinic Progress</span>
-            <span class="cpv__trigger-sub">Structure nearing completion</span>
-          </div>
-          <span class="cpv__trigger-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12" class="cpv-icon-h"/></svg>
-          </span>
-        </button>
+      <!-- PROGRESS PANEL — static, always visible -->
+      <div class="cpv__panel cpv__panel--static" id="panelProgress">
 
-        <div class="cpv__hero">
-          <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-17.jpg" alt="Clinic exterior">
+        <div class="cpv__static-header">
+          <span class="cpv__trigger-label">Clinic Progress</span>
+          <span class="cpv__trigger-sub">Structure nearing completion</span>
         </div>
 
-        <div class="cpv__body"><div class="cpv__body-inner">
-          <div class="cpv__writeup">
-            <p>The Mkasanga Community Clinic is under construction and nearing completion. Walls are up, the roof is in place, and the building is taking its final form.</p>
-            <p>Phase One delivers a structurally sound shell — weather-tight, with running water, plumbing, and electricity. Once complete, it will be ready for full fit-out in the phases that follow.</p>
-            <p class="progress__phase-status"><span>Current phase —</span> Structure complete · Plumbing &amp; electrical underway</p>
+        <div class="panel-slider" id="sliderProgress">
+          <div class="panel-slider__img-wrap">
+          <div class="panel-slider__track">
+            <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-17.jpg" alt="Exterior · East elevation">
+            <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-16.jpg" alt="Interior · Roof complete">
+            <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-18.jpg" alt="Exterior · Full structure">
           </div>
-          <div class="cpv__images">
-            <div class="progress__img-item">
-              <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-17.jpg" alt="Clinic exterior">
-              <p class="progress__img-caption">Exterior · East elevation</p>
+          </div><!-- /.panel-slider__img-wrap -->
+          <div class="panel-slider__controls">
+            <button class="panel-slider__btn panel-slider__btn--prev" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15,18 9,12 15,6"/></svg>
+            </button>
+            <div class="panel-slider__dots">
+              <button class="panel-slider__dot is-active" aria-label="Image 1"></button>
+              <button class="panel-slider__dot" aria-label="Image 2"></button>
+              <button class="panel-slider__dot" aria-label="Image 3"></button>
             </div>
-            <div class="progress__img-item">
-              <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-16.jpg" alt="Clinic interior">
-              <p class="progress__img-caption">Interior · Roof structure complete</p>
-            </div>
-            <div class="progress__img-item">
-              <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-18.jpg" alt="Clinic exterior wide">
-              <p class="progress__img-caption">Exterior · Full structure</p>
-            </div>
+            <span class="panel-slider__label">Browse images</span>
+            <button class="panel-slider__btn panel-slider__btn--next" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9,18 15,12 9,6"/></svg>
+            </button>
           </div>
-        </div></div>
+        </div>
+
+        <div class="cpv__writeup" style="padding:16px 0 4px;">
+          <p>The Mkasanga Community Clinic is under construction and nearing completion. Walls are up, the roof is in place, and the building is taking its final form.</p>
+          <p>Phase One delivers a structurally sound shell — weather-tight, with running water, plumbing, and electricity. Once complete, it will be ready for full fit-out in the phases that follow.</p>
+          <p class="progress__phase-status"><span>Current phase —</span> Structure complete · Plumbing &amp; electrical underway</p>
+        </div>
+
       </div>
 
-      <!-- VISION PANEL -->
-      <div class="cpv__panel" id="panelVision">
-        <button class="cpv__trigger" data-panel="panelVision">
-          <div class="cpv__trigger-left">
-            <span class="cpv__trigger-label">Clinic Vision</span>
-            <span class="cpv__trigger-sub">What we are building towards</span>
-          </div>
-          <span class="cpv__trigger-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12" class="cpv-icon-h"/></svg>
-          </span>
-        </button>
+      <!-- VISION PANEL — static, always visible -->
+      <div class="cpv__panel cpv__panel--static" id="panelVision">
 
-        <div class="cpv__hero">
-          <img src="VISION/IMAGE%2002.png" alt="Clinic vision interior">
+        <div class="cpv__static-header">
+          <span class="cpv__trigger-label">Clinic Vision</span>
+          <span class="cpv__trigger-sub">What we are building towards</span>
         </div>
 
-        <div class="cpv__body"><div class="cpv__body-inner">
-          <div class="cpv__writeup">
-            <p>A fully equipped community clinic, painted with the stories of Mkasanga — open to every family in South Luangwa regardless of the season or the road.</p>
-            <p>Phase Two brings the fit-out: beds, equipment, medical supplies, and the staff to run it. Phase Three is the day it opens. Every contribution brings that day closer.</p>
-            <p class="progress__phase-status"><span>The goal —</span> A fully operational clinic serving South Luangwa permanently</p>
+        <div class="panel-slider" id="sliderVision">
+          <div class="panel-slider__img-wrap">
+          <div class="panel-slider__track">
+            <img loading="lazy" src="VISION/IMAGE%2001.png" alt="Exterior · Completed">
+            <img loading="lazy" src="VISION/IMAGE%2002.png" alt="Interior · Equipped">
+            <img loading="lazy" src="VISION/IMAGE%2003.png" alt="Exterior · Community entrance">
           </div>
-          <div class="cpv__images">
-            <div class="progress__img-item">
-              <img src="VISION/IMAGE%2001.png" alt="Clinic vision exterior">
-              <p class="progress__img-caption">Exterior · Completed</p>
+          </div><!-- /.panel-slider__img-wrap -->
+          <div class="panel-slider__controls">
+            <button class="panel-slider__btn panel-slider__btn--prev" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15,18 9,12 15,6"/></svg>
+            </button>
+            <div class="panel-slider__dots">
+              <button class="panel-slider__dot is-active" aria-label="Image 1"></button>
+              <button class="panel-slider__dot" aria-label="Image 2"></button>
+              <button class="panel-slider__dot" aria-label="Image 3"></button>
             </div>
-            <div class="progress__img-item">
-              <img src="VISION/IMAGE%2002.png" alt="Clinic vision interior">
-              <p class="progress__img-caption">Interior · Equipped &amp; open</p>
-            </div>
-            <div class="progress__img-item">
-              <img src="VISION/IMAGE%2003.png" alt="Clinic vision community">
-              <p class="progress__img-caption">Exterior · Community entrance</p>
-            </div>
+            <span class="panel-slider__label">Browse images</span>
+            <button class="panel-slider__btn panel-slider__btn--next" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9,18 15,12 9,6"/></svg>
+            </button>
           </div>
         </div>
+
+        <div class="cpv__writeup" style="padding:16px 0 4px;">
+          <p>A fully equipped community clinic, painted with the stories of Mkasanga — open to every family in South Luangwa regardless of the season or the road.</p>
+          <p>Phase Two brings the fit-out: beds, equipment, medical supplies, and the staff to run it. Phase Three is the day it opens. Every contribution brings that day closer.</p>
+          <p class="progress__phase-status"><span>The goal —</span> A fully operational clinic serving South Luangwa permanently</p>
+        </div>
+
       </div>
 
     </div>
@@ -1505,7 +2048,7 @@
   <!-- ════════════════════════════════════════
        RESILIENCE — clean stat strip
   ════════════════════════════════════════ -->
-  <section class="info-section reveal" style="background:linear-gradient(to bottom, var(--bg-1) 0%, var(--bg-2) 80px, var(--bg-2) 100%);padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px);">
+  <section class="info-section reveal section--resilience">
     <span class="info-section__eyebrow" style="display:block;margin-bottom:40px;">A Place of Resilience</span>
     <div class="stat-strip">
       <div class="stat-strip__item">
@@ -1521,9 +2064,9 @@
       </div>
       <div class="stat-strip__divider"></div>
       <div class="stat-strip__item">
-        <i data-lucide="cloud-rain" class="stat-strip__icon"></i>
-        <div class="stat-strip__num">5 mo.</div>
-        <div class="stat-strip__label">Annual isolation</div>
+        <i data-lucide="building-2" class="stat-strip__icon"></i>
+        <div class="stat-strip__num">0</div>
+        <div class="stat-strip__label">Equipped clinics</div>
       </div>
       <div class="stat-strip__divider"></div>
       <div class="stat-strip__item">
@@ -1538,7 +2081,8 @@
   <!-- ════════════════════════════════════════
        GEOGRAPHIC CHALLENGES — two-column editorial
   ════════════════════════════════════════ -->
-  <section class="info-section reveal" style="background:linear-gradient(to bottom, var(--bg-2) 0%, var(--bg-3) 80px, var(--bg-3) 100%);padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px);">
+  <section class="info-section reveal section--geographic">
+
     <div class="geo-layout">
       <div class="geo-left">
         <span class="info-section__eyebrow">Geographic &amp; Access Challenges</span>
@@ -1546,10 +2090,10 @@
       </div>
       <div class="geo-right">
         <div class="geo-item">
-          <i data-lucide="waves"></i>
+          <i data-lucide="milestone"></i>
           <div>
-            <h4>Rainy Season Blockade</h4>
-            <p>December–April, the Luangwa River swells and every bridge disappears. The village becomes an island for five months — no exceptions.</p>
+            <h4>No Road, No Help</h4>
+            <p>Even in the dry season, emergency access is near-impossible. There are no paved roads, no ambulance routes, and no infrastructure built for crisis response.</p>
           </div>
         </div>
         <div class="geo-item">
@@ -1573,7 +2117,7 @@
   <!-- ════════════════════════════════════════
        HEALTH CHALLENGES — full-width rows
   ════════════════════════════════════════ -->
-  <section class="info-section reveal" style="background:linear-gradient(to bottom, var(--bg-3) 0%, var(--bg-4) 80px, var(--bg-4) 100%);padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px);">
+  <section class="info-section reveal section--health">
     <span class="info-section__eyebrow" style="display:block;margin-bottom:32px;">Health Challenges &amp; Vulnerabilities</span>
     <div class="health-rows">
       <div class="health-row">
@@ -1610,8 +2154,7 @@
   <!-- ════════════════════════════════════════
        NEAREST HOSPITAL — quote + 4 steps below
   ════════════════════════════════════════ -->
-  <section class="info-section reveal" style="background:linear-gradient(to bottom, var(--bg-4) 0%, var(--bg-5) 80px, var(--bg-5) 100%);padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px);">
-    <span class="info-section__eyebrow" style="display:block;margin-bottom:40px;">The Nearest Hospital</span>
+  <section class="info-section reveal section--hospital">
     <blockquote class="hospital-quote">
       "For families in Mkasanga, healthcare is not simply a matter of waiting times or clinic capacity. It is often the difference between life and death."
     </blockquote>
@@ -1646,59 +2189,39 @@
   <!-- ════════════════════════════════════════
        GALLERY
   ════════════════════════════════════════ -->
-  <section class="gallery" style="background:var(--bg-7);">
+  <section class="gallery section--gallery">
     <div class="gallery__header reveal">
-      <div class="gallery__header-inner">
+      <h2 class="gallery__heading">Project Gallery</h2>
+      <div class="gallery__header-right">
         <span class="gallery__eyebrow">From the field</span>
-        <h2 class="gallery__heading">Photography</h2>
+        <p class="gallery__header-desc">South Luangwa · Zambia · 2024 — 2025</p>
       </div>
-      <p class="gallery__header-desc">South Luangwa · Zambia · 2024 — 2025</p>
     </div>
 
     <div class="gallery__grid reveal reveal-delay-1">
-      <!-- 1: feature wide — two elders B&W (span 2) -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-4.jpg" alt="Two elders">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Two elders — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-4.jpg" alt="Two elders">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <!-- 2: boy looking up B&W -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-6.jpg" alt="Boy looking up">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Boy looking up — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-6.jpg" alt="Boy looking up">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <!-- 3: child laughing B&W -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-5.jpg" alt="Child laughing">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Mother and sleeping baby — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-19.jpg" alt="Mother and sleeping baby">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <!-- 4: clinic consultation B&W -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Clinic consultation">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Clinic consultation — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Clinic consultation">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <!-- 5: mother and baby B&W -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-7.jpg" alt="Mother and baby">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Community member — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-25.jpg" alt="Community member">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <!-- 6: clinic exterior full width (span 3) -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-18.jpg" alt="Mkasanga clinic exterior" style="object-position: center 65%;">
-      </div>
-      <!-- 7: kids inside the building -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-30.jpg" alt="Children inside the clinic">
-      </div>
-      <!-- 8: clinic waiting room colour -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg" alt="Clinic waiting room">
-      </div>
-      <!-- 9: woman working -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-25.jpg" alt="Community member working">
-      </div>
-      <!-- 10: mother and sleeping baby colour -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-19.jpg" alt="Mother and sleeping baby">
-      </div>
-      <!-- 11: clinic interior roof — spans 2 -->
-      <div class="gallery__item">
-        <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-16.jpg" alt="Clinic interior">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Elder woman portrait — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-2.jpg" alt="Elder woman portrait" style="object-position: center top;">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
     </div>
 
@@ -1708,9 +2231,28 @@
   <!-- ════════════════════════════════════════
        FOOTER
   ════════════════════════════════════════ -->
-  <footer class="page-footer" style="background:linear-gradient(to bottom, var(--bg-7) 0%, var(--bg-8) 60px, var(--bg-8) 100%);">
-    <a href="projects.html" class="page-footer__back">All Projects</a>
-    <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+  <!-- ════════════════════════════════════════
+       CTA
+  ════════════════════════════════════════ -->
+  <section class="page-cta reveal" style="background:linear-gradient(to bottom, var(--bg-7) 0%, #1a0600 100%);">
+    <p class="page-cta__eyebrow">Walk with us</p>
+    <h2 class="page-cta__heading">Every contribution carries a name,<br>a place, a thank-you.</h2>
+    <p class="page-cta__desc">Direct, transparent funding — no middle layer, no overhead skim. Whatever you give goes to the people building this clinic with their own hands.</p>
+    <div class="page-cta__actions">
+      <a href="get-involved.html#donate" class="page-cta__btn page-cta__btn--primary">Support the Clinic</a>
+      <a href="get-involved.html" class="page-cta__btn page-cta__btn--secondary">Other ways to help →</a>
+    </div>
+  </section>
+
+  <footer class="page-footer" style="background:#0e0300;">
+    <div class="page-footer__closing">
+      <p class="page-footer__tagline">A spotlight, not a solution.</p>
+      <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
+    </div>
+    <div class="page-footer__bottom">
+      <a href="projects.html" class="page-footer__back">All Projects</a>
+      <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+    </div>
   </footer>
 
   <!-- ════════════════════════════════════════
@@ -1742,6 +2284,24 @@
     </button>
   </div>
 
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox__img-wrap">
+      <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    </div>
+    <button class="lightbox__btn lightbox__close" id="lightboxClose">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Close
+    </button>
+    <button class="lightbox__btn lightbox__prev" id="lightboxPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+    </button>
+    <button class="lightbox__btn lightbox__next" id="lightboxNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+    </button>
+    <span class="lightbox__counter" id="lightboxCounter"></span>
+  </div>
+
   <!-- ── Support pill ── -->
   <a href="get-involved.html#donate" class="navi-pill">
     <span>♥</span> Support
@@ -1750,6 +2310,53 @@
   <!-- ── Scripts ── -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>
+    // Lightbox — handles both gallery and vision image sets
+    (function() {
+      const lb      = document.getElementById('lightbox');
+      const lbImg   = document.getElementById('lightboxImg');
+      const lbCount = document.getElementById('lightboxCounter');
+      let srcs = [];
+      let cur  = 0;
+
+      function open(set, i) {
+        srcs = set;
+        cur  = i;
+        update();
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      function go(dir) {
+        cur = (cur + dir + srcs.length) % srcs.length;
+        update();
+      }
+      function update() {
+        lbImg.src = srcs[cur];
+        lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
+      }
+
+      // Photography gallery
+      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
+      const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
+      galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
+
+      // No vision/progress panel galleries needed (they use inline sliders)
+
+      document.getElementById('lightboxClose').addEventListener('click', close);
+      document.getElementById('lightboxPrev').addEventListener('click', () => go(-1));
+      document.getElementById('lightboxNext').addEventListener('click', () => go(1));
+      lb.addEventListener('click', e => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('is-open')) return;
+        if (e.key === 'ArrowLeft')  go(-1);
+        if (e.key === 'ArrowRight') go(1);
+        if (e.key === 'Escape')     close();
+      });
+    })();
+
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(el => {
@@ -1757,6 +2364,55 @@
       });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile hamburger
+    const hamburger  = document.getElementById('naviHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('is-open');
+      mobileMenu.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('.mobile-menu__link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        mobileMenu.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Keyboard support for gallery items
+    document.querySelectorAll('.gallery__item[role="button"]').forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      });
+    });
+
+    // Panel sliders — click, dots + swipe
+    document.querySelectorAll('.panel-slider').forEach(slider => {
+      const track  = slider.querySelector('.panel-slider__track');
+      const imgs   = [...track.querySelectorAll('img')];
+      const dots   = [...slider.querySelectorAll('.panel-slider__dot')];
+      let idx = 0, touchStartX = 0;
+
+      function goTo(n) {
+        idx = (n + imgs.length) % imgs.length;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+
+      slider.querySelector('.panel-slider__btn--prev').addEventListener('click', () => goTo(idx - 1));
+      slider.querySelector('.panel-slider__btn--next').addEventListener('click', () => goTo(idx + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+      slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      slider.addEventListener('touchend', e => {
+        const delta = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(delta) > 40) goTo(delta > 0 ? idx + 1 : idx - 1);
+      }, { passive: true });
+    });
 
     // Init Lucide icons
     lucide.createIcons();
@@ -1794,11 +2450,15 @@
       }
     });
 
-    // Hide nav on scroll down, show on scroll up
+    // Scroll progress bar + nav backdrop + hide-on-scroll
+    const progressBar = document.getElementById('scrollProgress');
     let lastY = 0;
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       const y = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (y / maxScroll * 100) + '%';
+      nav.classList.toggle('is-scrolled', y > 60);
       if (y > lastY && y > 80) nav.classList.add('nav-hidden');
       else nav.classList.remove('nav-hidden');
       lastY = y;

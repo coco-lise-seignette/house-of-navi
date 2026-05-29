@@ -4,238 +4,389 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects — House of Navi</title>
+  <meta name="description" content="A community-built clinic on the edge of South Luangwa. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
   <style>
-    /* Stronger scrim for legibility on warm elephant texture */
-    .texture-stack .scrim {
-      background: rgba(20, 4, 0, 0.72) !important;
+
+    /* ── Tokens ── */
+    :root {
+      --navi-first-light:        #F5DDD5;
+      --navi-clay-cream:         #EDE3D0;
+      --navi-blood-dune:         #6B1A0E;
+      --navi-midnight-dune:      #280800;
+      --navi-warm-sand:          #DDD0B8;
+      --navi-original-terracotta:#9B4420;
+      --navi-sunlit-face:        #B85040;
+      --navi-mid-dune:           #D9907A;
+      --navi-pale-herb:          #C8DECA;
+      --ff-display: 'Lilita One', cursive;
+      --ff-body:    'Baloo 2', sans-serif;
+      --ff-script:  'Caveat', cursive;
+      --fs-cap: 11px;
     }
 
-    /* ── Reveal animations ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.75s ease, transform 0.75s ease;
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.22s; }
-    .reveal-delay-3 { transition-delay: 0.34s; }
-    .reveal-delay-4 { transition-delay: 0.46s; }
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    /* Section background tones — darkest at top, warming as you scroll */
+    :root {
+      --bg-0: #000000;   /* hero — pure black for the photo */
+      --bg-1: #0b0200;   /* story write-up */
+      --bg-2: #130400;   /* resilience */
+      --bg-3: #0e0300;   /* geographic — steps back dark */
+      --bg-4: #1c0700;   /* health challenges */
+      --bg-5: #130400;   /* nearest hospital — slightly darker */
+      --bg-6: #230900;   /* clinic progress / vision */
+      --bg-7: #190600;   /* gallery header */
+      --bg-8: #0e0300;   /* footer */
     }
 
-    /* ── Page shell ── */
-    .projects-page {
+    body {
+      background: var(--bg-1);
+      color: var(--navi-first-light);
+      font-family: var(--ff-body);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Grain overlay (global) ── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px;
+    }
+
+    /* ── Nav ── */
+    .navi-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
       display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      justify-content: space-between;
+      align-items: center;
+      padding: clamp(20px, 3vh, 28px) clamp(24px, 5vw, 64px);
+      transition: transform 0.3s ease;
     }
-
-    /* Override shared absolute footer for this page */
-    .projects-page .page-footer {
-      position: static;
-      padding: 0 clamp(28px, 6vw, 72px) clamp(24px, 3vh, 40px);
-      margin-top: auto;
+    .navi-nav.nav-hidden { transform: translateY(-100%); }
+    .navi-logo img { height: 44px; }
+    .navi-links {
+      display: flex;
+      gap: clamp(20px, 2vw, 36px);
+      align-items: center;
     }
-
-    /* ── Eyebrow ── */
-    .eyebrow {
+    .navi-link {
       font-family: var(--ff-body);
       font-size: var(--fs-cap);
       font-weight: 600;
-      letter-spacing: 0.32em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--navi-first-light);
-      opacity: 0.5;
-      margin: 0 0 clamp(10px, 1.5vh, 18px) 0;
+      opacity: 0.55;
+      transition: opacity 0.2s;
     }
+    .navi-link:hover { opacity: 1; }
+    .navi-link.is-current { opacity: 1; text-decoration: underline; text-underline-offset: 5px; }
 
-    /* ── Hero ── */
-    .projects-hero {
-      padding: clamp(110px, 15vh, 170px) clamp(28px, 6vw, 72px) clamp(28px, 4vh, 52px);
-    }
-
-    .projects-hero__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-lg);
-      align-items: end;
-    }
-
-    .projects-title {
-      font-family: var(--ff-display);
-      font-size: clamp(56px, 7.5vw, 108px);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-      color: var(--navi-first-light);
-      margin: 0;
-    }
-
-    .projects-intro {
-      font-family: var(--ff-body);
-      font-size: clamp(14px, 1.2vw, 17px);
-      font-weight: 400;
-      line-height: 1.75;
-      color: rgba(245, 221, 213, 0.88);
-      margin: 0;
-      padding-top: clamp(32px, 5vh, 64px);
-      max-width: 440px;
-      margin-left: auto;
-    }
-
-    /* ── Projects section ── */
-    .projects-section {
-      padding: 0 clamp(28px, 6vw, 72px);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .projects-divider {
-      width: 100%;
-      height: 1px;
-      background: rgba(245, 221, 213, 0.16);
-      margin-bottom: clamp(24px, 3.5vh, 44px);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: clamp(24px, 4vw, 56px);
-    }
-
-    /* ── Project card ── */
-    .project-card {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-card__meta {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: clamp(14px, 2vh, 22px);
-    }
-
-    .project-card__num {
-      font-family: var(--ff-body);
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--navi-warm-sand);
-      white-space: nowrap;
-      flex-shrink: 0;
-      letter-spacing: 0.04em;
-    }
-
-    .project-card__rule-line {
-      flex: 1;
-      height: 1px;
-      background: rgba(221, 208, 184, 0.25);
-    }
-
-    .project-card__cat {
-      font-family: var(--ff-body);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--navi-warm-sand);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .project-card__title {
-      font-family: var(--ff-display);
-      font-size: clamp(22px, 2.2vw, 30px);
-      line-height: 1.1;
-      color: var(--navi-first-light);
-      margin: 0 0 clamp(6px, 1vh, 10px) 0;
-    }
-
-    .project-card__location {
-      font-family: var(--ff-body);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      color: var(--navi-warm-sand);
-      margin: 0 0 clamp(10px, 1.8vh, 18px) 0;
-    }
-
-    .project-card__desc {
-      font-family: var(--ff-body);
-      font-size: clamp(13px, 1vw, 14px);
-      font-weight: 400;
-      line-height: 1.75;
-      color: rgba(245, 221, 213, 0.72);
-      margin: 0 0 clamp(16px, 2.5vh, 28px) 0;
-      flex: 1;
-    }
-
-    .project-card__cta {
-      font-family: var(--ff-body);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--navi-first-light);
-      opacity: 0.65;
+    /* ── Support pill ── */
+    .navi-pill {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 150;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding-bottom: 3px;
-      border-bottom: 1px solid rgba(245, 221, 213, 0.28);
-      transition: opacity 0.2s ease, border-color 0.2s ease;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 100px;
+      background: var(--navi-clay-cream);
+      color: var(--navi-blood-dune);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 6px 24px rgba(40,8,0,0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .navi-pill:hover { transform: translateY(-1px); box-shadow: 0 10px 32px rgba(40,8,0,0.3); }
+
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* Full-bleed portrait — behind everything */
+    .hero__portrait {
+      position: absolute;
+      inset: 0;
+      background-image: url('MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY_HERO%20IMAGE.jpg');
+      background-size: auto 78%;
+      background-position: left bottom;
+      background-repeat: no-repeat;
+    }
+    .hero__portrait img { display: none; }
+
+    /* Smooth blend — top bleeds fully into page, right fades into copy area */
+    .hero__portrait::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 50%, var(--navi-midnight-dune) 80%);
+    }
+
+    /* Copy sits on top, right side — vertically centred */
+    .hero__copy {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 52%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(80px, 10vh, 120px) clamp(48px, 6vw, 88px) clamp(48px, 7vh, 88px) clamp(32px, 3vw, 40px);
+      z-index: 2;
+    }
+
+    .hero__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--ff-body);
+      font-size: clamp(13px, 1.1vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+      margin-bottom: clamp(20px, 3vh, 32px);
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+    }
+    .hero__eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--navi-mid-dune);
+      opacity: 0.6;
+      flex-shrink: 0;
+    }
+
+    .hero__title {
+      font-family: var(--ff-display);
+      font-size: clamp(48px, 5.5vw, 84px);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--navi-first-light);
+      margin-bottom: clamp(24px, 3.5vh, 40px);
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s forwards;
+    }
+
+    .hero__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.1vw, 16px);
+      font-weight: 400;
+      line-height: 1.78;
+      color: rgba(245, 221, 213, 0.72);
+      max-width: 380px;
+      margin-bottom: clamp(32px, 4vh, 48px);
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+    }
+
+    /* Showreel trigger card */
+    .hero__reel-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: clamp(28px, 3.5vh, 40px);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
       width: fit-content;
     }
 
-    .project-card__cta::after {
-      content: '→';
-      font-size: 11px;
-    }
-
-    .project-card__cta:hover {
-      opacity: 1;
-      border-color: rgba(245, 221, 213, 0.65);
-    }
-
-    /* ── Card status label ── */
-    .project-card__status {
-      font-family: var(--ff-body);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--navi-warm-sand);
-      opacity: 0.75;
-      margin: 0 0 clamp(10px, 1.5vh, 16px) 0;
-    }
-
-    /* ── Multiple CTAs (column 3) ── */
-    .project-card__cta-group {
+    .hero__reel-btn {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 14px;
+      margin-top: clamp(28px, 3.5vh, 40px);
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 100%;
+      max-width: 380px;
+      text-align: left;
     }
 
-    /* ── CTA plain (non-link, e.g. Coming Soon) ── */
-    .project-card__cta--plain {
-      cursor: default;
-      opacity: 0.38;
-      border-bottom-color: transparent;
+    .hero__reel-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(245, 221, 213, 0.18);
+      transition: border-color 0.3s;
     }
-    .project-card__cta--plain:hover {
-      opacity: 0.38;
-      border-color: transparent;
+    .hero__reel-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.55);
+      transition: filter 0.4s, transform 0.6s ease;
+    }
+    .hero__reel-thumb-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero__reel-thumb-play-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245, 221, 213, 0.6);
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: transform 0.25s, border-color 0.25s, background 0.25s;
+    }
+    .hero__reel-thumb-play-circle svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--navi-first-light);
+      margin-left: 3px;
+    }
+    .hero__reel-btn:hover .hero__reel-thumb { border-color: rgba(245, 221, 213, 0.5); }
+    .hero__reel-btn:hover .hero__reel-thumb img { filter: brightness(0.72); transform: scale(1.03); }
+    .hero__reel-btn:hover .hero__reel-thumb-play-circle {
+      transform: scale(1.1);
+      border-color: var(--navi-first-light);
+      background: rgba(245, 221, 213, 0.12);
     }
 
-    /* ── Footer metadata ── */
-    .projects-footer-meta {
-      margin: 0;
+    .hero__reel-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero__reel-label {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.7);
+      transition: color 0.2s;
+    }
+    .hero__reel-meta {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(245, 221, 213, 0.3);
+    }
+    .hero__reel-btn:hover .hero__reel-label { color: var(--navi-first-light); }
+
+    /* Fullscreen modal */
+    .reel-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .reel-modal.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .reel-modal__inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .reel-modal__video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    /* Video player placeholder */
+    .reel-modal__player {
+      position: relative;
+      width: 90vw;
+      max-width: 1200px;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+    }
+    .reel-modal__thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.65);
+    }
+    .reel-modal__overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .reel-modal__play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 2px solid rgba(245, 221, 213, 0.7);
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, border-color 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .reel-modal__play-btn:hover {
+      background: rgba(245, 221, 213, 0.15);
+      border-color: var(--navi-first-light);
+      transform: scale(1.08);
+    }
+    .reel-modal__play-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--navi-first-light);
+      margin-left: 4px;
+    }
+    .reel-modal__coming-soon {
       font-family: var(--ff-body);
       font-size: 10px;
       font-weight: 600;
@@ -243,151 +394,2072 @@
       text-transform: uppercase;
       color: rgba(245, 221, 213, 0.45);
     }
+    /* bottom bar */
+    .reel-modal__bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px 14px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .reel-modal__progress {
+      width: 100%;
+      height: 2px;
+      background: rgba(245, 221, 213, 0.15);
+      border-radius: 2px;
+      position: relative;
+    }
+    .reel-modal__progress::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--navi-first-light);
+      border-radius: 2px;
+    }
+    .reel-modal__meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reel-modal__title {
+      font-family: var(--ff-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: rgba(245, 221, 213, 0.8);
+    }
+    .reel-modal__duration {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(245, 221, 213, 0.45);
+      letter-spacing: 0.04em;
+    }
+    .reel-modal__close {
+      position: absolute;
+      top: 28px;
+      right: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.5);
+      transition: color 0.2s;
+    }
+    .reel-modal__close:hover { color: var(--navi-first-light); }
+    .reel-modal__close svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+    }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .projects-hero__grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-      }
-      .projects-intro {
-        padding-top: 0;
-        margin-left: 0;
-        max-width: 100%;
-      }
-      .projects-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-lg);
-      }
+    .hero__scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.35);
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.65s forwards;
+    }
+    .hero__scroll-hint::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 28px;
+      background: rgba(245, 221, 213, 0.2);
+      flex-shrink: 0;
+    }
+
+    /* hero::after removed — portrait::after handles all blending */
+
+    /* ════════════════════════════════════════
+       SHARED SECTION CHROME
+    ════════════════════════════════════════ */
+    .section-rule {
+      width: 100%;
+      height: 1px;
+      background: rgba(245, 221, 213, 0.1);
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.38);
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(245, 221, 213, 0.1);
+    }
+
+    /* ════════════════════════════════════════
+       STORY WRITE-UP
+    ════════════════════════════════════════ */
+    .story {
+      padding: clamp(72px, 10vh, 120px) clamp(24px, 8vw, 120px);
+    }
+
+    .story__inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+
+    .story__left {
+      position: sticky;
+      top: 100px;
+    }
+
+    .story__kicker {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+      margin-bottom: 20px;
+    }
+
+    .story__heading {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 3vw, 48px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin-bottom: 24px;
+    }
+
+    .story__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(245, 221, 213, 0.1);
+    }
+
+    .story__meta-item {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: rgba(245, 221, 213, 0.45);
+    }
+
+    .story__meta-item span {
+      color: rgba(245, 221, 213, 0.72);
+    }
+
+    .story__right p {
+      font-family: var(--ff-body);
+      font-size: clamp(16px, 1.3vw, 18px);
+      font-weight: 400;
+      line-height: 1.85;
+      color: rgba(245, 221, 213, 0.78);
+      margin-bottom: clamp(20px, 2.5vh, 28px);
+    }
+    .story__right p:last-child { margin-bottom: 0; }
+
+    .story__right strong {
+      color: var(--navi-first-light);
+      font-weight: 600;
+    }
+
+    .story__right em {
+      color: var(--navi-mid-dune);
+      font-style: normal;
+    }
+
+    /* ════════════════════════════════════════
+       CLINIC PROGRESS
+    ════════════════════════════════════════ */
+    .progress__status-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-bottom: 32px;
+    }
+
+    .progress__phase {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px 0 20px;
+      border-top: 1px solid rgba(245, 221, 213, 0.12);
+      position: relative;
+    }
+
+    .progress__phase-num {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: rgba(245, 221, 213, 0.28);
+    }
+
+    .progress__phase-label {
+      font-family: var(--ff-body);
+      font-size: clamp(15px, 1.2vw, 17px);
+      font-weight: 500;
+      color: rgba(245, 221, 213, 0.75);
+      letter-spacing: 0.02em;
+    }
+
+    .progress__phase-tag {
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: inline-block;
+      width: fit-content;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+
+    .progress__phase-tag--done {
+      background: rgba(200, 222, 202, 0.12);
+      color: var(--navi-pale-herb);
+    }
+
+    .progress__phase-tag--active {
+      background: rgba(217, 144, 122, 0.15);
+      color: var(--navi-mid-dune);
+    }
+
+    .progress__phase-tag--pending {
+      background: rgba(245, 221, 213, 0.06);
+      color: rgba(245, 221, 213, 0.3);
+    }
+
+    /* active phase gets a highlighted top border */
+    .progress__phase:nth-child(2) {
+      border-top-color: var(--navi-mid-dune);
+    }
+
+    .progress__images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .progress__header {
+      margin-bottom: 36px;
+    }
+    .progress__writeup {
+      max-width: 680px;
+    }
+    .progress__writeup p {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.1vw, 16px);
+      font-weight: 400;
+      line-height: 1.8;
+      color: rgba(245, 221, 213, 0.7);
+      margin: 0 0 14px 0;
+    }
+    .progress__writeup p:last-child { margin-bottom: 0; }
+    .progress__phase-status {
+      font-size: 11px !important;
+      color: rgba(245, 221, 213, 0.4) !important;
+      margin-top: 20px !important;
+      padding-top: 20px;
+      border-top: 1px solid rgba(245, 221, 213, 0.08);
+    }
+    .progress__phase-status span {
+      color: var(--navi-mid-dune);
+      font-weight: 600;
+    }
+
+    .progress__img-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .progress__img-item img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .progress__img-item:hover img { transform: scale(1.02); }
+
+    .progress__img-caption {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.32);
     }
 
     @media (max-width: 768px) {
-      .projects-hero {
-        padding-top: 110px;
+      .progress__status-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+      .progress__images {
+        grid-template-columns: 1fr;
       }
     }
-  </style>
-  <style>
-    /* ── Scroll unlock ── */
-    html, body { height: auto !important; min-height: 100vh; overflow-y: auto !important; }
-    .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-    .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
-    main { position: relative; z-index: 10; }
+
+    /* ════════════════════════════════════════
+       INFO SECTIONS
+    ════════════════════════════════════════ */
+    .info-rule {
+      margin: 0 clamp(24px, 8vw, 120px);
+      height: 1px;
+      background: rgba(245, 221, 213, 0.08);
+    }
+
+    .info-section__eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.38);
+    }
+
+    /* Lucide icon base */
+    [data-lucide] {
+      width: 20px;
+      height: 20px;
+      stroke: var(--navi-mid-dune);
+      stroke-width: 1.5;
+      flex-shrink: 0;
+    }
+
+    /* ── RESILIENCE: clean stat strip ── */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+    .stat-strip__divider {
+      width: 1px;
+      height: 60px;
+      background: rgba(245, 221, 213, 0.1);
+      margin: 0 clamp(20px, 3vw, 48px);
+    }
+    .stat-strip__item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stat-strip__icon {
+      margin-bottom: 4px;
+    }
+    .stat-strip__num {
+      font-family: var(--ff-display);
+      font-size: clamp(36px, 4vw, 60px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+    }
+    .stat-strip__label {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.38);
+    }
+    .stat-strip__note {
+      font-family: var(--ff-body);
+      font-size: clamp(15px, 1.1vw, 16px);
+      color: rgba(245, 221, 213, 0.45);
+      line-height: 1.7;
+      margin: 0;
+      max-width: 600px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(245, 221, 213, 0.07);
+    }
+
+    /* ── GEOGRAPHIC: isolation callout ── */
+    .isolation-bar {
+      background: var(--bg-6);
+      border-top: 1px solid rgba(217, 144, 122, 0.15);
+      border-bottom: 1px solid rgba(217, 144, 122, 0.15);
+    }
+    .isolation-bar__inner {
+      display: grid;
+      grid-template-columns: auto 1px 1fr;
+      gap: clamp(28px, 4vw, 64px);
+      align-items: center;
+      padding: clamp(28px, 4vh, 44px) clamp(24px, 8vw, 120px);
+    }
+    .isolation-bar__stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .isolation-bar__num {
+      font-family: var(--ff-display);
+      font-size: clamp(56px, 7vw, 100px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--navi-first-light);
+    }
+    .isolation-bar__unit {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+    }
+    .isolation-bar__divider {
+      width: 1px;
+      height: 56px;
+      background: rgba(217, 144, 122, 0.2);
+      align-self: center;
+    }
+    .isolation-bar__headline {
+      font-family: var(--ff-body);
+      font-size: clamp(16px, 1.6vw, 22px);
+      font-weight: 700;
+      color: var(--navi-first-light);
+      margin-bottom: 8px;
+    }
+    .isolation-bar__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.1vw, 15px);
+      line-height: 1.72;
+      color: rgba(245, 221, 213, 0.55);
+      margin: 0;
+      max-width: 580px;
+    }
+    @media (max-width: 768px) {
+      .isolation-bar__inner { grid-template-columns: 1fr; gap: 16px; }
+      .isolation-bar__divider { display: none; }
+    }
+
+    /* ── GEOGRAPHIC: two-column editorial ── */
+    .geo-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+    .geo-left { position: sticky; top: 100px; }
+    .geo-statement {
+      font-family: var(--ff-body);
+      font-size: clamp(16px, 1.4vw, 20px);
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.7);
+      margin: 20px 0 0;
+    }
+    .geo-right {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .geo-item {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      padding: clamp(18px, 2.8vh, 28px) 0;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.09);
+    }
+    .geo-item:first-child { border-top: 1px solid rgba(245, 221, 213, 0.09); }
+    /* Geo icons get terracotta tint to signal danger */
+    .geo-item [data-lucide] { stroke: var(--navi-mid-dune); opacity: 0.9; margin-top: 2px; }
+    .geo-item h4 {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navi-first-light);
+      margin: 0 0 6px;
+    }
+    .geo-item p {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(245, 221, 213, 0.52);
+      margin: 0;
+    }
+
+    /* ── HEALTH: full-width rows — escalating urgency ── */
+    .health-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .health-row {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: clamp(24px, 4vw, 64px);
+      align-items: baseline;
+      padding: clamp(18px, 2.8vh, 28px) 0 clamp(18px, 2.8vh, 28px) 16px;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.09);
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .health-row:first-child { border-top: 1px solid rgba(245, 221, 213, 0.09); }
+    .health-row:hover { border-left-color: var(--navi-mid-dune); }
+    .health-row__left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--ff-body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navi-first-light);
+    }
+    /* Health icons carry warning colour */
+    .health-row__left [data-lucide] { stroke: var(--navi-mid-dune); flex-shrink: 0; }
+    .health-row__desc {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.65);
+      margin: 0;
+    }
+
+    /* ── HOSPITAL: quote + small steps ── */
+    .hospital-quote {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3.2vw, 52px);
+      font-weight: 400;
+      font-style: normal;
+      line-height: 1.2;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(48px, 7vh, 72px);
+      padding-left: clamp(24px, 2.5vw, 40px);
+      border-left: 3px solid var(--navi-mid-dune);
+      max-width: 100%;
+    }
+    .hospital-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .hospital-step {
+      padding: clamp(16px, 2vw, 24px);
+      border: 1px solid rgba(217, 144, 122, 0.12);
+      background: rgba(217, 144, 122, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .hospital-step [data-lucide] { stroke: var(--navi-mid-dune); opacity: 0.7; margin-bottom: 4px; }
+    .hospital-step__num {
+      font-family: var(--ff-body);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(217, 144, 122, 0.4);
+    }
+    .hospital-step__title {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navi-first-light);
+      margin: 0;
+    }
+    .hospital-step__desc {
+      font-family: var(--ff-body);
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(245, 221, 213, 0.45);
+      margin: 0;
+    }
+
+    /* ════════════════════════════════════════
+       NAV — breadcrumb + hamburger
+    ════════════════════════════════════════ */
+    .navi-nav__left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .navi-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .navi-breadcrumb__link {
+      color: rgba(245,221,213,0.4);
+      transition: color 0.2s;
+    }
+    .navi-breadcrumb__link:hover { color: rgba(245,221,213,0.75); }
+    .navi-breadcrumb__sep { color: rgba(245,221,213,0.2); font-size: 12px; }
+    .navi-breadcrumb__current { color: rgba(245,221,213,0.65); }
+
+    /* Hamburger — hidden on desktop */
+    .navi-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .navi-hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--navi-first-light);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+    .navi-hamburger.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .navi-hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .navi-hamburger.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(10,2,0,0.97);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.is-open { opacity: 1; pointer-events: all; }
+    .mobile-menu__link {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 7vw, 52px);
+      color: rgba(245,221,213,0.6);
+      letter-spacing: -0.01em;
+      transition: color 0.2s;
+      padding: 8px 0;
+    }
+    .mobile-menu__link:hover { color: var(--navi-first-light); }
+
+    /* ════════════════════════════════════════
+       GALLERY — clickable affordance
+    ════════════════════════════════════════ */
+    .gallery__item-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s ease;
+    }
+    .gallery__item-overlay svg {
+      width: 20px;
+      height: 20px;
+      stroke: rgba(245,221,213,0);
+      transition: stroke 0.3s ease, transform 0.3s ease;
+    }
+    .gallery__item:hover .gallery__item-overlay {
+      background: rgba(0,0,0,0.28);
+    }
+    .gallery__item:hover .gallery__item-overlay svg {
+      stroke: rgba(245,221,213,0.9);
+      transform: scale(1.1);
+    }
+    /* Always-visible subtle indicator bottom-right */
+    .gallery__item-overlay::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(245,221,213,0.2);
+      border-radius: 50%;
+      transition: border-color 0.3s;
+    }
+    .gallery__item:hover .gallery__item-overlay::after {
+      border-color: rgba(245,221,213,0.6);
+    }
+
+    @media (max-width: 600px) {
+      .navi-hamburger { display: flex; }
+      .navi-links { display: none; }
+      .navi-breadcrumb { display: none; }
+    }
+
+    /* ════════════════════════════════════════
+       CTA SECTION
+    ════════════════════════════════════════ */
+    .page-cta {
+      text-align: center;
+      padding: clamp(72px, 12vh, 120px) clamp(24px, 8vw, 120px);
+    }
+    .page-cta__eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+      margin-bottom: 20px;
+    }
+    .page-cta__heading {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 4vw, 60px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin-bottom: 24px;
+    }
+    .page-cta__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.65);
+      max-width: 560px;
+      margin: 0 auto clamp(36px, 5vh, 56px);
+    }
+    .page-cta__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .page-cta__btn {
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 100px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s;
+    }
+    .page-cta__btn--primary {
+      background: var(--navi-clay-cream);
+      color: var(--navi-blood-dune);
+      box-shadow: 0 8px 32px rgba(40,8,0,0.3);
+    }
+    .page-cta__btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(40,8,0,0.4);
+    }
+    .page-cta__btn--secondary {
+      color: rgba(245, 221, 213, 0.6);
+    }
+    .page-cta__btn--secondary:hover { color: var(--navi-first-light); }
+
+    /* ════════════════════════════════════════
+       FOCUS STATES — accessibility
+    ════════════════════════════════════════ */
+    :focus-visible {
+      outline: 2px solid var(--navi-mid-dune);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+    .navi-pill:focus-visible,
+    .page-cta__btn--primary:focus-visible {
+      outline: 2px solid var(--navi-blood-dune);
+      outline-offset: 4px;
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .stat-strip { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .stat-strip__divider { display: none; }
+      .geo-layout { grid-template-columns: 1fr; }
+      .geo-left { position: static; }
+      .health-row { grid-template-columns: 1fr; gap: 6px; padding-left: 12px; }
+      .hospital-steps { grid-template-columns: 1fr 1fr; }
+      .hero__copy {
+        width: 100%;
+        left: 0;
+        justify-content: flex-end;
+        padding-bottom: clamp(40px, 6vh, 64px);
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+      }
+      .hero__title { font-size: clamp(36px, 7vw, 56px); }
+    }
+    @media (max-width: 600px) {
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+      .hospital-steps { grid-template-columns: 1fr; }
+      .hero__title { font-size: clamp(30px, 9vw, 44px); }
+      .hero__reel-thumb { display: none; }
+      .page-cta__heading { font-size: clamp(26px, 7vw, 36px); }
+      .navi-pill { padding: 11px 18px; font-size: 12px; }
+    }
+
+    /* ════════════════════════════════════════
+       CLINIC PROGRESS + VISION PANELS
+    ════════════════════════════════════════ */
+    .cpv__panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 64px);
+      align-items: start;
+    }
+
+    .cpv__panel { overflow: hidden; }
+
+    /* Static (non-accordion) vision panel */
+    .cpv__panel--static .cpv__static-header {
+      border-top: 1px solid rgba(245, 221, 213, 0.12);
+      padding: 18px 0;
+    }
+    .cpv__panel--static .cpv__trigger-label {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.75);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .cpv__panel--static .cpv__trigger-sub {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      color: rgba(245, 221, 213, 0.3);
+      display: block;
+    }
+
+    /* Panel inline slider */
+    .panel-slider {
+      position: relative;
+      width: 100%;
+      background: #0a0200;
+    }
+    .panel-slider__img-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+    .panel-slider__track {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .panel-slider__track img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    /* Controls bar below the image — always visible */
+    .panel-slider__controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0 4px;
+      gap: 12px;
+    }
+    .panel-slider__btn {
+      background: none;
+      border: 1px solid rgba(245,221,213,0.22);
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .panel-slider__btn:hover {
+      border-color: var(--navi-first-light);
+      background: rgba(245,221,213,0.06);
+    }
+    .panel-slider__btn:active { background: rgba(245,221,213,0.1); }
+    .panel-slider__btn svg { width: 16px; height: 16px; stroke: rgba(245,221,213,0.75); }
+    .panel-slider__dots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      justify-content: center;
+    }
+    .panel-slider__dot {
+      height: 2px;
+      width: 24px;
+      background: rgba(245,221,213,0.18);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.25s, width 0.25s;
+    }
+    .panel-slider__dot.is-active {
+      background: var(--navi-mid-dune);
+      width: 36px;
+    }
+    .panel-slider__label {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245,221,213,0.28);
+      white-space: nowrap;
+    }
+
+    .cpv__hero {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      margin-bottom: 2px;
+    }
+    .cpv__hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .cpv__panel:hover .cpv__hero img { transform: scale(1.02); }
+
+    .cpv__trigger {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      border-top: 1px solid rgba(245, 221, 213, 0.12);
+      padding: 18px 0;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+    }
+    .cpv__trigger-left { display: flex; flex-direction: column; gap: 3px; }
+    .cpv__trigger-label {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.75);
+      transition: color 0.2s;
+    }
+    .cpv__trigger-sub {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      color: rgba(245, 221, 213, 0.3);
+    }
+    .cpv__trigger-icon {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border: 1px solid rgba(245, 221, 213, 0.18);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s, transform 0.35s ease;
+    }
+    .cpv__trigger-icon svg {
+      width: 12px; height: 12px;
+      stroke: rgba(245, 221, 213, 0.5);
+    }
+    .cpv__trigger:hover .cpv__trigger-label { color: var(--navi-first-light); }
+    .cpv__trigger:hover .cpv__trigger-icon { border-color: rgba(245, 221, 213, 0.4); }
+    .cpv__panel.is-open .cpv__trigger-icon { transform: rotate(45deg); }
+    .cpv__panel.is-open .cpv__trigger-label { color: var(--navi-first-light); }
+
+    /* body collapses to 0 height */
+    .cpv__body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.45s ease;
+    }
+    .cpv__body-inner { overflow: hidden; }
+    .cpv__panel.is-open .cpv__body { grid-template-rows: 1fr; }
+
+    .cpv__writeup { padding: 16px 0 20px; }
+    .cpv__writeup p {
+      font-family: var(--ff-body);
+      font-size: clamp(15px, 1.1vw, 16px);
+      line-height: 1.78;
+      color: rgba(245, 221, 213, 0.65);
+      margin: 0 0 10px;
+    }
+    .cpv__writeup p:last-child { margin-bottom: 0; }
+
+    .cpv__images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding-bottom: 4px;
+    }
+    .cpv__images .progress__img-item img { aspect-ratio: 4 / 3; }
+
+    @media (max-width: 768px) {
+      .cpv__panels { grid-template-columns: 1fr; }
+      .cpv__images { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ════════════════════════════════════════
+       VIDEO REEL
+    ════════════════════════════════════════ */
+    .reel {
+      padding: 0 clamp(24px, 8vw, 120px) clamp(72px, 10vh, 120px);
+    }
+
+    .reel__label {
+      margin-bottom: 24px;
+    }
+
+    .reel__frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: rgba(245, 221, 213, 0.03);
+      border: 1px solid rgba(245, 221, 213, 0.1);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* placeholder noise texture inside reel */
+    .reel__frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 225' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    .reel__inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .reel__play {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 221, 213, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .reel__frame:hover .reel__play {
+      border-color: rgba(245, 221, 213, 0.6);
+      transform: scale(1.06);
+    }
+    .reel__play svg {
+      width: 20px;
+      height: 20px;
+      fill: rgba(245, 221, 213, 0.6);
+      margin-left: 3px;
+    }
+
+    .reel__placeholder-text {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.28);
+    }
+
+    /* thin corner accents */
+    .reel__frame::after {
+      content: '';
+      position: absolute;
+      top: 16px; left: 16px;
+      right: 16px; bottom: 16px;
+      border: 1px solid rgba(245, 221, 213, 0.06);
+      pointer-events: none;
+    }
+
+    .reel__caption {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .reel__caption-left {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(245, 221, 213, 0.4);
+      letter-spacing: 0.06em;
+    }
+
+    .reel__caption-right {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.28);
+    }
+
+    /* ════════════════════════════════════════
+       GALLERY
+    ════════════════════════════════════════ */
+    .gallery {
+      padding: 0;
+    }
+
+    /* full-bleed header bar */
+    .gallery__header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) clamp(36px, 5vh, 56px);
+      border-bottom: 1px solid rgba(245, 221, 213, 0.08);
+      margin-bottom: 2px;
+    }
+
+    .gallery__header-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .gallery__eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.35);
+    }
+
+    .gallery__heading {
+      font-family: var(--ff-display);
+      font-size: clamp(36px, 4vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+      margin: 0;
+    }
+
+    .gallery__header-desc {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.28);
+      margin: 0;
+    }
+
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 340px);
+      gap: 2px;
+    }
+
+    .gallery__item {
+      position: relative;
+      overflow: hidden;
+      background: #0e0400;
+      cursor: zoom-in;
+    }
+    .gallery__item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+    .gallery__item:hover img { transform: scale(1.04); }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 600;
+      background: rgba(0,0,0,0.96);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.is-open { opacity: 1; pointer-events: all; }
+
+    .lightbox__img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox__img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox__img.is-loading { opacity: 0; }
+
+    .lightbox__btn {
+      position: fixed;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(245,221,213,0.6);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+    .lightbox__btn:hover { color: var(--navi-first-light); }
+    .lightbox__btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .lightbox__close { top: 24px; right: 28px; gap: 8px;
+      font-family: var(--ff-body); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase; }
+    .lightbox__prev { left: 24px; top: 50%; transform: translateY(-50%); }
+    .lightbox__next { right: 24px; top: 50%; transform: translateY(-50%); }
+
+    .lightbox__counter {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: rgba(245,221,213,0.35);
+    }
+
+    .gallery__caption {
+      margin-top: 16px;
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(245, 221, 213, 0.35);
+      letter-spacing: 0.06em;
+    }
+
+    /* ════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════ */
+    .page-footer {
+      padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) clamp(32px, 4vh, 48px);
+      border-top: 1px solid rgba(245, 221, 213, 0.08);
+    }
+    .page-footer__closing {
+      text-align: center;
+      padding-bottom: clamp(36px, 5vh, 56px);
+      margin-bottom: clamp(24px, 3vh, 36px);
+      border-bottom: 1px solid rgba(245, 221, 213, 0.07);
+    }
+    .page-footer__tagline {
+      font-family: var(--ff-display);
+      font-size: clamp(24px, 3vw, 42px);
+      color: rgba(245, 221, 213, 0.55);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .page-footer__subline {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.25);
+    }
+    .page-footer__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-footer__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.5);
+      transition: color 0.2s;
+    }
+    .page-footer__back:hover { color: var(--navi-first-light); }
+    .page-footer__back::before { content: '←'; font-size: 13px; }
+
+    .page-footer__meta {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245, 221, 213, 0.28);
+    }
+
+    /* ════════════════════════════════════════
+       SECTION BACKGROUNDS — replaces inline styles
+    ════════════════════════════════════════ */
+    .section--story    { background: linear-gradient(to bottom, var(--bg-0) 0%, var(--bg-1) 80px, var(--bg-1) 100%); }
+    .section--resilience { background: linear-gradient(to bottom, var(--bg-1) 0%, var(--bg-2) 80px, var(--bg-2) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--geographic { background: linear-gradient(to bottom, var(--bg-2) 0%, var(--bg-3) 80px, var(--bg-3) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--health     { background: linear-gradient(to bottom, var(--bg-3) 0%, var(--bg-4) 80px, var(--bg-4) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--hospital   { background: linear-gradient(to bottom, var(--bg-4) 0%, var(--bg-5) 80px, var(--bg-5) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--cpv        { background: linear-gradient(to bottom, var(--bg-5) 0%, var(--bg-6) 80px, var(--bg-6) 100%); padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px); }
+    .section--gallery    { background: var(--bg-7); }
+
+    /* ════════════════════════════════════════
+       SCROLL PROGRESS BAR
+    ════════════════════════════════════════ */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: var(--navi-mid-dune);
+      z-index: 999;
+      transition: width 0.1s linear;
+    }
+
+    /* ════════════════════════════════════════
+       NAV — backdrop on scroll
+    ════════════════════════════════════════ */
+    .navi-nav.is-scrolled {
+      background: rgba(8, 2, 0, 0.82);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    /* ════════════════════════════════════════
+       STORY PULL QUOTE
+    ════════════════════════════════════════ */
+    .story__pullquote {
+      font-family: var(--ff-display);
+      font-size: clamp(22px, 2.4vw, 36px);
+      line-height: 1.2;
+      color: var(--navi-first-light);
+      margin: clamp(28px, 4vh, 40px) 0;
+      padding-left: clamp(18px, 2vw, 28px);
+      border-left: 2px solid var(--navi-mid-dune);
+    }
+
+    /* ════════════════════════════════════════
+       ANIMATIONS
+    ════════════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-rows: 55vh 1fr;
+        height: auto;
+      }
+      .hero__portrait::after {
+        background: linear-gradient(to bottom, transparent 50%, var(--navi-midnight-dune) 100%);
+      }
+      .hero::after { display: none; }
+      .hero__copy {
+        padding: clamp(32px, 5vw, 56px);
+        justify-content: flex-start;
+      }
+
+      .story__inner {
+        grid-template-columns: 1fr;
+      }
+      .story__left {
+        position: static;
+        border-bottom: 1px solid rgba(245, 221, 213, 0.1);
+        padding-bottom: 32px;
+        margin-bottom: 8px;
+      }
+
+      .gallery__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 260px);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navi-links { display: none; }
+      .gallery__grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(3, 240px);
+      }
+    }
+
   </style>
 </head>
 <body>
-  <div class="texture-stack">
-    <div class="texture" style="background-image: url('brand/assets/textures/texture-elephant-warm.jpg');"></div>
-    <div class="scrim"></div>
-    <div class="vignette"></div>
-    <div class="grain"></div>
+
+  <!-- ── Scroll progress ── -->
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
+
+  <!-- ── Nav ── -->
+  <nav class="navi-nav" id="nav">
+    <div class="navi-nav__left">
+      <a href="index.html" class="navi-logo">
+        <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="44">
+      </a>
+
+    </div>
+    <div class="navi-links" id="naviLinks" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="navi-link">Landing</a>
+      <a href="projects.html" class="navi-link is-current">Projects</a>
+      <a href="get-involved.html" class="navi-link">Get Involved</a>
+      <a href="about.html" class="navi-link">About</a>
+      <a href="contact.html" class="navi-link">Contact</a>
+    </div>
+    <button class="navi-hamburger" id="naviHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── Mobile menu overlay ── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-menu__link">Landing</a>
+    <a href="projects.html" class="mobile-menu__link">Projects</a>
+    <a href="get-involved.html" class="mobile-menu__link">Get Involved</a>
+    <a href="about.html" class="mobile-menu__link">About</a>
+    <a href="contact.html" class="mobile-menu__link">Contact</a>
   </div>
 
-  <main class="page-content projects-page">
-
-      <header class="page-header">
-        <a href="index.html" class="navi-logo">
-          <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
-        </a>
-        <nav class="navi-nav">
-          <a href="index.html" class="navi-nav-link">Landing</a>
-          <a href="projects.html" class="navi-nav-link is-current">Projects</a>
-          <a href="get-involved.html" class="navi-nav-link">Get Involved</a>
-          <a href="about.html" class="navi-nav-link">About</a>
-          <a href="contact.html" class="navi-nav-link">Contact</a>
-        </nav>
-      </header>
-
-      <section class="projects-hero">
-        <p class="eyebrow reveal">THE WORK</p>
-        <div class="projects-hero__grid">
-          <h1 class="projects-title reveal reveal-delay-1">Projects</h1>
-          <p class="projects-intro reveal reveal-delay-2">Stories rooted in humanity. From healthcare and conservation to education and community led development, each project exists to bring visibility, connection, and meaningful support to initiatives already creating change on the ground.</p>
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero__portrait" role="img" aria-label="Black and white portrait of an elder woman from Mkasanga village, looking upward">
+      <img src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY_HERO%20IMAGE.jpg" alt="Mkasanga Community Elder">
+    </div>
+    <div class="hero__copy">
+      <p class="hero__eyebrow">Mkasanga Community Clinic</p>
+      <h1 class="hero__title">We're here to make sure they're heard.</h1>
+      <p class="hero__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.</p>
+      <button class="hero__reel-btn" id="reelBtn">
+        <div class="hero__reel-thumb">
+          <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Showreel thumbnail">
+          <div class="hero__reel-thumb-play">
+            <div class="hero__reel-thumb-play-circle">
+              <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+            </div>
+          </div>
         </div>
-      </section>
-
-      <section class="projects-section">
-        <div class="projects-divider"></div>
-        <div class="projects-grid">
-
-          <article class="project-card reveal reveal-delay-1">
-            <div class="project-card__meta">
-              <span class="project-card__num">№ 01</span>
-              <span class="project-card__rule-line"></span>
-              <span class="project-card__cat">Healthcare</span>
-            </div>
-            <h2 class="project-card__title">Mkasanga Community Clinic</h2>
-            <p class="project-card__location">South Luangwa · Zambia</p>
-            <p class="project-card__desc">A community built clinic on the edge of the wild. Mkasanga sits six to eight hours from the nearest hospital, with roads often cut off during the rains. Pregnant mothers, children, and families currently travel extreme distances for basic care. The clinic is already halfway built by the local community. The mission now is to help complete it.</p>
-            <p class="project-card__status">In Motion</p>
-            <a href="#" class="project-card__cta">Read the Story</a>
-          </article>
-
-          <article class="project-card reveal reveal-delay-2">
-            <div class="project-card__meta">
-              <span class="project-card__num">№ 02</span>
-              <span class="project-card__rule-line"></span>
-              <span class="project-card__cat">Coming Soon</span>
-            </div>
-            <h2 class="project-card__title">Next Story Loading</h2>
-            <p class="project-card__location">Africa</p>
-            <p class="project-card__desc">We are currently developing the next House of Navi project alongside local communities and long term partners.</p>
-            <p class="project-card__status">Listening</p>
-            <span class="project-card__cta project-card__cta--plain">Coming Soon</span>
-          </article>
-
-          <article class="project-card reveal reveal-delay-3">
-            <div class="project-card__meta">
-              <span class="project-card__num">№ 03</span>
-              <span class="project-card__rule-line"></span>
-              <span class="project-card__cat">Get Involved</span>
-            </div>
-            <h2 class="project-card__title">Want to get involved?</h2>
-            <p class="project-card__desc">Whether you are a donor, filmmaker, organisation, brand, or creative partner, we are always open to collaborating with people who believe in the power of storytelling and human connection.</p>
-            <p class="project-card__status">Open</p>
-            <div class="project-card__cta-group">
-              <a href="get-involved.html#donate" class="project-card__cta">Donate</a>
-              <a href="contact.html" class="project-card__cta">Become a Partner</a>
-              <a href="projects.html" class="project-card__cta">Share the Story</a>
-            </div>
-          </article>
-
+        <div class="hero__reel-info">
+          <span class="hero__reel-label">Watch the Showreel</span>
+          <span class="hero__reel-meta">2025 · 3:24</span>
         </div>
-      </section>
+      </button>
+    </div>
+  </section>
 
-      <footer class="page-footer">
-        <p class="projects-footer-meta">03 Projects · In Motion · In Listening</p>
-      </footer>
+  <!-- ════════════════════════════════════════
+       STORY WRITE-UP
+  ════════════════════════════════════════ -->
+  <section class="story section--story">
+    <div class="story__inner">
 
-  </main>
+      <div class="story__left reveal">
+        <p class="story__kicker">Healthcare · Community</p>
+        <h2 class="story__heading">Mkasanga Community Clinic</h2>
+        <div class="story__meta">
+          <p class="story__meta-item">Location · <span>South Luangwa, Zambia</span></p>
+          <p class="story__meta-item">Category · <span>Healthcare</span></p>
+          <p class="story__meta-item">Status · <span>In Motion</span></p>
+        </div>
+      </div>
 
+      <div class="story__right reveal reveal-delay-1">
+        <p>Mkasanga sits at the edge of South Luangwa — one of Africa's last great wilderness areas, and one of its most isolated communities. The nearest hospital is six to eight hours away on a good day. During the rains, the roads close entirely. <em>Pregnant mothers travel alone. Children with fevers wait.</em></p>
+
+        <blockquote class="story__pullquote">Already half-built by the people who need it.</blockquote>
+
+        <p>The people of Mkasanga didn't wait for outside help. They started building their own clinic — by hand, with local materials, on the belief that <strong>their community deserved basic care</strong>. What they need now is for the rest of the world to notice.</p>
+        <p>House of Navi arrived with a spotlight, not a script. We're walking with Mkasanga for as long as it takes — documenting the build, amplifying the voices behind it, and connecting them to the donors and partners who believe what we believe: that <em>stories come first, and funding follows</em>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       CLINIC PROGRESS + VISION (expandable panels)
+  ════════════════════════════════════════ -->
+  <div class="isolation-bar reveal">
+    <div class="isolation-bar__inner">
+      <div class="isolation-bar__stat">
+        <span class="isolation-bar__num">5</span>
+        <span class="isolation-bar__unit">months</span>
+      </div>
+      <div class="isolation-bar__divider"></div>
+      <div class="isolation-bar__body">
+        <p class="isolation-bar__headline">Every year, Mkasanga becomes an island.</p>
+        <p class="isolation-bar__desc">December through April, the Luangwa River rises. Bridges wash away. Roads submerge. The village is completely cut off — no emergency vehicle in, no one out.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="cpv reveal section--cpv">
+
+    <div class="cpv__panels">
+
+      <!-- PROGRESS PANEL — static, always visible -->
+      <div class="cpv__panel cpv__panel--static" id="panelProgress">
+
+        <div class="cpv__static-header">
+          <span class="cpv__trigger-label">Clinic Progress</span>
+          <span class="cpv__trigger-sub">Structure nearing completion</span>
+        </div>
+
+        <div class="panel-slider" id="sliderProgress">
+          <div class="panel-slider__img-wrap">
+          <div class="panel-slider__track">
+            <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-17.jpg" alt="Exterior · East elevation">
+            <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-16.jpg" alt="Interior · Roof complete">
+            <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-18.jpg" alt="Exterior · Full structure">
+          </div>
+          </div><!-- /.panel-slider__img-wrap -->
+          <div class="panel-slider__controls">
+            <button class="panel-slider__btn panel-slider__btn--prev" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15,18 9,12 15,6"/></svg>
+            </button>
+            <div class="panel-slider__dots">
+              <button class="panel-slider__dot is-active" aria-label="Image 1"></button>
+              <button class="panel-slider__dot" aria-label="Image 2"></button>
+              <button class="panel-slider__dot" aria-label="Image 3"></button>
+            </div>
+            <span class="panel-slider__label">Browse images</span>
+            <button class="panel-slider__btn panel-slider__btn--next" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9,18 15,12 9,6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cpv__writeup" style="padding:16px 0 4px;">
+          <p>The Mkasanga Community Clinic is under construction and nearing completion. Walls are up, the roof is in place, and the building is taking its final form.</p>
+          <p>Phase One delivers a structurally sound shell — weather-tight, with running water, plumbing, and electricity. Once complete, it will be ready for full fit-out in the phases that follow.</p>
+          <p class="progress__phase-status"><span>Current phase —</span> Structure complete · Plumbing &amp; electrical underway</p>
+        </div>
+
+      </div>
+
+      <!-- VISION PANEL — static, always visible -->
+      <div class="cpv__panel cpv__panel--static" id="panelVision">
+
+        <div class="cpv__static-header">
+          <span class="cpv__trigger-label">Clinic Vision</span>
+          <span class="cpv__trigger-sub">What we are building towards</span>
+        </div>
+
+        <div class="panel-slider" id="sliderVision">
+          <div class="panel-slider__img-wrap">
+          <div class="panel-slider__track">
+            <img loading="lazy" src="VISION/IMAGE%2001.png" alt="Exterior · Completed">
+            <img loading="lazy" src="VISION/IMAGE%2002.png" alt="Interior · Equipped">
+            <img loading="lazy" src="VISION/IMAGE%2003.png" alt="Exterior · Community entrance">
+          </div>
+          </div><!-- /.panel-slider__img-wrap -->
+          <div class="panel-slider__controls">
+            <button class="panel-slider__btn panel-slider__btn--prev" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15,18 9,12 15,6"/></svg>
+            </button>
+            <div class="panel-slider__dots">
+              <button class="panel-slider__dot is-active" aria-label="Image 1"></button>
+              <button class="panel-slider__dot" aria-label="Image 2"></button>
+              <button class="panel-slider__dot" aria-label="Image 3"></button>
+            </div>
+            <span class="panel-slider__label">Browse images</span>
+            <button class="panel-slider__btn panel-slider__btn--next" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9,18 15,12 9,6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cpv__writeup" style="padding:16px 0 4px;">
+          <p>A fully equipped community clinic, painted with the stories of Mkasanga — open to every family in South Luangwa regardless of the season or the road.</p>
+          <p>Phase Two brings the fit-out: beds, equipment, medical supplies, and the staff to run it. Phase Three is the day it opens. Every contribution brings that day closer.</p>
+          <p class="progress__phase-status"><span>The goal —</span> A fully operational clinic serving South Luangwa permanently</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       RESILIENCE — clean stat strip
+  ════════════════════════════════════════ -->
+  <section class="info-section reveal section--resilience">
+    <span class="info-section__eyebrow" style="display:block;margin-bottom:40px;">A Place of Resilience</span>
+    <div class="stat-strip">
+      <div class="stat-strip__item">
+        <i data-lucide="users" class="stat-strip__icon"></i>
+        <div class="stat-strip__num">3,500</div>
+        <div class="stat-strip__label">Community members</div>
+      </div>
+      <div class="stat-strip__divider"></div>
+      <div class="stat-strip__item">
+        <i data-lucide="baby" class="stat-strip__icon"></i>
+        <div class="stat-strip__num">800+</div>
+        <div class="stat-strip__label">School-aged children</div>
+      </div>
+      <div class="stat-strip__divider"></div>
+      <div class="stat-strip__item">
+        <i data-lucide="building-2" class="stat-strip__icon"></i>
+        <div class="stat-strip__num">0</div>
+        <div class="stat-strip__label">Equipped clinics</div>
+      </div>
+      <div class="stat-strip__divider"></div>
+      <div class="stat-strip__item">
+        <i data-lucide="map-pin" class="stat-strip__icon"></i>
+        <div class="stat-strip__num">6–8h</div>
+        <div class="stat-strip__label">To nearest hospital</div>
+      </div>
+    </div>
+    <p class="stat-strip__note">Nestled on the eastern edge of South Luangwa National Park — a community of 3,500 building its own future, fuelled by generations of determination.</p>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       GEOGRAPHIC CHALLENGES — two-column editorial
+  ════════════════════════════════════════ -->
+  <section class="info-section reveal section--geographic">
+
+    <div class="geo-layout">
+      <div class="geo-left">
+        <span class="info-section__eyebrow">Geographic &amp; Access Challenges</span>
+        <p class="geo-statement">Getting to healthcare is not a matter of inconvenience. It is a life-or-death calculation made under pressure — in the dark, in the rain, with no vehicle and no bridge.</p>
+      </div>
+      <div class="geo-right">
+        <div class="geo-item">
+          <i data-lucide="milestone"></i>
+          <div>
+            <h4>No Road, No Help</h4>
+            <p>Even in the dry season, emergency access is near-impossible. There are no paved roads, no ambulance routes, and no infrastructure built for crisis response.</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <i data-lucide="navigation"></i>
+          <div>
+            <h4>Distance &amp; Terrain</h4>
+            <p>In the dry season, Mfuwe Hospital is hours away over rough roads. Most families have no vehicle and cannot afford transport.</p>
+          </div>
+        </div>
+        <div class="geo-item">
+          <i data-lucide="building-2"></i>
+          <div>
+            <h4>Under-Resourced on Arrival</h4>
+            <p>Families who make it find a hospital stretched beyond capacity — limited staff, little equipment, and no guarantee of care.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       HEALTH CHALLENGES — full-width rows
+  ════════════════════════════════════════ -->
+  <section class="info-section reveal section--health">
+    <span class="info-section__eyebrow" style="display:block;margin-bottom:32px;">Health Challenges &amp; Vulnerabilities</span>
+    <div class="health-rows">
+      <div class="health-row">
+        <div class="health-row__left">
+          <i data-lucide="heart-pulse"></i>
+          <span>Maternal &amp; Child Risk</span>
+        </div>
+        <p class="health-row__desc">Women give birth without midwives or emergency obstetric care. Complications manageable in minutes at a clinic take lives in Mkasanga.</p>
+      </div>
+      <div class="health-row">
+        <div class="health-row__left">
+          <i data-lucide="thermometer"></i>
+          <span>Endemic Disease</span>
+        </div>
+        <p class="health-row__desc">Malaria, cholera, tuberculosis, and HIV/AIDS are constant threats. Without testing and treatment nearby, preventable diseases turn fatal.</p>
+      </div>
+      <div class="health-row">
+        <div class="health-row__left">
+          <i data-lucide="bandage"></i>
+          <span>Untreated Conditions</span>
+        </div>
+        <p class="health-row__desc">Minor injuries and common infections escalate rapidly without nearby care — particularly during the rainy season when the village is cut off.</p>
+      </div>
+      <div class="health-row">
+        <div class="health-row__left">
+          <i data-lucide="alert-triangle"></i>
+          <span>Human-Wildlife Conflict</span>
+        </div>
+        <p class="health-row__desc">On the edge of South Luangwa, snake bites and encounters with elephants, hippos, and crocodiles happen regularly. Emergency care does not exist.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       NEAREST HOSPITAL — quote + 4 steps below
+  ════════════════════════════════════════ -->
+  <section class="info-section reveal section--hospital">
+    <blockquote class="hospital-quote">
+      "For families in Mkasanga, healthcare is not simply a matter of waiting times or clinic capacity. It is often the difference between life and death."
+    </blockquote>
+    <div class="hospital-steps">
+      <div class="hospital-step">
+        <span class="hospital-step__num">01</span>
+        <i data-lucide="clock"></i>
+        <h3 class="hospital-step__title">Hours-Long Journey</h3>
+        <p class="hospital-step__desc">Dangerous, often impassable roads. Impossible during the rains.</p>
+      </div>
+      <div class="hospital-step">
+        <span class="hospital-step__num">02</span>
+        <i data-lucide="coins"></i>
+        <h3 class="hospital-step__title">Prohibitive Cost</h3>
+        <p class="hospital-step__desc">Transport costs more than most families earn in a week.</p>
+      </div>
+      <div class="hospital-step">
+        <span class="hospital-step__num">03</span>
+        <i data-lucide="package-open"></i>
+        <h3 class="hospital-step__title">Under-Resourced</h3>
+        <p class="hospital-step__desc">Limited staff, little equipment, essential medicines missing.</p>
+      </div>
+      <div class="hospital-step">
+        <span class="hospital-step__num">04</span>
+        <i data-lucide="x-circle"></i>
+        <h3 class="hospital-step__title">Poor Outcomes</h3>
+        <p class="hospital-step__desc">Substandard care after a dangerous journey — or no arrival at all.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       GALLERY
+  ════════════════════════════════════════ -->
+  <section class="gallery section--gallery">
+    <div class="gallery__header reveal">
+      <h2 class="gallery__heading">Project Gallery</h2>
+      <div class="gallery__header-right">
+        <span class="gallery__eyebrow">From the field</span>
+        <p class="gallery__header-desc">South Luangwa · Zambia · 2024 — 2025</p>
+      </div>
+    </div>
+
+    <div class="gallery__grid reveal reveal-delay-1">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Two elders — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-4.jpg" alt="Two elders">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Boy looking up — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-6.jpg" alt="Boy looking up">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Mother and sleeping baby — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-19.jpg" alt="Mother and sleeping baby">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Clinic consultation — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Clinic consultation">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Community member — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-25.jpg" alt="Community member">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="View Elder woman portrait — open image">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-2.jpg" alt="Elder woman portrait" style="object-position: center top;">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+    </div>
+
+    <p class="gallery__caption reveal" style="padding: 0 clamp(24px, 8vw, 120px);">Photography · Lion Camp, Mkasanga Village, South Luangwa · Zambia</p>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <!-- ════════════════════════════════════════
+       CTA
+  ════════════════════════════════════════ -->
+  <section class="page-cta reveal" style="background:linear-gradient(to bottom, var(--bg-7) 0%, #1a0600 100%);">
+    <p class="page-cta__eyebrow">Walk with us</p>
+    <h2 class="page-cta__heading">Every contribution carries a name,<br>a place, a thank-you.</h2>
+    <p class="page-cta__desc">Direct, transparent funding — no middle layer, no overhead skim. Whatever you give goes to the people building this clinic with their own hands.</p>
+    <div class="page-cta__actions">
+      <a href="get-involved.html#donate" class="page-cta__btn page-cta__btn--primary">Support the Clinic</a>
+      <a href="get-involved.html" class="page-cta__btn page-cta__btn--secondary">Other ways to help →</a>
+    </div>
+  </section>
+
+  <footer class="page-footer" style="background:#0e0300;">
+    <div class="page-footer__closing">
+      <p class="page-footer__tagline">A spotlight, not a solution.</p>
+      <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
+    </div>
+    <div class="page-footer__bottom">
+      <a href="projects.html" class="page-footer__back">Back to top</a>
+      <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+    </div>
+  </footer>
+
+  <!-- ════════════════════════════════════════
+       SHOWREEL MODAL
+  ════════════════════════════════════════ -->
+  <div class="reel-modal" id="reelModal">
+    <div class="reel-modal__inner">
+      <div class="reel-modal__player">
+        <!-- Swap for <video> when ready -->
+        <img class="reel-modal__thumb" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Mkasanga Showreel">
+        <div class="reel-modal__overlay">
+          <div class="reel-modal__play-btn">
+            <svg viewBox="0 0 24 24"><polygon points="6,3 20,12 6,21"/></svg>
+          </div>
+          <p class="reel-modal__coming-soon">Showreel coming soon</p>
+        </div>
+        <div class="reel-modal__bar">
+          <div class="reel-modal__progress"></div>
+          <div class="reel-modal__meta">
+            <span class="reel-modal__title">Mkasanga Community Clinic — Project Showreel · 2025</span>
+            <span class="reel-modal__duration">0:00 / 3:24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="reel-modal__close" id="reelClose">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Close
+    </button>
+  </div>
+
+  <!-- ── Lightbox ── -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox__img-wrap">
+      <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    </div>
+    <button class="lightbox__btn lightbox__close" id="lightboxClose">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      Close
+    </button>
+    <button class="lightbox__btn lightbox__prev" id="lightboxPrev" aria-label="Previous image">
+      <svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg>
+    </button>
+    <button class="lightbox__btn lightbox__next" id="lightboxNext" aria-label="Next image">
+      <svg viewBox="0 0 24 24"><polyline points="9,18 15,12 9,6"/></svg>
+    </button>
+    <span class="lightbox__counter" id="lightboxCounter"></span>
+  </div>
+
+  <!-- ── Support pill ── -->
   <a href="get-involved.html#donate" class="navi-pill">
-    <span class="navi-pill__heart">♥</span>
-    Support
+    <span>♥</span> Support
   </a>
 
+  <!-- ── Scripts ── -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>
+    // Lightbox — handles both gallery and vision image sets
+    (function() {
+      const lb      = document.getElementById('lightbox');
+      const lbImg   = document.getElementById('lightboxImg');
+      const lbCount = document.getElementById('lightboxCounter');
+      let srcs = [];
+      let cur  = 0;
+
+      function open(set, i) {
+        srcs = set;
+        cur  = i;
+        update();
+        lb.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lb.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+      function go(dir) {
+        cur = (cur + dir + srcs.length) % srcs.length;
+        update();
+      }
+      function update() {
+        lbImg.src = srcs[cur];
+        lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
+      }
+
+      // Photography gallery
+      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
+      const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
+      galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
+
+      // No vision/progress panel galleries needed (they use inline sliders)
+
+      document.getElementById('lightboxClose').addEventListener('click', close);
+      document.getElementById('lightboxPrev').addEventListener('click', () => go(-1));
+      document.getElementById('lightboxNext').addEventListener('click', () => go(1));
+      lb.addEventListener('click', e => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('is-open')) return;
+        if (e.key === 'ArrowLeft')  go(-1);
+        if (e.key === 'ArrowRight') go(1);
+        if (e.key === 'Escape')     close();
+      });
+    })();
+
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(el => {
         if (el.isIntersecting) el.target.classList.add('is-visible');
       });
     }, { threshold: 0.08 });
-
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    ;(function () {
-      var lastY = 0;
-      var nav = document.querySelector('.navi-nav');
-      window.addEventListener('scroll', function () {
-        var y = window.scrollY;
-        if (y > lastY && y > 60) {
-          nav.classList.add('nav-hidden');
-        } else {
-          nav.classList.remove('nav-hidden');
-        }
-        lastY = y;
+    // Mobile hamburger
+    const hamburger  = document.getElementById('naviHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('is-open');
+      mobileMenu.classList.toggle('is-open', open);
+      hamburger.setAttribute('aria-expanded', open);
+      mobileMenu.setAttribute('aria-hidden', !open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileMenu.querySelectorAll('.mobile-menu__link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        mobileMenu.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Keyboard support for gallery items
+    document.querySelectorAll('.gallery__item[role="button"]').forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      });
+    });
+
+    // Panel sliders — click, dots + swipe
+    document.querySelectorAll('.panel-slider').forEach(slider => {
+      const track  = slider.querySelector('.panel-slider__track');
+      const imgs   = [...track.querySelectorAll('img')];
+      const dots   = [...slider.querySelectorAll('.panel-slider__dot')];
+      let idx = 0, touchStartX = 0;
+
+      function goTo(n) {
+        idx = (n + imgs.length) % imgs.length;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      }
+
+      slider.querySelector('.panel-slider__btn--prev').addEventListener('click', () => goTo(idx - 1));
+      slider.querySelector('.panel-slider__btn--next').addEventListener('click', () => goTo(idx + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+      slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      slider.addEventListener('touchend', e => {
+        const delta = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(delta) > 40) goTo(delta > 0 ? idx + 1 : idx - 1);
       }, { passive: true });
-    }());
+    });
+
+    // Init Lucide icons
+    lucide.createIcons();
+
+    // Expandable panels
+    document.querySelectorAll('.cpv__trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = btn.closest('.cpv__panel');
+        panel.classList.toggle('is-open');
+      });
+    });
+
+    // Showreel modal
+    const reelBtn   = document.getElementById('reelBtn');
+    const reelModal = document.getElementById('reelModal');
+    const reelClose = document.getElementById('reelClose');
+    reelBtn.addEventListener('click', () => {
+      reelModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+    reelClose.addEventListener('click', () => {
+      reelModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    });
+    reelModal.addEventListener('click', (e) => {
+      if (e.target === reelModal) {
+        reelModal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        reelModal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Scroll progress bar + nav backdrop + hide-on-scroll
+    const progressBar = document.getElementById('scrollProgress');
+    let lastY = 0;
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.width = (y / maxScroll * 100) + '%';
+      nav.classList.toggle('is-scrolled', y > 60);
+      if (y > lastY && y > 80) nav.classList.add('nav-hidden');
+      else nav.classList.remove('nav-hidden');
+      lastY = y;
+    }, { passive: true });
   </script>
+
 </body>
 </html>
