@@ -112,36 +112,7 @@ a {
   pointer-events: auto;
 }
 
-.navi-logo img {
-  height: 48px;
-}
-
-.navi-nav {
-  display: flex;
-  gap: clamp(24px, 2vw, 40px);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.navi-nav.nav-hidden {
-  transform: translateY(-60px);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.navi-nav-link {
-  font-family: var(--ff-body);
-  font-size: var(--fs-cap);
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--navi-first-light);
-  opacity: 0.72;
-}
-
-.navi-nav-link:hover,
-.navi-nav-link.is-current {
-  opacity: 1;
-}
+/* old .navi-nav-link rules removed — replaced by new nav at bottom of file */
 
 .navi-nav-link.is-current {
   text-decoration: underline;
