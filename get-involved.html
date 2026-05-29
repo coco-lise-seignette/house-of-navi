@@ -31,11 +31,6 @@
       min-height: 100vh;
     }
 
-    .gi-page .page-footer {
-      position: static;
-      padding: clamp(20px, 3vh, 36px) clamp(28px, 6vw, 72px);
-    }
-
     /* ── Hero ── */
     .gi-hero {
       flex: 1;
@@ -44,7 +39,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: clamp(110px, 16vh, 180px) clamp(28px, 6vw, 160px) clamp(16px, 2vh, 32px);
+      padding: clamp(110px, 16vh, 180px) clamp(24px, 8vw, 120px) clamp(16px, 2vh, 32px);
     }
 
     .gi-eyebrow {
@@ -53,8 +48,7 @@
       font-weight: 600;
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: var(--navi-first-light);
-      opacity: 0.5;
+      color: var(--navi-mid-dune);
       margin: 0 0 clamp(10px, 1.5vh, 18px) 0;
     }
 
@@ -104,7 +98,7 @@
 
     /* ── Closing line ── */
     .gi-closing {
-      padding: clamp(28px, 4vh, 48px) clamp(28px, 6vw, 72px) clamp(24px, 4vh, 40px);
+      padding: clamp(28px, 4vh, 48px) clamp(24px, 8vw, 120px) clamp(24px, 4vh, 40px);
       font-family: var(--ff-body);
       font-size: clamp(13px, 1.1vw, 15px);
       font-weight: 400;
@@ -116,7 +110,7 @@
 
     /* ── Three ways section ── */
     .gi-ways {
-      padding: clamp(24px, 4vh, 48px) clamp(28px, 6vw, 72px) 0;
+      padding: clamp(24px, 4vh, 48px) clamp(24px, 8vw, 120px) 0;
     }
 
     .gi-grid {
@@ -222,8 +216,6 @@
     .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
     main { position: relative; z-index: 10; }
-.navi-links { display: none !important; }
-    }
   </style>
 </head>
 <body>
@@ -260,7 +252,7 @@
   </div>
 
 <div class="texture-stack">
-    <div class="texture" style="background-image: url('brand/assets/textures/dried_river.png');"></div>
+    <div class="texture" style="background-image: url('brand/assets/textures/texture-tree-roots.jpg');"></div>
     <div class="scrim"></div>
     <div class="vignette"></div>
     <div class="grain"></div>
@@ -305,6 +297,17 @@
 
   </main>
 
+  <footer class="page-footer">
+    <div class="page-footer__closing">
+      <p class="page-footer__tagline">A spotlight, not a solution.</p>
+      <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
+    </div>
+    <div class="page-footer__bottom">
+      <a href="#" class="page-footer__back">Back to top</a>
+      <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+    </div>
+  </footer>
+
   <a href="get-involved.html#donate" class="navi-pill">
     <span class="navi-pill__heart">♥</span>
     Support
@@ -324,7 +327,8 @@
       var nav = document.querySelector('.navi-nav');
       window.addEventListener('scroll', function () {
         var y = window.scrollY;
-        if (y > lastY && y > 60) {
+        nav.classList.toggle('is-scrolled', y > 60);
+        if (y > lastY && y > 80) {
           nav.classList.add('nav-hidden');
         } else {
           nav.classList.remove('nav-hidden');
