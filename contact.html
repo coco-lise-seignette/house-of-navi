@@ -31,16 +31,11 @@
       min-height: 100vh;
     }
 
-    .contact-page .page-footer {
-      position: static;
-      padding: clamp(20px, 3vh, 36px) clamp(28px, 6vw, 72px);
-    }
-
     /* ── Coordinates — top right, below nav ── */
     .contact-coords {
       position: absolute;
       top: clamp(64px, 8vh, 92px);
-      right: clamp(28px, 6vw, 72px);
+      right: clamp(24px, 8vw, 120px);
       font-family: var(--ff-body);
       font-size: 10px;
       font-weight: 600;
@@ -56,7 +51,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(32px, 4vw, 64px);
-      padding: clamp(110px, 14vh, 160px) clamp(28px, 6vw, 72px) clamp(24px, 4vh, 48px);
+      padding: clamp(110px, 14vh, 160px) clamp(24px, 8vw, 120px) clamp(24px, 4vh, 48px);
       align-items: stretch;
     }
 
@@ -73,8 +68,7 @@
       font-weight: 600;
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: var(--navi-first-light);
-      opacity: 0.5;
+      color: var(--navi-mid-dune);
       margin: 0;
     }
 
@@ -211,7 +205,6 @@
     .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
     main { position: relative; z-index: 10; }
-    }
   </style>
 </head>
 <body>
@@ -254,6 +247,8 @@
     <div class="grain"></div>
   </div>
 
+  <p class="contact-coords">S 33°55' · E 18°25'</p>
+
   <main class="page-content contact-page">
 <div class="contact-content">
 
@@ -272,15 +267,15 @@
           <ul class="contact-list">
             <li class="contact-item">
               <span class="contact-item__label">General</span>
-              <a href="mailto:hello@houseofnavi.com" class="contact-item__value">hello@houseofnavi.com</a>
+              <a href="mailto:hello@houseofnavi.org" class="contact-item__value">hello@houseofnavi.org</a>
             </li>
             <li class="contact-item">
               <span class="contact-item__label">Partnerships</span>
-              <a href="mailto:partners@houseofnavi.com" class="contact-item__value">partners@houseofnavi.com</a>
+              <a href="mailto:partners@houseofnavi.org" class="contact-item__value">partners@houseofnavi.org</a>
             </li>
             <li class="contact-item">
               <span class="contact-item__label">Press</span>
-              <a href="mailto:press@houseofnavi.com" class="contact-item__value">press@houseofnavi.com</a>
+              <a href="mailto:press@houseofnavi.org" class="contact-item__value">press@houseofnavi.org</a>
             </li>
             <li class="contact-item">
               <span class="contact-item__label">Post</span>
@@ -297,6 +292,27 @@
 
 
   </main>
+
+  <section class="page-cta">
+    <p class="page-cta__eyebrow reveal">While you're here</p>
+    <h2 class="page-cta__heading reveal reveal-delay-1">See who we walk with.</h2>
+    <p class="page-cta__desc reveal reveal-delay-2">Every message matters — but so does the work behind it. Take a look at the people and places we're shining a light on.</p>
+    <div class="page-cta__actions reveal reveal-delay-3">
+      <a href="projects.html" class="page-cta__btn page-cta__btn--primary">See the work</a>
+      <a href="get-involved.html#donate" class="page-cta__btn page-cta__btn--secondary">Get involved →</a>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="page-footer__closing">
+      <p class="page-footer__tagline">A spotlight, not a solution.</p>
+      <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
+    </div>
+    <div class="page-footer__bottom">
+      <a href="#" class="page-footer__back">Back to top</a>
+      <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+    </div>
+  </footer>
 
   <a href="get-involved.html#donate" class="navi-pill">
     <span class="navi-pill__heart">♥</span>
