@@ -356,7 +356,8 @@
       var nav = document.querySelector('.navi-nav');
       window.addEventListener('scroll', function () {
         var y = window.scrollY;
-        if (y > lastY && y > 60) {
+        nav.classList.toggle('is-scrolled', y > 60);
+        if (y > lastY && y > 80) {
           nav.classList.add('nav-hidden');
         } else {
           nav.classList.remove('nav-hidden');
