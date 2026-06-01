@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — House of Navi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+    .reveal-delay-4 { transition-delay: 0.46s; }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Page shell ── */
+    .projects-page {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ── Eyebrow ── */
+    .eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+      margin: 0 0 clamp(10px, 1.5vh, 18px) 0;
+    }
+
+    /* ── Hero ── */
+    .projects-hero {
+      padding: clamp(110px, 15vh, 170px) clamp(28px, 6vw, 72px) clamp(28px, 4vh, 52px);
+    }
+
+    .projects-hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: end;
+    }
+
+    .projects-title {
+      font-family: var(--ff-display);
+      font-size: clamp(72px, 9vw, 120px);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+      margin: 0;
+    }
+
+    .projects-intro {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.2vw, 17px);
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.88);
+      margin: 0;
+      max-width: 440px;
+    }
+
+    .project-panel__intro {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.2vw, 17px);
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.88);
+      margin: 0;
+      margin-bottom: clamp(24px, 3vh, 32px);
+      max-width: 420px;
+    }
+
+    /* ── Projects section ── */
+    .projects-section {
+      padding: 0 clamp(28px, 6vw, 72px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .projects-divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(245, 221, 213, 0.16);
+      margin-bottom: clamp(24px, 3.5vh, 44px);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: clamp(24px, 4vw, 56px);
+      align-items: start;
+    }
+
+    /* ── Project card ── */
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      padding: clamp(28px, 3vw, 40px) 0;
+    }
+
+    .project-card__meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: clamp(14px, 2vh, 22px);
+    }
+
+    .project-card__num {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navi-warm-sand);
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.04em;
+    }
+
+    .project-card__rule-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(221, 208, 184, 0.25);
+    }
+
+    .project-card__cat {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--navi-warm-sand);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .project-card__title {
+      font-family: var(--ff-display);
+      font-size: clamp(22px, 2.2vw, 30px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin: 0 0 clamp(6px, 1vh, 10px) 0;
+    }
+
+    .project-card__location {
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--navi-warm-sand);
+      margin: 0 0 clamp(10px, 1.8vh, 18px) 0;
+    }
+
+    .project-card__desc {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.2vw, 17px);
+      font-weight: 400;
+      line-height: 1.75;
+      color: rgba(245, 221, 213, 0.72);
+      margin: 0 0 clamp(16px, 2.5vh, 28px) 0;
+      flex: 1;
+    }
+
+    .project-card__status {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.75;
+      margin: 0 0 clamp(18px, 2.5vh, 26px) 0;
+    }
+
+    .project-card__cta {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.65;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(245, 221, 213, 0.28);
+      transition: opacity 0.2s ease, border-color 0.2s ease;
+      width: fit-content;
+    }
+
+    .project-card__cta::after {
+      content: '→';
+      font-size: 11px;
+    }
+
+    .project-card__cta:hover {
+      opacity: 1;
+      border-color: rgba(245, 221, 213, 0.65);
+    }
+
+    @keyframes ctaPulse {
+      0%, 100% { opacity: 0.75; border-color: rgba(217, 144, 122, 0.25); }
+      50%       { opacity: 1;    border-color: rgba(217, 144, 122, 0.95); }
+    }
+
+    .project-card__cta--highlight {
+      color: var(--navi-mid-dune);
+      border-color: rgba(217, 144, 122, 0.55);
+      opacity: 0.9;
+      animation: ctaPulse 2.8s ease-in-out infinite;
+    }
+
+    .project-card__cta--highlight:hover {
+      animation: none;
+      opacity: 1;
+      border-color: rgba(217, 144, 122, 0.95);
+    }
+
+    .project-card__label {
+      font-family: var(--ff-body);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--navi-first-light);
+      opacity: 0.65;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 3px;
+      width: fit-content;
+    }
+
+    .project-panel {
+      padding-top: clamp(28px, 3vh, 40px);
+    }
+
+    .project-panel__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border: 1px solid rgba(245, 221, 213, 0.4);
+      color: var(--navi-first-light);
+      background: transparent;
+      text-decoration: none;
+      font-family: var(--ff-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      margin-top: clamp(18px, 2vh, 28px);
+      width: fit-content;
+    }
+
+    .project-panel__button:hover {
+      background: rgba(245, 221, 213, 0.08);
+      border-color: rgba(245, 221, 213, 0.65);
+    }
+
+    /* ── Scroll unlock ── */
+    html, body {
+      height: auto !important;
+      min-height: 100vh;
+      overflow-y: auto !important;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .projects-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .projects-hero {
+        padding-top: 110px;
+      }
+      .projects-hero__grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+      .projects-intro {
+        padding-top: 0;
+        margin-left: 0;
+        max-width: 100%;
+      }
+      .projects-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Scroll progress ── -->
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
+
+  <!-- ── Nav ── -->
+  <nav class="navi-nav" id="nav">
+    <div class="navi-nav__left">
+      <a href="index.html" class="navi-logo">
+        <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
+      </a>
+    </div>
+    <div class="navi-links" id="naviLinks" role="navigation" aria-label="Main navigation">
+      <a href="index.html" class="navi-link">Home</a>
+      <a href="projects.html" class="navi-link is-current">Projects</a>
+      <a href="get-involved.html" class="navi-link">Get Involved</a>
+      <a href="about.html" class="navi-link">About</a>
+      <a href="contact.html" class="navi-link">Contact</a>
+    </div>
+    <button class="navi-hamburger" id="naviHamburger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ── Mobile menu overlay ── -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html" class="mobile-menu__link">Home</a>
+    <a href="projects.html" class="mobile-menu__link">Projects</a>
+    <a href="get-involved.html" class="mobile-menu__link">Get Involved</a>
+    <a href="about.html" class="mobile-menu__link">About</a>
+    <a href="contact.html" class="mobile-menu__link">Contact</a>
+  </div>
+
+  <div class="texture-stack">
+    <div class="texture" style="background-image: url('brand/assets/textures/texture-elephant-warm.jpg');"></div>
+    <div class="scrim"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+
+  <main class="page-content projects-page">
+
+      <section class="projects-hero">
+        <p class="eyebrow reveal">THE WORK</p>
+        <div class="projects-hero__grid">
+          <h1 class="projects-title reveal reveal-delay-1">Projects.</h1>
+        </div>
+      </section>
+
+      <section class="projects-section">
+        <div class="projects-divider"></div>
+        <div class="projects-grid">
+
+          <article class="project-card reveal reveal-delay-1">
+            <div class="project-card__meta">
+              <span class="project-card__num">№ 01</span>
+              <span class="project-card__rule-line"></span>
+              <span class="project-card__cat">Healthcare</span>
+            </div>
+            <h2 class="project-card__title">Mkasanga Community Clinic</h2>
+            <p class="project-card__location">South Luangwa · Zambia</p>
+            <p class="project-card__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.</p>
+            <p class="project-card__status">Status: IN MOTION</p>
+            <a href="mkasanga.html" class="project-card__cta project-card__cta--highlight">Read the Story</a>
+          </article>
+
+          <article class="project-card reveal reveal-delay-2">
+            <div class="project-card__meta">
+              <span class="project-card__num">№ 02</span>
+              <span class="project-card__rule-line"></span>
+              <span class="project-card__cat">Coming Soon</span>
+            </div>
+            <h2 class="project-card__title">Next Story Loading</h2>
+            <p class="project-card__location">Africa</p>
+            <p class="project-card__desc">We are currently developing the next House of Navi project alongside local communities and long term partners.</p>
+            <p class="project-card__status">Status: IN DEVELOPMENT</p>
+            <span class="project-card__label">Coming Soon</span>
+          </article>
+
+          <div class="project-panel reveal reveal-delay-3">
+            <p class="project-panel__intro">Whether you are a donor, filmmaker, organisation, brand, or creative partner, we are always open to collaborating with people who believe in the power of storytelling and human connection.</p>
+            <a href="get-involved.html" class="project-panel__button">Get Involved</a>
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <div class="page-footer__closing">
+          <p class="page-footer__tagline">Making hope visible.</p>
+          <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
+        </div>
+        <div class="page-footer__bottom">
+          <a href="#" class="page-footer__back">Back to top</a>
+          <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+        </div>
+      </footer>
+
+  </main>
+
+  <a href="get-involved.html#donate" class="navi-pill">
+    <span class="navi-pill__heart">♥</span>
+    Support
+  </a>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) el.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    ;(function () {
+      var lastY = 0;
+      var nav = document.querySelector('.navi-nav');
+      var progress = document.getElementById('scrollProgress');
+      window.addEventListener('scroll', function () {
+        var y = window.scrollY;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (progress) progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+        nav.classList.toggle('is-scrolled', y > 60);
+        if (y > lastY && y > 80) {
+          nav.classList.add('nav-hidden');
+        } else {
+          nav.classList.remove('nav-hidden');
+        }
+        lastY = y;
+      }, { passive: true });
+
+      var hamburger = document.getElementById('naviHamburger');
+      var mobileMenu = document.getElementById('mobileMenu');
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function () {
+          var open = hamburger.classList.toggle('is-open');
+          mobileMenu.classList.toggle('is-open', open);
+          hamburger.setAttribute('aria-expanded', open);
+          mobileMenu.setAttribute('aria-hidden', !open);
+        });
+      }
+    }());
+  </script>
+</body>
+</html>
