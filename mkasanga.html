@@ -140,24 +140,24 @@
     }
     .hero__portrait img { display: none; }
 
-    /* Smooth blend — top bleeds fully into page, right fades into copy area */
+    /* Smooth blend — starts darkening earlier so text never sits on the face */
     .hero__portrait::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, transparent 50%, var(--navi-midnight-dune) 80%);
+      background: linear-gradient(to right, transparent 38%, rgba(28,7,0,0.7) 58%, var(--navi-midnight-dune) 72%);
     }
 
-    /* Copy sits on top, right side — vertically centred */
+    /* Copy sits on top, right side — narrowed to stay firmly in clean dark zone */
     .hero__copy {
       position: absolute;
       right: 0;
       top: 0;
       bottom: 0;
-      width: 52%;
+      width: 46%;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       padding: clamp(110px, 13vh, 140px) clamp(48px, 6vw, 88px) clamp(48px, 7vh, 88px) clamp(32px, 3vw, 40px);
       z-index: 2;
     }
@@ -1113,12 +1113,6 @@
       border-color: rgba(245,221,213,0.6);
     }
 
-    @media (max-width: 600px) {
-      .navi-hamburger { display: flex; }
-      .navi-links { display: none; }
-      .navi-breadcrumb { display: none; }
-    }
-
     /* ════════════════════════════════════════
        CTA SECTION
     ════════════════════════════════════════ */
@@ -1198,6 +1192,11 @@
     /* ════════════════════════════════════════
        RESPONSIVE
     ════════════════════════════════════════ */
+    /* Hide breadcrumb at widths where it collides with nav links */
+    @media (max-width: 1100px) {
+      .navi-breadcrumb { display: none; }
+    }
+
     @media (max-width: 900px) {
       .stat-strip { grid-template-columns: 1fr 1fr; gap: 24px; }
       .stat-strip__divider { display: none; }
@@ -1213,12 +1212,19 @@
         background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
       }
       .hero__title { font-size: clamp(36px, 7vw, 56px); }
+      /* Thumbnail: shrink via max-width only — aspect-ratio:16/9 handles height */
+      .hero__reel-btn { max-width: 300px; }
+      .hero__reel-thumb-play-circle { width: 40px; height: 40px; }
+      .hero__reel-thumb-play-circle svg { width: 12px; height: 12px; }
     }
     @media (max-width: 600px) {
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .hospital-steps { grid-template-columns: 1fr; }
       .hero__title { font-size: clamp(30px, 9vw, 44px); }
-      .hero__reel-thumb { display: none; }
+      /* Thumbnail stays visible — just narrower. Never hide it. */
+      .hero__reel-btn { max-width: 220px; }
+      .hero__reel-thumb-play-circle { width: 32px; height: 32px; }
+      .hero__reel-thumb-play-circle svg { width: 10px; height: 10px; }
       .page-cta__heading { font-size: clamp(26px, 7vw, 36px); }
       .navi-pill { padding: 11px 18px; font-size: 12px; }
     }
@@ -1808,9 +1814,8 @@
     ════════════════════════════════════════ */
     @media (max-width: 900px) {
       .hero {
-        grid-template-columns: 1fr;
-        grid-template-rows: 55vh 1fr;
-        height: auto;
+        height: 100vh;
+        min-height: 600px;
       }
       .hero__portrait::after {
         background: linear-gradient(to bottom, transparent 50%, var(--navi-midnight-dune) 100%);
@@ -1818,6 +1823,7 @@
       .hero::after { display: none; }
       .hero__copy {
         padding: clamp(32px, 5vw, 56px);
+        padding-top: clamp(96px, 12vh, 128px);
         justify-content: flex-start;
       }
 
@@ -1833,15 +1839,36 @@
 
       .gallery__grid {
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(3, 260px);
+        grid-template-rows: auto;
+      }
+      .gallery__item {
+        aspect-ratio: 4/3;
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .navi-hamburger { display: flex; }
       .navi-links { display: none; }
+      .navi-breadcrumb { display: none; }
+      .navi-pill {
+        padding: 11px 18px;
+        font-size: 12px;
+        gap: 7px;
+        bottom: 16px;
+        right: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
       .gallery__grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: repeat(3, 240px);
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .gallery__item {
+        aspect-ratio: 4/3;
+      }
+      .health-row {
+        padding: 16px 0 16px 10px;
       }
     }
 
@@ -2250,7 +2277,7 @@
     </div>
     <div class="page-footer__bottom">
       <a href="projects.html" class="page-footer__back">All Projects</a>
-      <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+      <p class="page-footer__meta">House of Navi · est. MMXXIV</p>
     </div>
   </footer>
 

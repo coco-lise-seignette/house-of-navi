@@ -229,9 +229,16 @@ a {
   pointer-events: none;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .navi-hamburger { display: flex; }
   .navi-links { display: none; }
+  .navi-pill {
+    padding: 11px 18px;
+    font-size: 12px;
+    gap: 7px;
+    bottom: 16px;
+    right: 16px;
+  }
 }
 
 .hero {

@@ -91,16 +91,18 @@ All brand assets live in `brand/assets/`. Never reference assets from anywhere e
 
 ```
 brand/assets/
-├── logo-navi-firstlight.png        ← PRIMARY LOGO — use this everywhere on dark/textured grounds
-├── logo-navi-sossusvlei-red.png    ← on cream/light grounds only
-├── logo-navi-midnight-dune.png     ← dark variant
-├── logo-navi-fired-clay.png        ← fired clay variant
+├── logos/
+│   ├── logo-navi-firstlight.png        ← PRIMARY LOGO — use this everywhere on dark/textured grounds
+│   ├── logo-navi-sossusvlei-red.png    ← on cream/light grounds only
+│   ├── logo-navi-midnight-dune.png     ← dark variant
+│   ├── logo-navi-fired-clay.png        ← fired clay variant
+│   └── logo-navi-pale-herb.png         ← rare, dark grounds only
 ├── textures/
 │   ├── texture-terracotta.png      ← Landing page
 │   ├── texture-elephant-warm.jpg   ← Projects page
 │   ├── texture-elephant-olive.jpg  ← long-form / editorial
 │   ├── texture-knuckles.jpg        ← About page
-│   ├── texture-tree-roots.jpg      ← Get Involved page
+│   ├── dried_river.png             ← Get Involved page
 │   └── texture-croc.png            ← Contact page
 └── icons/
     ├── icon-sun.svg
@@ -126,7 +128,7 @@ Build one page at a time. Complete and confirm each before moving to the next.
 |---|---|---|---|
 | `index.html` | Landing | texture-terracotta.png | Hero brand statement. Single CTA: Support. |
 | `projects.html` | Projects | texture-elephant-warm.jpg | The three active projects. |
-| `get-involved.html` | Get Involved | texture-tree-roots.jpg | Three paths: Donate · Partner · Spread the word. |
+| `get-involved.html` | Get Involved | dried_river.png | Three paths: Donate · Partner · Spread the word. |
 | `about.html` | About | texture-knuckles.jpg | Who we are. The Navi promise. |
 | `contact.html` | Contact | texture-croc.jpg | Say hello. Contact details. |
 
@@ -217,7 +219,7 @@ Every page shares the same nav, logo, and Support pill. Build these as a shared 
 ### Logo
 ```html
 <a href="index.html" class="navi-logo">
-  <img src="brand/assets/logo-navi-firstlight.png" alt="House of Navi" height="48">
+  <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
 </a>
 ```
 - Top-left, 24px from edges

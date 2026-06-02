@@ -10,6 +10,9 @@ brand/assets/guidelines/
 # Skills repo (separate git repository)
 skills/
 
+# Mockup staging folder — not for production
+mockup/
+
 # Unused textures
 brand/assets/textures/texture-tree-roots.jpg
 brand/assets/textures/elephant_olive_texture_2880x1800_correct_scale.jpg

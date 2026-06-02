@@ -49,7 +49,7 @@
 
     .projects-hero__grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: var(--space-lg);
       align-items: end;
     }
@@ -288,6 +288,9 @@
     }
 
     @media (max-width: 768px) {
+      .projects-title {
+        font-size: clamp(48px, 13vw, 72px);
+      }
       .projects-hero {
         padding-top: 110px;
       }
@@ -401,7 +404,7 @@
         </div>
         <div class="page-footer__bottom">
           <a href="#" class="page-footer__back">Back to top</a>
-          <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+          <p class="page-footer__meta">House of Navi · est. MMXXIV</p>
         </div>
       </footer>
 

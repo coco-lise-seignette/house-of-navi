@@ -47,11 +47,11 @@
 
     /* ── Two-column main content ── */
     .contact-content {
-      flex: 1;
+      flex: none;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(32px, 4vw, 64px);
-      padding: clamp(110px, 14vh, 160px) clamp(24px, 8vw, 120px) clamp(24px, 4vh, 48px);
+      padding: clamp(110px, 14vh, 160px) clamp(24px, 8vw, 120px) clamp(18px, 3vh, 36px);
       align-items: stretch;
     }
 
@@ -195,8 +195,12 @@
 
     @media (max-width: 768px) {
       .contact-title {
-        font-size: clamp(64px, 14vw, 96px);
+        font-size: clamp(48px, 14vw, 96px);
       }
+    }
+    /* Reduce gap between content and CTA by ~25% */
+    .page-cta {
+      padding-top: clamp(54px, 9vh, 90px);
     }
   </style>
   <style>
@@ -281,7 +285,6 @@
       </div>
 
 
-  </main>
 
   <section class="page-cta">
     <p class="page-cta__eyebrow reveal">While you're here</p>
@@ -293,6 +296,8 @@
     </div>
   </section>
 
+  </main>
+
   <footer class="page-footer">
     <div class="page-footer__closing">
       <p class="page-footer__tagline">Making hope visible.</p>
@@ -300,7 +305,7 @@
     </div>
     <div class="page-footer__bottom">
       <a href="#" class="page-footer__back">Back to top</a>
-      <p class="page-footer__meta">House of Navi · EST MMXXIV · NPC 2026/246813/08</p>
+      <p class="page-footer__meta">House of Navi · est. MMXXIV</p>
     </div>
   </footer>
 
