@@ -43,10 +43,45 @@
       --bg-8: #0e0300;   /* footer */
     }
 
+    /* ── Texture stack (fixed, behind all content) ── */
+    .texture-stack {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .texture-stack .texture {
+      position: absolute;
+      inset: 0;
+      background-image: url('brand/assets/textures/texture-tree-water.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .texture-stack .scrim {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 2, 0, 0.48);
+    }
+    .texture-stack .vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 30%, rgba(8,2,0,0.55) 100%);
+    }
+    .texture-stack .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
     body {
-      background: var(--bg-1);
+      background: transparent;
       color: var(--navi-first-light);
       font-family: var(--ff-body);
+      position: relative;
+      z-index: 1;
       overflow-x: hidden;
     }
     img { display: block; max-width: 100%; }
@@ -74,6 +109,9 @@
       align-items: center;
       padding: clamp(20px, 3vh, 28px) clamp(24px, 5vw, 64px);
       transition: transform 0.3s ease;
+      background: rgba(8, 2, 0, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
     .navi-nav.nav-hidden { transform: translateY(-100%); }
     .navi-logo img { height: 44px; }
@@ -124,9 +162,9 @@
       position: relative;
       width: 100%;
       height: 100vh;
-      min-height: 600px;
+      min-height: 720px;
       overflow: hidden;
-      background: #000;
+      background: transparent;
     }
 
     /* Full-bleed portrait — behind everything */
@@ -140,26 +178,38 @@
     }
     .hero__portrait img { display: none; }
 
-    /* Smooth blend — starts darkening earlier so text never sits on the face */
-    .hero__portrait::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, transparent 38%, rgba(28,7,0,0.7) 58%, var(--navi-midnight-dune) 72%);
+    /* Portrait fades into texture — top (nav band) and right (copy area) both dissolve */
+    .hero__portrait {
+      -webkit-mask-image: linear-gradient(to bottom, transparent 14%, black 26%), linear-gradient(to right, black 32%, transparent 66%);
+      mask-image: linear-gradient(to bottom, transparent 14%, black 26%), linear-gradient(to right, black 32%, transparent 66%);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
     }
 
-    /* Copy sits on top, right side — narrowed to stay firmly in clean dark zone */
+    /* Copy block — starts where the portrait starts (22% from top), aligns fully */
     .hero__copy {
       position: absolute;
       right: 0;
-      top: 0;
+      top: 22%;
       bottom: 0;
       width: 46%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding: clamp(110px, 13vh, 140px) clamp(48px, 6vw, 88px) clamp(48px, 7vh, 88px) clamp(32px, 3vw, 40px);
+      padding: clamp(16px, 2vh, 24px) clamp(48px, 6vw, 88px) clamp(16px, 2vh, 28px) clamp(32px, 3vw, 40px);
       z-index: 2;
+    }
+
+    /* Dark gradient — only covers the lower-right where the portrait zone is */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, transparent 20%, rgba(4,1,0,0.5) 35%),
+        linear-gradient(to right, transparent 28%, rgba(4,1,0,0.52) 52%, rgba(4,1,0,0.68) 100%);
+      z-index: 1;
+      pointer-events: none;
     }
 
     .hero__eyebrow {
@@ -188,11 +238,12 @@
 
     .hero__title {
       font-family: var(--ff-display);
-      font-size: clamp(48px, 5.5vw, 84px);
+      font-size: clamp(48px, min(5.5vw, 9vh), 84px);
       line-height: 1.05;
       letter-spacing: -0.015em;
       color: var(--navi-first-light);
-      margin-bottom: clamp(24px, 3.5vh, 40px);
+      margin-top: auto;
+      margin-bottom: clamp(16px, 2vh, 24px);
       opacity: 0;
       animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s forwards;
     }
@@ -204,7 +255,7 @@
       line-height: 1.78;
       color: rgba(245, 221, 213, 0.72);
       max-width: 380px;
-      margin-bottom: clamp(32px, 4vh, 48px);
+      margin-bottom: clamp(12px, 1.5vh, 20px);
       opacity: 0;
       animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
     }
@@ -214,7 +265,7 @@
       display: inline-flex;
       align-items: center;
       gap: 16px;
-      margin-top: clamp(28px, 3.5vh, 40px);
+      margin-top: clamp(12px, 1.5vh, 20px);
       cursor: pointer;
       background: none;
       border: none;
@@ -822,7 +873,7 @@
 
     /* ── GEOGRAPHIC: isolation callout ── */
     .isolation-bar {
-      background: var(--bg-6);
+      background: rgba(8, 2, 0, 0.55);
       border-top: 1px solid rgba(217, 144, 122, 0.15);
       border-bottom: 1px solid rgba(217, 144, 122, 0.15);
     }
@@ -1222,11 +1273,12 @@
       .hero__copy {
         width: 100%;
         left: 0;
-        justify-content: flex-end;
-        padding-bottom: clamp(40px, 6vh, 64px);
+        top: 0;
+        justify-content: flex-start;
+        padding: clamp(100px, 12vh, 130px) clamp(24px, 5vw, 48px) clamp(24px, 3vh, 40px);
         background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
       }
-      .hero__title { font-size: clamp(36px, 7vw, 56px); }
+      .hero__title { font-size: clamp(36px, min(7vw, 9vh), 56px); margin-top: auto; }
       /* Thumbnail: shrink via max-width only — aspect-ratio:16/9 handles height */
       .hero__reel-btn { max-width: 300px; }
       .hero__reel-thumb-play-circle { width: 40px; height: 40px; }
@@ -1235,7 +1287,7 @@
     @media (max-width: 600px) {
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .hospital-steps { grid-template-columns: 1fr; }
-      .hero__title { font-size: clamp(30px, 9vw, 44px); }
+      .hero__title { font-size: clamp(30px, min(9vw, 8vh), 44px); }
       /* Thumbnail stays visible — just narrower. Never hide it. */
       .hero__reel-btn { max-width: 220px; }
       .hero__reel-thumb-play-circle { width: 32px; height: 32px; }
@@ -1763,13 +1815,13 @@
     /* ════════════════════════════════════════
        SECTION BACKGROUNDS — replaces inline styles
     ════════════════════════════════════════ */
-    .section--story    { background: linear-gradient(to bottom, var(--bg-0) 0%, var(--bg-1) 80px, var(--bg-1) 100%); }
-    .section--resilience { background: linear-gradient(to bottom, var(--bg-1) 0%, var(--bg-2) 80px, var(--bg-2) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--geographic { background: linear-gradient(to bottom, var(--bg-2) 0%, var(--bg-3) 80px, var(--bg-3) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--health     { background: linear-gradient(to bottom, var(--bg-3) 0%, var(--bg-4) 80px, var(--bg-4) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--hospital   { background: linear-gradient(to bottom, var(--bg-4) 0%, var(--bg-5) 80px, var(--bg-5) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--cpv        { background: linear-gradient(to bottom, var(--bg-5) 0%, var(--bg-6) 80px, var(--bg-6) 100%); padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px); }
-    .section--gallery    { background: var(--bg-7); }
+    .section--story    { background: transparent; }
+    .section--resilience { background: rgba(8, 2, 0, 0.55); padding: clamp(20px,2.5vh,28px) clamp(24px,8vw,120px); }
+    .section--geographic { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--health     { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--hospital   { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--cpv        { background: transparent; padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px); }
+    .section--gallery    { background: transparent; }
 
     /* ════════════════════════════════════════
        SCROLL PROGRESS BAR
@@ -1890,6 +1942,14 @@
   </style>
 </head>
 <body>
+
+  <!-- ── Texture background ── -->
+  <div class="texture-stack">
+    <div class="texture"></div>
+    <div class="scrim"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
 
   <!-- ── Scroll progress ── -->
   <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
@@ -2088,7 +2148,7 @@
        RESILIENCE — clean stat strip
   ════════════════════════════════════════ -->
   <section class="info-section reveal section--resilience">
-    <span class="info-section__eyebrow" style="display:block;margin-bottom:40px;">A Place of Resilience</span>
+    <span class="info-section__eyebrow" style="display:block;margin-bottom:16px;">A Place of Resilience</span>
     <div class="stat-strip">
       <div class="stat-strip__item">
         <div class="stat-strip__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="30" cy="40" r="7.5"/><circle cx="50" cy="32" r="7.5"/><circle cx="70" cy="40" r="7.5"/><path d="M18 66 Q30 52 42 62"/><path d="M38 60 Q50 46 62 60"/><path d="M58 62 Q70 52 82 66"/></svg></div>
@@ -2272,7 +2332,7 @@
   <!-- ════════════════════════════════════════
        CTA
   ════════════════════════════════════════ -->
-  <section class="page-cta reveal" style="background:linear-gradient(to bottom, var(--bg-7) 0%, #1a0600 100%);">
+  <section class="page-cta reveal" style="background:transparent;">
     <p class="page-cta__eyebrow">Walk with us</p>
     <h2 class="page-cta__heading">Every contribution carries a name,<br>a place, a thank-you.</h2>
     <p class="page-cta__desc">Direct, transparent funding — no middle layer, no overhead skim. Whatever you give goes to the people building this clinic with their own hands.</p>
@@ -2282,7 +2342,7 @@
     </div>
   </section>
 
-  <footer class="page-footer" style="background:#0e0300;">
+  <footer class="page-footer" style="background:transparent;">
     <div class="page-footer__closing">
       <p class="page-footer__tagline">Making hope visible.</p>
       <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
