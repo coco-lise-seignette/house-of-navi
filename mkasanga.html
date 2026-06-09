@@ -1813,6 +1813,177 @@
     }
 
     /* ════════════════════════════════════════
+       DONATE SECTION
+    ════════════════════════════════════════ */
+    .section--donate {
+      background: transparent;
+      padding: clamp(64px,9vh,100px) clamp(24px,8vw,120px);
+    }
+    .donate__eyebrow {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--navi-mid-dune);
+      margin-bottom: 16px;
+    }
+    .donate__title {
+      font-family: var(--ff-display);
+      font-size: clamp(32px, 4vw, 64px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin-bottom: clamp(40px, 6vh, 64px);
+    }
+    .donate__progress-wrap {
+      max-width: 640px;
+      margin-bottom: clamp(40px, 6vh, 64px);
+    }
+    .donate__raised {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .donate__raised-num {
+      font-family: var(--ff-display);
+      font-size: clamp(40px, 5vw, 72px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+    }
+    .donate__raised-label {
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(245,221,213,0.4);
+      letter-spacing: 0.04em;
+    }
+    .donate__bar-track {
+      width: 100%;
+      height: 3px;
+      background: rgba(245,221,213,0.12);
+      border-radius: 2px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .donate__bar-fill {
+      height: 100%;
+      background: var(--navi-mid-dune);
+      border-radius: 2px;
+    }
+    .donate__bar-desc {
+      font-family: var(--ff-body);
+      font-size: clamp(14px, 1.1vw, 16px);
+      line-height: 1.75;
+      color: rgba(245,221,213,0.55);
+    }
+    .donate__tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: clamp(48px, 7vh, 80px);
+    }
+    .donate__tier {
+      border: 1px solid rgba(245,221,213,0.1);
+      padding: clamp(20px, 2.5vw, 32px);
+      background: rgba(8,2,0,0.25);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .donate__tier:hover {
+      border-color: rgba(217,144,122,0.3);
+      background: rgba(8,2,0,0.45);
+    }
+    .donate__tier--wide {
+      grid-column: span 2;
+    }
+    .donate__tier-amount {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1;
+      color: var(--navi-mid-dune);
+      margin-bottom: 10px;
+    }
+    .donate__tier-name {
+      font-family: var(--ff-body);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navi-first-light);
+      margin-bottom: 8px;
+    }
+    .donate__tier-desc {
+      font-family: var(--ff-body);
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(245,221,213,0.5);
+    }
+    .donate__legacy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: center;
+      padding-top: clamp(40px, 5vh, 64px);
+    }
+    .donate__legacy-title {
+      font-family: var(--ff-display);
+      font-size: clamp(28px, 3.5vw, 52px);
+      line-height: 1.1;
+      color: var(--navi-first-light);
+      margin-bottom: 20px;
+    }
+    .donate__legacy-desc {
+      font-family: var(--ff-body);
+      font-size: clamp(15px, 1.2vw, 17px);
+      line-height: 1.78;
+      color: rgba(245,221,213,0.58);
+    }
+    .donate__legacy-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      justify-content: center;
+    }
+    .donate__cta-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 18px 40px;
+      border-radius: 100px;
+      background: var(--navi-clay-cream);
+      color: var(--navi-blood-dune);
+      font-family: var(--ff-body);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 32px rgba(40,8,0,0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .donate__cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(40,8,0,0.4);
+    }
+    .donate__cta-link {
+      font-family: var(--ff-body);
+      font-size: var(--fs-cap);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,221,213,0.45);
+      transition: color 0.2s;
+    }
+    .donate__cta-link:hover { color: var(--navi-first-light); }
+    @media (max-width: 900px) {
+      .donate__tiers { grid-template-columns: 1fr 1fr; }
+      .donate__tier--wide { grid-column: span 2; }
+      .donate__legacy { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      .donate__tiers { grid-template-columns: 1fr; }
+      .donate__tier--wide { grid-column: span 1; }
+    }
+
+    /* ════════════════════════════════════════
        SECTION BACKGROUNDS — replaces inline styles
     ════════════════════════════════════════ */
     .section--story    { background: transparent; }
@@ -2208,6 +2379,66 @@
             <p>Families who make it find a hospital stretched beyond capacity — limited staff, little equipment, and no guarantee of care.</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DONATE — goal + tiers + CTA
+  ════════════════════════════════════════ -->
+  <section class="info-section reveal section--donate">
+    <div class="donate__header">
+      <p class="donate__eyebrow">The Goal</p>
+      <h2 class="donate__title">Every contribution carries a name,<br>a place, a thank-you.</h2>
+    </div>
+
+    <div class="donate__progress-wrap">
+      <div class="donate__raised">
+        <span class="donate__raised-num">$84,000</span>
+        <span class="donate__raised-label">raised of $120,000</span>
+      </div>
+      <div class="donate__bar-track">
+        <div class="donate__bar-fill" style="width: 70%"></div>
+      </div>
+      <p class="donate__bar-desc">Enough to finish the structure, fit out the first ward, and keep the lights on through the clinic's first year.</p>
+    </div>
+
+    <div class="donate__tiers">
+      <div class="donate__tier">
+        <p class="donate__tier-amount">$25</p>
+        <p class="donate__tier-name">Office &amp; supplies</p>
+        <p class="donate__tier-desc">The quiet machinery that keeps a clinic running.</p>
+      </div>
+      <div class="donate__tier">
+        <p class="donate__tier-amount">$150</p>
+        <p class="donate__tier-name">Contribute a bed</p>
+        <p class="donate__tier-desc">A place to rest, recover, and be cared for through the night.</p>
+      </div>
+      <div class="donate__tier">
+        <p class="donate__tier-amount">$600</p>
+        <p class="donate__tier-name">Sponsor the electricity</p>
+        <p class="donate__tier-desc">Lights, a fridge for vaccines, a charged phone in an emergency.</p>
+      </div>
+      <div class="donate__tier">
+        <p class="donate__tier-amount">$2,500</p>
+        <p class="donate__tier-name">Fund an incubator</p>
+        <p class="donate__tier-desc">The smallest patients in Mkasanga, given a fighting chance.</p>
+      </div>
+      <div class="donate__tier donate__tier--wide">
+        <p class="donate__tier-amount">$10,000+</p>
+        <p class="donate__tier-name">Sponsor a ward or wing</p>
+        <p class="donate__tier-desc">Underwrite an entire room of the clinic — floor to roof.</p>
+      </div>
+    </div>
+
+    <div class="donate__legacy">
+      <div class="donate__legacy-left">
+        <h3 class="donate__legacy-title">Leave a mark. Leave your name.</h3>
+        <p class="donate__legacy-desc">For larger gifts, we offer the chance to put your name where it matters — on a ward, an office, a bed, or the clinic's honorary wall. A permanent thank-you, in the place you helped build.</p>
+      </div>
+      <div class="donate__legacy-right">
+        <a href="get-involved.html#donate" class="donate__cta-btn">Support the Clinic</a>
+        <a href="get-involved.html" class="donate__cta-link">Other ways to help →</a>
       </div>
     </div>
   </section>
