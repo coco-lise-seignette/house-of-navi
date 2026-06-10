@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Get Involved — House of Navi</title>
+  <meta name="description" content="Support House of Navi — donate, partner, or share the story. Help fund storytelling and community-led projects already creating change on the ground.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
@@ -275,7 +276,8 @@
             <span class="gi-way__num">I</span>
             <h2 class="gi-way__title">Donate</h2>
             <p class="gi-way__desc">Help fund active projects, documentary storytelling, and community led initiatives.</p>
-            <a href="#donate" class="gi-way__cta">Donate Now</a>
+            <!-- TODO: replace href with real donation platform URL when ready -->
+            <a href="https://donate.houseofnavi.org" class="gi-way__cta" target="_blank" rel="noopener">Donate Now</a>
           </article>
 
           <article class="gi-way reveal reveal-delay-2">
@@ -327,16 +329,41 @@
     ;(function () {
       var lastY = 0;
       var nav = document.querySelector('.navi-nav');
+      var progress = document.getElementById('scrollProgress');
       window.addEventListener('scroll', function () {
         var y = window.scrollY;
-        nav.classList.toggle('is-scrolled', y > 60);
-        if (y > lastY && y > 80) {
-          nav.classList.add('nav-hidden');
-        } else {
-          nav.classList.remove('nav-hidden');
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        if (progress) progress.style.width = (h > 0 ? (y / h) * 100 : 0) + '%';
+        if (nav) {
+          nav.classList.toggle('is-scrolled', y > 60);
+          if (y > lastY && y > 80) {
+            nav.classList.add('nav-hidden');
+          } else {
+            nav.classList.remove('nav-hidden');
+          }
         }
         lastY = y;
       }, { passive: true });
+
+      // Mobile menu toggle
+      var hamburger = document.getElementById('naviHamburger');
+      var mobileMenu = document.getElementById('mobileMenu');
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', function () {
+          var open = hamburger.classList.toggle('is-open');
+          mobileMenu.classList.toggle('is-open', open);
+          hamburger.setAttribute('aria-expanded', open);
+          mobileMenu.setAttribute('aria-hidden', !open);
+          document.body.style.overflow = open ? 'hidden' : '';
+        });
+        mobileMenu.querySelectorAll('.mobile-menu__link').forEach(function (link) {
+          link.addEventListener('click', function () {
+            hamburger.classList.remove('is-open');
+            mobileMenu.classList.remove('is-open');
+            document.body.style.overflow = '';
+          });
+        });
+      }
     }());
   </script>
 </body>

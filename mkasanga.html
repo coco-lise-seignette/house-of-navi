@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mkasanga Community Clinic — House of Navi</title>
+  <meta name="description" content="The Mkasanga Community Clinic — a community-built clinic on the edge of South Luangwa, Zambia, six to eight hours from the nearest hospital. Read the story and help finish it.">
   <meta name="description" content="A community-built clinic on the edge of South Luangwa. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,11 +108,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: clamp(20px, 3vh, 28px) clamp(24px, 5vw, 64px);
+      padding: clamp(20px, 3vh, 28px) clamp(24px, 5vw, 64px) clamp(28px, 4vh, 44px);
       transition: transform 0.3s ease;
-      background: rgba(8, 2, 0, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      /* Soft top-down scrim that fades to transparent — no hard bottom edge,
+         so the nav melts into the hero gradient instead of cutting a line. */
+      background: linear-gradient(to bottom, rgba(8, 2, 0, 0.92) 0%, rgba(8, 2, 0, 0.5) 45%, rgba(8, 2, 0, 0) 100%);
     }
     .navi-nav.nav-hidden { transform: translateY(-100%); }
     .navi-logo img { height: 44px; }
@@ -164,7 +165,12 @@
       height: 100vh;
       min-height: 720px;
       overflow: hidden;
-      background: transparent;
+      /* Dark terracotta glow on a near-black ground — warm in the middle,
+         dissolving to black at every edge so it blends seamlessly into the
+         nav above and the section below (no hard lines, no bright band). */
+      background:
+        radial-gradient(ellipse 135% 125% at 60% 44%, rgba(80, 32, 16, 0.15) 0%, rgba(44, 18, 9, 0.07) 50%, rgba(8, 2, 1, 0) 85%),
+        #050100;
     }
 
     /* Full-bleed portrait — behind everything */
@@ -180,8 +186,8 @@
 
     /* Portrait fades into texture — top (nav band) and right (copy area) both dissolve */
     .hero__portrait {
-      -webkit-mask-image: linear-gradient(to bottom, transparent 14%, black 26%), linear-gradient(to right, black 32%, transparent 66%);
-      mask-image: linear-gradient(to bottom, transparent 14%, black 26%), linear-gradient(to right, black 32%, transparent 66%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 23%, black 44%), linear-gradient(to right, black 32%, transparent 66%);
+      mask-image: linear-gradient(to bottom, transparent 23%, black 44%), linear-gradient(to right, black 32%, transparent 66%);
       -webkit-mask-composite: source-in;
       mask-composite: intersect;
     }
@@ -205,9 +211,8 @@
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(to bottom, transparent 20%, rgba(4,1,0,0.5) 35%),
-        linear-gradient(to right, transparent 28%, rgba(4,1,0,0.52) 52%, rgba(4,1,0,0.68) 100%);
+      /* Just a seamless fade into the section below — no overlay behind the photo. */
+      background: linear-gradient(to bottom, transparent 74%, var(--bg-1) 100%);
       z-index: 1;
       pointer-events: none;
     }
@@ -878,11 +883,12 @@
       border-bottom: 1px solid rgba(217, 144, 122, 0.15);
     }
     .isolation-bar__inner {
-      display: grid;
-      grid-template-columns: auto 1px 1fr;
-      gap: clamp(28px, 4vw, 64px);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: clamp(28px, 4vh, 44px) clamp(24px, 8vw, 120px);
+      text-align: center;
+      gap: clamp(14px, 2vh, 22px);
+      padding: clamp(32px, 5vh, 52px) clamp(24px, 8vw, 120px);
     }
     .isolation-bar__stat {
       display: flex;
@@ -906,10 +912,9 @@
       color: var(--navi-mid-dune);
     }
     .isolation-bar__divider {
-      width: 1px;
-      height: 56px;
-      background: rgba(217, 144, 122, 0.2);
-      align-self: center;
+      width: 48px;
+      height: 1px;
+      background: rgba(217, 144, 122, 0.25);
     }
     .isolation-bar__headline {
       font-family: var(--ff-body);
@@ -923,12 +928,11 @@
       font-size: clamp(14px, 1.1vw, 15px);
       line-height: 1.72;
       color: rgba(245, 221, 213, 0.55);
-      margin: 0;
+      margin: 0 auto;
       max-width: 580px;
     }
     @media (max-width: 768px) {
-      .isolation-bar__inner { grid-template-columns: 1fr; gap: 16px; }
-      .isolation-bar__divider { display: none; }
+      .isolation-bar__inner { gap: 14px; }
     }
 
     /* ── GEOGRAPHIC: two-column editorial ── */
@@ -1273,10 +1277,12 @@
       .hero__copy {
         width: 100%;
         left: 0;
-        top: 0;
-        justify-content: flex-start;
-        padding: clamp(100px, 12vh, 130px) clamp(24px, 5vw, 48px) clamp(24px, 3vh, 40px);
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+        right: 0;
+        top: auto;
+        bottom: 0;
+        justify-content: flex-end;
+        padding: clamp(80px, 10vh, 110px) clamp(24px, 6vw, 48px) clamp(20px, 3vh, 36px);
+        background: none;
       }
       .hero__title { font-size: clamp(36px, min(7vw, 9vh), 56px); margin-top: auto; }
       /* Thumbnail: shrink via max-width only — aspect-ratio:16/9 handles height */
@@ -1288,10 +1294,27 @@
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .hospital-steps { grid-template-columns: 1fr; }
       .hero__title { font-size: clamp(30px, min(9vw, 8vh), 44px); }
-      /* Thumbnail stays visible — just narrower. Never hide it. */
-      .hero__reel-btn { max-width: 220px; }
-      .hero__reel-thumb-play-circle { width: 32px; height: 32px; }
-      .hero__reel-thumb-play-circle svg { width: 10px; height: 10px; }
+      /* Compact showreel: a small pill button instead of the large tile, so
+         the copy stays short and sits low, keeping her face uncovered. */
+      .hero__reel-thumb { display: none; }
+      .hero__reel-btn {
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+        width: auto;
+        max-width: none;
+        margin-top: clamp(14px, 2vh, 22px);
+        padding: 9px 18px;
+        border: 1px solid rgba(245, 221, 213, 0.35);
+        border-radius: 100px;
+        background: rgba(0, 0, 0, 0.28);
+      }
+      .hero__reel-label::before {
+        content: '\25B6';
+        margin-right: 9px;
+        font-size: 9px;
+        color: var(--navi-mid-dune);
+      }
       .page-cta__heading { font-size: clamp(26px, 7vw, 36px); }
       .navi-pill { padding: 11px 18px; font-size: 12px; }
     }
@@ -1986,12 +2009,22 @@
     /* ════════════════════════════════════════
        SECTION BACKGROUNDS — replaces inline styles
     ════════════════════════════════════════ */
-    .section--story    { background: transparent; }
-    .section--resilience { background: rgba(8, 2, 0, 0.55); padding: clamp(20px,2.5vh,28px) clamp(24px,8vw,120px); }
-    .section--geographic { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--health     { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--hospital   { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--cpv        { background: transparent; padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px); }
+    /* Subtle dark-terracotta wash behind text-heavy sections — fades at the
+       top/bottom edges so it calms the busy texture for readability without
+       hard seams. */
+    .section--story    { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); }
+    .section--resilience { background: rgba(28, 13, 6, 0.55); padding: clamp(20px,2.5vh,28px) clamp(24px,8vw,120px); }
+    .section--geographic { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--health     { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--hospital   { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
+    .section--cpv {
+      padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px);
+      /* Same deep terracotta ember as the hero — fades to transparent at the
+         top and bottom so it blends into the neighbouring sections. */
+      background:
+        radial-gradient(ellipse 120% 120% at 50% 45%, rgba(92, 37, 18, 0.24) 0%, rgba(52, 22, 11, 0.10) 52%, rgba(10, 3, 1, 0) 86%),
+        linear-gradient(to bottom, rgba(7, 1, 0, 0) 0%, #070100 14%, #070100 86%, rgba(7, 1, 0, 0) 100%);
+    }
     .section--gallery    { background: transparent; }
 
     /* ════════════════════════════════════════
@@ -2055,14 +2088,23 @@
         height: 100vh;
         min-height: 600px;
       }
+      /* Mobile: fill the hero with the portrait (face toward the top) and drop
+         the desktop side-fade mask so the whole photo shows. */
+      .hero__portrait {
+        background-size: cover;
+        background-position: 50% 22%;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
       .hero__portrait::after {
-        background: linear-gradient(to bottom, transparent 50%, var(--navi-midnight-dune) 100%);
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 32%, rgba(7, 1, 0, 0.55) 60%, var(--navi-midnight-dune) 100%);
       }
       .hero::after { display: none; }
       .hero__copy {
-        padding: clamp(32px, 5vw, 56px);
-        padding-top: clamp(96px, 12vh, 128px);
-        justify-content: flex-start;
+        justify-content: flex-end;
       }
 
       .story__inner {
@@ -2138,7 +2180,7 @@
       </div>
     </div>
     <div class="navi-links" id="naviLinks" role="navigation" aria-label="Main navigation">
-      <a href="index.html" class="navi-link">Landing</a>
+      <a href="index.html" class="navi-link">Home</a>
       <a href="projects.html" class="navi-link">Projects</a>
       <a href="get-involved.html" class="navi-link">Get Involved</a>
       <a href="about.html" class="navi-link">About</a>
@@ -2151,7 +2193,7 @@
 
   <!-- ── Mobile menu overlay ── -->
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <a href="index.html" class="mobile-menu__link">Landing</a>
+    <a href="index.html" class="mobile-menu__link">Home</a>
     <a href="projects.html" class="mobile-menu__link">Projects</a>
     <a href="get-involved.html" class="mobile-menu__link">Get Involved</a>
     <a href="about.html" class="mobile-menu__link">About</a>
@@ -2437,7 +2479,8 @@
         <p class="donate__legacy-desc">For larger gifts, we offer the chance to put your name where it matters — on a ward, an office, a bed, or the clinic's honorary wall. A permanent thank-you, in the place you helped build.</p>
       </div>
       <div class="donate__legacy-right">
-        <a href="get-involved.html#donate" class="donate__cta-btn">Support the Clinic</a>
+        <!-- TODO: replace href with real donation platform URL when ready -->
+        <a href="https://donate.houseofnavi.org" class="donate__cta-btn" target="_blank" rel="noopener">Support the Clinic</a>
         <a href="get-involved.html" class="donate__cta-link">Other ways to help →</a>
       </div>
     </div>
