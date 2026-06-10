@@ -1294,10 +1294,27 @@
       .stat-strip { grid-template-columns: 1fr 1fr; }
       .hospital-steps { grid-template-columns: 1fr; }
       .hero__title { font-size: clamp(30px, min(9vw, 8vh), 44px); }
-      /* Thumbnail stays visible — just narrower. Never hide it. */
-      .hero__reel-btn { max-width: 220px; }
-      .hero__reel-thumb-play-circle { width: 32px; height: 32px; }
-      .hero__reel-thumb-play-circle svg { width: 10px; height: 10px; }
+      /* Compact showreel: a small pill button instead of the large tile, so
+         the copy stays short and sits low, keeping her face uncovered. */
+      .hero__reel-thumb { display: none; }
+      .hero__reel-btn {
+        flex-direction: row;
+        align-items: center;
+        gap: 0;
+        width: auto;
+        max-width: none;
+        margin-top: clamp(14px, 2vh, 22px);
+        padding: 9px 18px;
+        border: 1px solid rgba(245, 221, 213, 0.35);
+        border-radius: 100px;
+        background: rgba(0, 0, 0, 0.28);
+      }
+      .hero__reel-label::before {
+        content: '\25B6';
+        margin-right: 9px;
+        font-size: 9px;
+        color: var(--navi-mid-dune);
+      }
       .page-cta__heading { font-size: clamp(26px, 7vw, 36px); }
       .navi-pill { padding: 11px 18px; font-size: 12px; }
     }
