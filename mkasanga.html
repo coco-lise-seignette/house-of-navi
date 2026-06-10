@@ -1996,7 +1996,14 @@
     .section--geographic { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
     .section--health     { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
     .section--hospital   { background: transparent; padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
-    .section--cpv        { background: transparent; padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px); }
+    .section--cpv {
+      padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px);
+      /* Same deep terracotta ember as the hero — fades to transparent at the
+         top and bottom so it blends into the neighbouring sections. */
+      background:
+        radial-gradient(ellipse 120% 120% at 50% 45%, rgba(92, 37, 18, 0.24) 0%, rgba(52, 22, 11, 0.10) 52%, rgba(10, 3, 1, 0) 86%),
+        linear-gradient(to bottom, rgba(7, 1, 0, 0) 0%, #070100 14%, #070100 86%, rgba(7, 1, 0, 0) 100%);
+    }
     .section--gallery    { background: transparent; }
 
     /* ════════════════════════════════════════
