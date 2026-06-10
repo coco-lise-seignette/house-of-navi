@@ -883,11 +883,12 @@
       border-bottom: 1px solid rgba(217, 144, 122, 0.15);
     }
     .isolation-bar__inner {
-      display: grid;
-      grid-template-columns: auto 1px 1fr;
-      gap: clamp(28px, 4vw, 64px);
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      padding: clamp(28px, 4vh, 44px) clamp(24px, 8vw, 120px);
+      text-align: center;
+      gap: clamp(14px, 2vh, 22px);
+      padding: clamp(32px, 5vh, 52px) clamp(24px, 8vw, 120px);
     }
     .isolation-bar__stat {
       display: flex;
@@ -911,10 +912,9 @@
       color: var(--navi-mid-dune);
     }
     .isolation-bar__divider {
-      width: 1px;
-      height: 56px;
-      background: rgba(217, 144, 122, 0.2);
-      align-self: center;
+      width: 48px;
+      height: 1px;
+      background: rgba(217, 144, 122, 0.25);
     }
     .isolation-bar__headline {
       font-family: var(--ff-body);
@@ -928,12 +928,11 @@
       font-size: clamp(14px, 1.1vw, 15px);
       line-height: 1.72;
       color: rgba(245, 221, 213, 0.55);
-      margin: 0;
+      margin: 0 auto;
       max-width: 580px;
     }
     @media (max-width: 768px) {
-      .isolation-bar__inner { grid-template-columns: 1fr; gap: 16px; }
-      .isolation-bar__divider { display: none; }
+      .isolation-bar__inner { gap: 14px; }
     }
 
     /* ── GEOGRAPHIC: two-column editorial ── */
