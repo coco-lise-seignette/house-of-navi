@@ -193,6 +193,14 @@
     .texture-stack { position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
     .page-header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 100; }
     main { position: relative; z-index: 10; }
+    /* Nav: soft fading scrim (matches Mkasanga) — no hard bottom line on scroll */
+    .navi-nav,
+    .navi-nav.is-scrolled {
+      background: linear-gradient(to bottom, rgba(8, 2, 0, 0.92) 0%, rgba(8, 2, 0, 0.5) 45%, rgba(8, 2, 0, 0) 100%);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .navi-nav { padding-bottom: clamp(28px, 4vh, 44px); }
   </style>
 </head>
 <body>
