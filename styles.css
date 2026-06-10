@@ -96,22 +96,6 @@ a {
   min-height: 100vh;
 }
 
-.page-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: clamp(24px, 4vw, 38px) clamp(28px, 6vw, 72px);
-  pointer-events: none;
-}
-
-.page-header > * {
-  pointer-events: auto;
-}
-
 /* ── Unified nav — used by all pages ── */
 .navi-logo img { height: 48px; }
 
@@ -241,50 +225,6 @@ a {
   }
 }
 
-.hero {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 0 clamp(24px, 6vw, 96px);
-}
-
-.hero-copy {
-  text-align: center;
-  max-width: 900px;
-}
-
-.hero-title {
-  margin: 0;
-  font-family: var(--ff-display);
-  font-size: clamp(96px, 12vw, 168px);
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-}
-
-.hero-tagline {
-  margin: clamp(32px, 3vw, 48px) auto 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
-  color: rgba(245, 221, 213, 0.9);
-  font-family: var(--ff-body);
-  font-size: var(--fs-cap);
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  position: relative;
-}
-
-.hero-tagline::before,
-.hero-tagline::after {
-  content: '';
-  display: block;
-  width: 84px;
-  height: 1px;
-  background: rgba(245, 221, 213, 0.2);
-}
-
 .page-footer {
   position: relative;
   z-index: 10;
@@ -386,25 +326,9 @@ a {
 }
 
 @media (max-width: 768px) {
-  .page-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 24px 24px 16px;
-  }
-
   .navi-nav {
     flex-wrap: wrap;
     gap: 16px;
-  }
-
-  .hero-title {
-    font-size: clamp(72px, 14vw, 104px);
-  }
-
-  .hero-tagline {
-    flex-wrap: wrap;
-    justify-content: center;
   }
 
   .page-footer {
