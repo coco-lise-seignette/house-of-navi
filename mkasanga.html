@@ -165,7 +165,11 @@
       height: 100vh;
       min-height: 720px;
       overflow: hidden;
-      background: transparent;
+      /* Terracotta ground for the hero only — the portrait melts into warmth,
+         fading to the dark dune at the bottom so it blends into the section below. */
+      background:
+        radial-gradient(ellipse 115% 90% at 30% 52%, rgba(184, 80, 64, 0.55) 0%, rgba(155, 68, 32, 0) 60%),
+        linear-gradient(168deg, #9B4420 0%, #7e331a 32%, #57210f 60%, #2c0e05 85%, var(--bg-1) 100%);
     }
 
     /* Full-bleed portrait — behind everything */
@@ -206,9 +210,11 @@
       content: '';
       position: absolute;
       inset: 0;
+      /* Warm depth only — keeps the cream copy legible on the right and eases the
+         bottom into the next section, without the old near-black overlay. */
       background:
-        linear-gradient(to bottom, transparent 20%, rgba(4,1,0,0.5) 35%),
-        linear-gradient(to right, transparent 28%, rgba(4,1,0,0.52) 52%, rgba(4,1,0,0.68) 100%);
+        linear-gradient(to bottom, transparent 58%, rgba(28, 10, 3, 0.5) 100%),
+        linear-gradient(to right, transparent 44%, rgba(74, 26, 12, 0.42) 100%);
       z-index: 1;
       pointer-events: none;
     }
