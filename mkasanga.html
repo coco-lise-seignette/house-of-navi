@@ -1277,10 +1277,12 @@
       .hero__copy {
         width: 100%;
         left: 0;
-        top: 0;
-        justify-content: flex-start;
-        padding: clamp(100px, 12vh, 130px) clamp(24px, 5vw, 48px) clamp(24px, 3vh, 40px);
-        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+        right: 0;
+        top: auto;
+        bottom: 0;
+        justify-content: flex-end;
+        padding: clamp(80px, 10vh, 110px) clamp(24px, 6vw, 48px) clamp(40px, 7vh, 72px);
+        background: none;
       }
       .hero__title { font-size: clamp(36px, min(7vw, 9vh), 56px); margin-top: auto; }
       /* Thumbnail: shrink via max-width only — aspect-ratio:16/9 handles height */
@@ -2069,14 +2071,23 @@
         height: 100vh;
         min-height: 600px;
       }
+      /* Mobile: fill the hero with the portrait (face toward the top) and drop
+         the desktop side-fade mask so the whole photo shows. */
+      .hero__portrait {
+        background-size: cover;
+        background-position: 50% 22%;
+        -webkit-mask-image: none;
+        mask-image: none;
+      }
       .hero__portrait::after {
-        background: linear-gradient(to bottom, transparent 50%, var(--navi-midnight-dune) 100%);
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, transparent 32%, rgba(7, 1, 0, 0.55) 60%, var(--navi-midnight-dune) 100%);
       }
       .hero::after { display: none; }
       .hero__copy {
-        padding: clamp(32px, 5vw, 56px);
-        padding-top: clamp(96px, 12vh, 128px);
-        justify-content: flex-start;
+        justify-content: flex-end;
       }
 
       .story__inner {
