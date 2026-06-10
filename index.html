@@ -31,9 +31,20 @@
     #landing {
       position: relative;
       width: 100%; height: 100vh;
+      /* terracotta texture stays as a fallback behind the video */
       background-image: url('brand/assets/textures/texture-terracotta.png');
       background-size: cover; background-position: center;
       display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    /* ── Background hero video ── */
+    .landing-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
     }
     .section-scrim {
       position: absolute; inset: 0;
@@ -166,6 +177,9 @@
 
   <!-- ── Landing ── -->
   <section id="landing">
+    <video class="landing-video" autoplay muted loop playsinline preload="auto" poster="brand/assets/textures/texture-terracotta.png">
+      <source src="brand/assets/HERO%20VIDEO.mp4" type="video/mp4">
+    </video>
     <div class="section-scrim"></div>
     <div class="section-vignette"></div>
 
