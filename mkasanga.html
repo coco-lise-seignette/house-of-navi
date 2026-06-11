@@ -2914,13 +2914,12 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Photography gallery — infinite-loop horizontal scroller
+      // Photography gallery — standard scroller with a seamless infinite loop
       const galleryTrack = document.querySelector('.gallery__track');
       const gallerySrcs = [...document.querySelectorAll('.gallery__item img')].map(img => img.src);
 
       if (galleryTrack) {
-        // Duplicate the set once so scrolling loops seamlessly (clones are
-        // decorative copies — they still open the lightbox via src lookup).
+        // Duplicate the set once so it tiles continuously (no gap) and loops.
         [...galleryTrack.children].forEach(item => {
           const clone = item.cloneNode(true);
           clone.classList.add('gallery__item--clone');
@@ -2932,32 +2931,26 @@
 
         let setW = galleryTrack.scrollWidth / 2;
         window.addEventListener('resize', () => { setW = galleryTrack.scrollWidth / 2; });
-        const easeInOut = t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
-        let anim = null, down = false, sx = 0, sl = 0, moved = false;
+        let down = false, sx = 0, sl = 0, moved = false;
 
-        // Seamless wrap — content is doubled, so a half-width jump is invisible
-        function wrap() {
+        // When scrolling settles, hop by one set-width if we've crossed into the
+        // duplicate — invisible because the content is identical (seamless loop).
+        function settle() {
           if (setW <= 0) return;
           if (galleryTrack.scrollLeft >= setW) galleryTrack.scrollLeft -= setW;
           else if (galleryTrack.scrollLeft < 0) galleryTrack.scrollLeft += setW;
         }
-        function frame(now) {
-          if (anim) {
-            const t = Math.min(1, (now - anim.start) / anim.dur);
-            const covered = easeInOut(t) * anim.dist;
-            galleryTrack.scrollLeft += covered - anim.prev;
-            anim.prev = covered;
-            if (t >= 1) anim = null;
-          }
-          wrap();
-          requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
+        let wrapTimer;
+        galleryTrack.addEventListener('scroll', () => {
+          clearTimeout(wrapTimer);
+          wrapTimer = setTimeout(settle, 90);
+        }, { passive: true });
+        galleryTrack.addEventListener('scrollend', settle);
 
         // Mouse drag-to-scroll (trackpad/touch use native scrolling)
         galleryTrack.addEventListener('pointerdown', e => {
           if (e.pointerType !== 'mouse') return;
-          down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft; anim = null;
+          down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
           galleryTrack.classList.add('is-dragging');
           galleryTrack.setPointerCapture(e.pointerId);
         });
@@ -2966,6 +2959,9 @@
           const dx = e.clientX - sx;
           if (Math.abs(dx) > 4) moved = true;
           galleryTrack.scrollLeft = sl - dx;
+          // wrap live while dragging, keeping the reference point in sync
+          if (galleryTrack.scrollLeft >= setW) { sl -= setW; galleryTrack.scrollLeft -= setW; }
+          else if (galleryTrack.scrollLeft < 0) { sl += setW; galleryTrack.scrollLeft += setW; }
         });
         const endDrag = () => { down = false; galleryTrack.classList.remove('is-dragging'); };
         galleryTrack.addEventListener('pointerup', endDrag);
@@ -2980,13 +2976,12 @@
           if (i >= 0) open(gallerySrcs, i);
         });
 
-        // Arrows — eased glide (~2-3 photos), loop-safe (relative deltas)
-        const tileW = () => { const it = galleryTrack.querySelector('.gallery__item'); return (it ? it.getBoundingClientRect().width : 320) + 2; };
-        const glide = dir => { anim = { start: performance.now(), dist: dir * tileW() * 1.5, prev: 0, dur: 480 }; };
+        // Arrows — standard smooth scroll by ~one view; loops via settle()
+        const step = () => Math.max(galleryTrack.clientWidth * 0.8, 320);
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
-        if (prevBtn) prevBtn.addEventListener('click', () => glide(-1));
-        if (nextBtn) nextBtn.addEventListener('click', () => glide(1));
+        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
       }
 
       // No vision/progress panel galleries needed (they use inline sliders)
