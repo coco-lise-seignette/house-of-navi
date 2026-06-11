@@ -1684,11 +1684,11 @@
       margin: 0;
     }
 
-    /* Two-row horizontal marquee — slowly scrolls right to left */
+    /* Two-row gallery — auto-scrolls right→left; also draggable + arrow nav */
     .gallery__marquee {
       position: relative;
-      overflow: hidden;
       width: 100%;
+      overflow: hidden;
     }
     .gallery__track {
       display: grid;
@@ -1696,17 +1696,47 @@
       grid-auto-flow: column;
       grid-auto-columns: clamp(300px, 30vw, 460px);
       gap: 2px;
-      width: max-content;
-      animation: galleryScroll 90s linear infinite;
-      will-change: transform;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
     }
-    .gallery__marquee:hover .gallery__track { animation-play-state: paused; }
-    @keyframes galleryScroll {
-      from { transform: translate3d(0, 0, 0); }
-      to   { transform: translate3d(-50%, 0, 0); }
+    .gallery__track::-webkit-scrollbar { display: none; }
+    .gallery__track.is-dragging { cursor: grabbing; scroll-behavior: auto; }
+    .gallery__track.is-dragging .gallery__item img { transition: none; }
+
+    /* arrow controls */
+    .gallery__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(237, 227, 208, 0.92);
+      color: var(--navi-blood-dune);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .gallery__nav:hover { background: var(--navi-first-light); transform: translateY(-50%) scale(1.06); }
+    .gallery__nav:focus-visible { outline: 2px solid var(--navi-first-light); outline-offset: 3px; }
+    .gallery__nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .gallery__nav--prev { left: clamp(12px, 2vw, 28px); }
+    .gallery__nav--next { right: clamp(12px, 2vw, 28px); }
+    @media (max-width: 768px) {
+      .gallery__nav { width: 42px; height: 42px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .gallery__track { animation: none; }
+      .gallery__track { scroll-behavior: auto; }
     }
 
     .gallery__item {
@@ -2651,6 +2681,12 @@
     </div>
 
     <div class="gallery__marquee reveal reveal-delay-1">
+      <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Scroll gallery left">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gallery__nav gallery__nav--next" type="button" aria-label="Scroll gallery right">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
       <div class="gallery__track">
       <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
         <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-22.jpg" alt="Mkasanga, South Luangwa · Zambia">
@@ -2886,6 +2922,61 @@
       const galleryEls  = [...document.querySelectorAll('.gallery__item:not(.gallery__item--clone)')];
       const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
       galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
+
+      // Gallery motion — slow auto-scroll + drag-to-scroll + arrow controls
+      if (galleryTrack) {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let half = galleryTrack.scrollWidth / 2;
+        window.addEventListener('resize', () => { half = galleryTrack.scrollWidth / 2; });
+
+        let paused = reduce, dragging = false, startX = 0, startScroll = 0, moved = false;
+        const SPEED = 0.5;
+
+        function wrap() {
+          if (half <= 0) return;
+          if (galleryTrack.scrollLeft >= half) galleryTrack.scrollLeft -= half;
+          else if (galleryTrack.scrollLeft < 0) galleryTrack.scrollLeft += half;
+        }
+        function frame() {
+          if (!paused && !dragging) galleryTrack.scrollLeft += SPEED;
+          wrap();
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+
+        galleryTrack.addEventListener('mouseenter', () => { paused = true; });
+        galleryTrack.addEventListener('mouseleave', () => { if (!reduce) paused = false; });
+
+        // Mouse drag-to-scroll (touch devices use native swipe)
+        galleryTrack.addEventListener('pointerdown', e => {
+          if (e.pointerType !== 'mouse') return;
+          dragging = true; moved = false;
+          startX = e.clientX; startScroll = galleryTrack.scrollLeft;
+          galleryTrack.classList.add('is-dragging');
+          galleryTrack.setPointerCapture(e.pointerId);
+        });
+        galleryTrack.addEventListener('pointermove', e => {
+          if (!dragging) return;
+          const dx = e.clientX - startX;
+          if (Math.abs(dx) > 4) moved = true;
+          galleryTrack.scrollLeft = startScroll - dx;
+          wrap();
+        });
+        const endDrag = () => { dragging = false; galleryTrack.classList.remove('is-dragging'); };
+        galleryTrack.addEventListener('pointerup', endDrag);
+        galleryTrack.addEventListener('pointercancel', endDrag);
+        // swallow the click that ends a drag so it doesn't open the lightbox
+        galleryTrack.addEventListener('click', e => {
+          if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+        }, true);
+
+        // Arrow controls
+        const step = () => Math.max(galleryTrack.clientWidth * 0.7, 320);
+        const prevBtn = document.querySelector('.gallery__nav--prev');
+        const nextBtn = document.querySelector('.gallery__nav--next');
+        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
+      }
 
       // No vision/progress panel galleries needed (they use inline sliders)
 
