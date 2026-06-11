@@ -2921,58 +2921,18 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Photography gallery — continuous, seamless infinite scroller
+      // Photography gallery — standard horizontal scroller
       const galleryTrack = document.querySelector('.gallery__track');
-      const gallerySrcs = [...document.querySelectorAll('.gallery__item img')].map(img => img.src);
+      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
+      const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
+      galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
 
       if (galleryTrack) {
-        // Repeat the set 4× so a two-set hop lands row-aligned — the loop wrap
-        // is invisible (continuous timeline) and the tiling never gaps.
-        const originals = [...galleryTrack.children];
-        for (let r = 0; r < 3; r++) {
-          originals.forEach(item => {
-            const clone = item.cloneNode(true);
-            clone.classList.add('gallery__item--clone');
-            clone.setAttribute('aria-hidden', 'true');
-            clone.removeAttribute('role');
-            clone.removeAttribute('tabindex');
-            galleryTrack.appendChild(clone);
-          });
-        }
-
-        let K = galleryTrack.scrollWidth / 2;   // two sets — a seamless, invisible hop
-        let anim = null, rafId = null, down = false, sx = 0, sl = 0, moved = false;
-        const easeInOut = t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
-
-        // Start in the middle so there's runway in both directions
-        requestAnimationFrame(() => { K = galleryTrack.scrollWidth / 2; galleryTrack.scrollLeft = K; });
-        window.addEventListener('resize', () => { K = galleryTrack.scrollWidth / 2; });
-
-        // Keep scrollLeft within a central band; hop by K (invisible) at the edges.
-        // Runs on EVERY scroll (free scroll + arrow glide), so it never walls.
-        function wrap() {
-          if (K <= 0) return;
-          if (galleryTrack.scrollLeft >= 1.5 * K) galleryTrack.scrollLeft -= K;
-          else if (galleryTrack.scrollLeft < 0.5 * K) galleryTrack.scrollLeft += K;
-        }
-        galleryTrack.addEventListener('scroll', wrap, { passive: true });
-
-        // Arrow glide is the ONLY thing that moves the track on its own, and only
-        // while an animation is in progress — there is no auto-scroll at idle.
-        function frame(now) {
-          if (!anim) { rafId = null; return; }
-          const t = Math.min(1, (now - anim.start) / anim.dur);
-          const covered = easeInOut(t) * anim.dist;
-          galleryTrack.scrollLeft += covered - anim.prev;  // relative deltas survive wrap()
-          anim.prev = covered;
-          if (t >= 1) { anim = null; rafId = null; return; }
-          rafId = requestAnimationFrame(frame);
-        }
-
         // Mouse drag-to-scroll (trackpad/touch use native scrolling)
+        let down = false, sx = 0, sl = 0, moved = false;
         galleryTrack.addEventListener('pointerdown', e => {
           if (e.pointerType !== 'mouse') return;
-          down = true; moved = false; anim = null; sx = e.clientX; sl = galleryTrack.scrollLeft;
+          down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
           galleryTrack.classList.add('is-dragging');
           galleryTrack.setPointerCapture(e.pointerId);
         });
@@ -2981,32 +2941,21 @@
           const dx = e.clientX - sx;
           if (Math.abs(dx) > 4) moved = true;
           galleryTrack.scrollLeft = sl - dx;
-          if (galleryTrack.scrollLeft >= 1.5 * K) { sl -= K; galleryTrack.scrollLeft -= K; }
-          else if (galleryTrack.scrollLeft < 0.5 * K) { sl += K; galleryTrack.scrollLeft += K; }
         });
         const endDrag = () => { down = false; galleryTrack.classList.remove('is-dragging'); };
         galleryTrack.addEventListener('pointerup', endDrag);
         galleryTrack.addEventListener('pointercancel', endDrag);
-
-        // Click any tile (original or clone) to open the lightbox — unless dragging
+        // swallow the click that ends a drag so it doesn't open the lightbox
         galleryTrack.addEventListener('click', e => {
-          if (moved) { moved = false; return; }
-          const item = e.target.closest('.gallery__item');
-          if (!item) return;
-          const i = gallerySrcs.indexOf(item.querySelector('img').src);
-          if (i >= 0) open(gallerySrcs, i);
-        });
+          if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+        }, true);
 
-        // Arrows — eased glide by ~one view; loop wraps live (no native scrollBy)
+        // Arrow buttons — flip one page of images (standard smooth scroll)
         const step = () => Math.max(galleryTrack.clientWidth * 0.8, 320);
-        function glide(dir) {
-          anim = { start: performance.now(), dist: dir * step(), prev: 0, dur: 460 };
-          if (!rafId) rafId = requestAnimationFrame(frame);
-        }
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
-        if (prevBtn) prevBtn.addEventListener('click', () => glide(-1));
-        if (nextBtn) nextBtn.addEventListener('click', () => glide(1));
+        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
       }
 
       // No vision/progress panel galleries needed (they use inline sliders)
