@@ -2929,17 +2929,25 @@
         let half = galleryTrack.scrollWidth / 2;
         window.addEventListener('resize', () => { half = galleryTrack.scrollWidth / 2; });
 
-        let paused = reduce, dragging = false, startX = 0, startScroll = 0, moved = false, boost = 0;
-        const SPEED = 0.5, FAST = 10;
+        let paused = reduce, dragging = false, startX = 0, startScroll = 0, moved = false, anim = null;
+        const SPEED = 0.5;
+        const easeInOut = t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
 
         function wrap() {
           if (half <= 0) return;
           if (galleryTrack.scrollLeft >= half) galleryTrack.scrollLeft -= half;
           else if (galleryTrack.scrollLeft < 0) galleryTrack.scrollLeft += half;
         }
-        function frame() {
-          if (boost !== 0) galleryTrack.scrollLeft += boost;
-          else if (!paused && !dragging) galleryTrack.scrollLeft += SPEED;
+        function frame(now) {
+          if (anim) {
+            const t = Math.min(1, (now - anim.start) / anim.dur);
+            const covered = easeInOut(t) * anim.dist;
+            galleryTrack.scrollLeft += covered - anim.prev;
+            anim.prev = covered;
+            if (t >= 1) anim = null;
+          } else if (!paused && !dragging) {
+            galleryTrack.scrollLeft += SPEED;
+          }
           wrap();
           requestAnimationFrame(frame);
         }
@@ -2971,27 +2979,18 @@
           if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
         }, true);
 
-        // Arrow controls — press & hold to scroll faster in that direction
+        // Arrow controls — click to glide ~2-3 photos in that direction
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
-        function bindNav(btn, dir) {
-          if (!btn) return;
-          const start = e => { e.preventDefault(); boost = dir * FAST; };
-          const stop  = () => { boost = 0; };
-          btn.addEventListener('pointerdown', start);
-          btn.addEventListener('pointerup', stop);
-          btn.addEventListener('pointerleave', stop);
-          btn.addEventListener('pointercancel', stop);
-          // keyboard: a smooth nudge
-          btn.addEventListener('keydown', e => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              galleryTrack.scrollBy({ left: dir * Math.max(galleryTrack.clientWidth * 0.7, 320), behavior: 'smooth' });
-            }
-          });
+        function tileW() {
+          const it = galleryTrack.querySelector('.gallery__item');
+          return (it ? it.getBoundingClientRect().width : 320) + 2;
         }
-        bindNav(prevBtn, -1);
-        bindNav(nextBtn, 1);
+        function jump(dir) {
+          anim = { start: performance.now(), dist: dir * tileW() * 1.5, prev: 0, dur: 480 };
+        }
+        if (prevBtn) prevBtn.addEventListener('click', () => jump(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => jump(1));
       }
 
       // No vision/progress panel galleries needed (they use inline sliders)
