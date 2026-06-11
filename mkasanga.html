@@ -3010,6 +3010,25 @@
         if (e.key === 'ArrowRight') go(1);
         if (e.key === 'Escape')     close();
       });
+
+      // Natural navigation in the large view — wheel/trackpad and swipe
+      let wheelLock = false;
+      lb.addEventListener('wheel', e => {
+        if (!lb.classList.contains('is-open')) return;
+        e.preventDefault();
+        if (wheelLock) return;
+        wheelLock = true;
+        setTimeout(() => { wheelLock = false; }, 320);
+        go((e.deltaY + e.deltaX) > 0 ? 1 : -1);
+      }, { passive: false });
+      let lbTouchX = null;
+      lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        if (lbTouchX === null) return;
+        const dx = e.changedTouches[0].clientX - lbTouchX;
+        lbTouchX = null;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+      });
     })();
 
     // Scroll reveal
