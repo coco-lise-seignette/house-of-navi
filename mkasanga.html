@@ -11,8 +11,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
 
-    /* Smooth cross-fade between pages (progressive enhancement) */
-    @view-transition { navigation: auto; }
+    /* Gentle fade-in on every page load (reliable, consistent transition) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0b0200;
+      pointer-events: none;
+      animation: pageReveal 0.45s ease forwards;
+    }
+    @keyframes pageReveal { to { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { body::before { display: none; } }
 
     /* ── Tokens ── */
     :root {
