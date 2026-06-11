@@ -1684,11 +1684,29 @@
       margin: 0;
     }
 
-    .gallery__grid {
+    /* Two-row horizontal marquee — slowly scrolls right to left */
+    .gallery__marquee {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+    .gallery__track {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 340px;
+      grid-template-rows: repeat(2, 340px);
+      grid-auto-flow: column;
+      grid-auto-columns: clamp(300px, 30vw, 460px);
       gap: 2px;
+      width: max-content;
+      animation: galleryScroll 90s linear infinite;
+      will-change: transform;
+    }
+    .gallery__marquee:hover .gallery__track { animation-play-state: paused; }
+    @keyframes galleryScroll {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(-50%, 0, 0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery__track { animation: none; }
     }
 
     .gallery__item {
@@ -2177,12 +2195,9 @@
         margin-bottom: 8px;
       }
 
-      .gallery__grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-      }
-      .gallery__item {
-        aspect-ratio: 4/3;
+      .gallery__track {
+        grid-template-rows: repeat(2, 260px);
+        grid-auto-columns: clamp(240px, 56vw, 360px);
       }
     }
 
@@ -2200,12 +2215,9 @@
     }
 
     @media (max-width: 480px) {
-      .gallery__grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
-      .gallery__item {
-        aspect-ratio: 4/3;
+      .gallery__track {
+        grid-template-rows: repeat(2, 200px);
+        grid-auto-columns: clamp(200px, 72vw, 300px);
       }
       .health-row {
         padding: 16px 0 16px 10px;
@@ -2638,7 +2650,8 @@
       </div>
     </div>
 
-    <div class="gallery__grid reveal reveal-delay-1">
+    <div class="gallery__marquee reveal reveal-delay-1">
+      <div class="gallery__track">
       <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
         <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-22.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
@@ -2738,6 +2751,7 @@
       <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
         <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-26.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
       </div>
     </div>
 
@@ -2854,8 +2868,22 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Photography gallery
-      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
+      // Gallery marquee — clone the items once so the right-to-left scroll
+      // loops seamlessly (clones are decorative: hidden from AT + lightbox).
+      const galleryTrack = document.querySelector('.gallery__track');
+      if (galleryTrack) {
+        [...galleryTrack.children].forEach(item => {
+          const clone = item.cloneNode(true);
+          clone.classList.add('gallery__item--clone');
+          clone.setAttribute('aria-hidden', 'true');
+          clone.removeAttribute('role');
+          clone.removeAttribute('tabindex');
+          galleryTrack.appendChild(clone);
+        });
+      }
+
+      // Photography gallery (originals only — exclude marquee clones)
+      const galleryEls  = [...document.querySelectorAll('.gallery__item:not(.gallery__item--clone)')];
       const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
       galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
 
