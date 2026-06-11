@@ -2921,15 +2921,40 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Photography gallery — standard horizontal scroller
+      // Photography gallery — standard page-flip scroller, looped seamlessly
       const galleryTrack = document.querySelector('.gallery__track');
-      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
-      const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
-      galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
+      const gallerySrcs = [...document.querySelectorAll('.gallery__item img')].map(img => img.src);
 
       if (galleryTrack) {
-        // Mouse drag-to-scroll (trackpad/touch use native scrolling)
-        let down = false, sx = 0, sl = 0, moved = false;
+        // Duplicate the set to 4 copies: the loop hop spans two sets, which keeps
+        // it row-aligned (invisible) and the tiling continuous (no gaps).
+        const originals = [...galleryTrack.children];
+        for (let r = 0; r < 3; r++) {
+          originals.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('gallery__item--clone');
+            clone.setAttribute('aria-hidden', 'true');
+            clone.removeAttribute('role');
+            clone.removeAttribute('tabindex');
+            galleryTrack.appendChild(clone);
+          });
+        }
+
+        let H = galleryTrack.scrollWidth / 2;          // two sets — a row-aligned, invisible hop
+        let down = false, sx = 0, sl = 0, moved = false, idleTimer;
+        requestAnimationFrame(() => { H = galleryTrack.scrollWidth / 2; galleryTrack.scrollLeft = H; });
+        window.addEventListener('resize', () => { H = galleryTrack.scrollWidth / 2; });
+
+        // Hop back by one unit once scrolling has FULLY stopped — invisible, and
+        // never mid-animation, so the page-flip never walls and never drifts.
+        function reposition() {
+          if (down || H <= 0) return;
+          if (galleryTrack.scrollLeft >= 1.5 * H) galleryTrack.scrollLeft -= H;
+          else if (galleryTrack.scrollLeft < 0.5 * H) galleryTrack.scrollLeft += H;
+        }
+        galleryTrack.addEventListener('scroll', () => { clearTimeout(idleTimer); idleTimer = setTimeout(reposition, 120); }, { passive: true });
+
+        // Mouse drag-to-scroll (direct set, so it can wrap live without drifting)
         galleryTrack.addEventListener('pointerdown', e => {
           if (e.pointerType !== 'mouse') return;
           down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
@@ -2941,16 +2966,23 @@
           const dx = e.clientX - sx;
           if (Math.abs(dx) > 4) moved = true;
           galleryTrack.scrollLeft = sl - dx;
+          if (galleryTrack.scrollLeft >= 1.5 * H) { sl -= H; galleryTrack.scrollLeft -= H; }
+          else if (galleryTrack.scrollLeft < 0.5 * H) { sl += H; galleryTrack.scrollLeft += H; }
         });
         const endDrag = () => { down = false; galleryTrack.classList.remove('is-dragging'); };
         galleryTrack.addEventListener('pointerup', endDrag);
         galleryTrack.addEventListener('pointercancel', endDrag);
-        // swallow the click that ends a drag so it doesn't open the lightbox
-        galleryTrack.addEventListener('click', e => {
-          if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
-        }, true);
 
-        // Arrow buttons — flip one page of images (standard smooth scroll)
+        // Click a tile (original or clone) to open the lightbox — unless dragging
+        galleryTrack.addEventListener('click', e => {
+          if (moved) { moved = false; return; }
+          const item = e.target.closest('.gallery__item');
+          if (!item) return;
+          const i = gallerySrcs.indexOf(item.querySelector('img').src);
+          if (i >= 0) open(gallerySrcs, i);
+        });
+
+        // Arrow buttons — flip one page of images (the exact standard smooth scroll)
         const step = () => Math.max(galleryTrack.clientWidth * 0.8, 320);
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
