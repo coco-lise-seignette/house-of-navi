@@ -1,3 +1,16 @@
+/* Gentle fade-in on every page load — a reliable, consistent page transition. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #280800;
+  pointer-events: none;
+  animation: pageReveal 0.45s ease forwards;
+}
+@keyframes pageReveal { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { body::before { display: none; } }
+
 :root {
   --navi-first-light:        #F5DDD5;
   --navi-clay-cream:         #EDE3D0;

@@ -3,13 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mkasanga Community Clinic — House of Navi</title>
-  <meta name="description" content="The Mkasanga Community Clinic — a community-built clinic on the edge of South Luangwa, Zambia, six to eight hours from the nearest hospital. Read the story and help finish it.">
-  <meta name="description" content="A community-built clinic on the edge of South Luangwa. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.">
+  <title>Mkasanga Community Clinic - House of Navi</title>
+  <meta name="description" content="The Mkasanga Community Clinic - a community-built clinic on the edge of South Luangwa, Zambia, six to eight hours from the nearest hospital. Read the story and help finish it.">
+  <meta name="description" content="A community-built clinic on the edge of South Luangwa. Six to eight hours from the nearest hospital, cut off entirely during the rains - and already half-built by the people who need it.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <style>
+
+    /* Gentle fade-in on every page load (reliable, consistent transition) */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0b0200;
+      pointer-events: none;
+      animation: pageReveal 0.45s ease forwards;
+    }
+    @keyframes pageReveal { to { opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { body::before { display: none; } }
 
     /* ── Tokens ── */
     :root {
@@ -31,14 +44,14 @@
     /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    /* Section background tones — darkest at top, warming as you scroll */
+    /* Section background tones - darkest at top, warming as you scroll */
     :root {
-      --bg-0: #000000;   /* hero — pure black for the photo */
+      --bg-0: #000000;   /* hero - pure black for the photo */
       --bg-1: #0b0200;   /* story write-up */
       --bg-2: #130400;   /* resilience */
-      --bg-3: #0e0300;   /* geographic — steps back dark */
+      --bg-3: #0e0300;   /* geographic - steps back dark */
       --bg-4: #1c0700;   /* health challenges */
-      --bg-5: #130400;   /* nearest hospital — slightly darker */
+      --bg-5: #130400;   /* nearest hospital - slightly darker */
       --bg-6: #230900;   /* clinic progress / vision */
       --bg-7: #190600;   /* gallery header */
       --bg-8: #0e0300;   /* footer */
@@ -54,7 +67,7 @@
     .texture-stack .texture {
       position: absolute;
       inset: 0;
-      background-image: url('brand/assets/textures/texture-tree-water.png');
+      background-image: url('brand/assets/textures/TEXTURE%20WOOD.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -110,7 +123,7 @@
       align-items: center;
       padding: clamp(20px, 3vh, 28px) clamp(24px, 5vw, 64px) clamp(28px, 4vh, 44px);
       transition: transform 0.3s ease;
-      /* Soft top-down scrim that fades to transparent — no hard bottom edge,
+      /* Soft top-down scrim that fades to transparent - no hard bottom edge,
          so the nav melts into the hero gradient instead of cutting a line. */
       background: linear-gradient(to bottom, rgba(8, 2, 0, 0.92) 0%, rgba(8, 2, 0, 0.5) 45%, rgba(8, 2, 0, 0) 100%);
     }
@@ -165,7 +178,7 @@
       height: 100vh;
       min-height: 720px;
       overflow: hidden;
-      /* Dark terracotta glow on a near-black ground — warm in the middle,
+      /* Dark terracotta glow on a near-black ground - warm in the middle,
          dissolving to black at every edge so it blends seamlessly into the
          nav above and the section below (no hard lines, no bright band). */
       background:
@@ -173,7 +186,7 @@
         #050100;
     }
 
-    /* Full-bleed portrait — behind everything */
+    /* Full-bleed portrait - behind everything */
     .hero__portrait {
       position: absolute;
       inset: 0;
@@ -184,7 +197,7 @@
     }
     .hero__portrait img { display: none; }
 
-    /* Portrait fades into texture — top (nav band) and right (copy area) both dissolve */
+    /* Portrait fades into texture - top (nav band) and right (copy area) both dissolve */
     .hero__portrait {
       -webkit-mask-image: linear-gradient(to bottom, transparent 23%, black 44%), linear-gradient(to right, black 32%, transparent 66%);
       mask-image: linear-gradient(to bottom, transparent 23%, black 44%), linear-gradient(to right, black 32%, transparent 66%);
@@ -192,7 +205,7 @@
       mask-composite: intersect;
     }
 
-    /* Copy block — starts where the portrait starts (22% from top), aligns fully */
+    /* Copy block - starts where the portrait starts (22% from top), aligns fully */
     .hero__copy {
       position: absolute;
       right: 0;
@@ -206,12 +219,12 @@
       z-index: 2;
     }
 
-    /* Dark gradient — only covers the lower-right where the portrait zone is */
+    /* Dark gradient - only covers the lower-right where the portrait zone is */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      /* Just a seamless fade into the section below — no overlay behind the photo. */
+      /* Just a seamless fade into the section below - no overlay behind the photo. */
       background: linear-gradient(to bottom, transparent 74%, var(--bg-1) 100%);
       z-index: 1;
       pointer-events: none;
@@ -547,7 +560,7 @@
       flex-shrink: 0;
     }
 
-    /* hero::after removed — portrait::after handles all blending */
+    /* hero::after removed - portrait::after handles all blending */
 
     /* ════════════════════════════════════════
        SHARED SECTION CHROME
@@ -982,7 +995,7 @@
       margin: 0;
     }
 
-    /* ── HEALTH: full-width rows — escalating urgency ── */
+    /* ── HEALTH: full-width rows - escalating urgency ── */
     .health-rows {
       display: flex;
       flex-direction: column;
@@ -1070,7 +1083,7 @@
     }
 
     /* ════════════════════════════════════════
-       NAV — breadcrumb + hamburger
+       NAV - breadcrumb + hamburger
     ════════════════════════════════════════ */
     .navi-nav__left {
       display: flex;
@@ -1095,7 +1108,7 @@
     .navi-breadcrumb__sep { color: rgba(245,221,213,0.2); font-size: 12px; }
     .navi-breadcrumb__current { color: rgba(245,221,213,0.65); }
 
-    /* Hamburger — hidden on desktop */
+    /* Hamburger - hidden on desktop */
     .navi-hamburger {
       display: none;
       flex-direction: column;
@@ -1143,7 +1156,7 @@
     .mobile-menu__link:hover { color: var(--navi-first-light); }
 
     /* ════════════════════════════════════════
-       GALLERY — clickable affordance
+       GALLERY - clickable affordance
     ════════════════════════════════════════ */
     .gallery__item-overlay {
       position: absolute;
@@ -1188,7 +1201,7 @@
     ════════════════════════════════════════ */
     .page-cta {
       text-align: center;
-      padding: clamp(72px, 12vh, 120px) clamp(24px, 8vw, 120px);
+      padding: clamp(44px, 6vh, 72px) clamp(24px, 8vw, 120px) clamp(20px, 3vh, 32px);
     }
     .page-cta__eyebrow {
       font-family: var(--ff-body);
@@ -1246,7 +1259,7 @@
     .page-cta__btn--secondary:hover { color: var(--navi-first-light); }
 
     /* ════════════════════════════════════════
-       FOCUS STATES — accessibility
+       FOCUS STATES - accessibility
     ════════════════════════════════════════ */
     :focus-visible {
       outline: 2px solid var(--navi-mid-dune);
@@ -1285,7 +1298,7 @@
         background: none;
       }
       .hero__title { font-size: clamp(36px, min(7vw, 9vh), 56px); margin-top: auto; }
-      /* Thumbnail: shrink via max-width only — aspect-ratio:16/9 handles height */
+      /* Thumbnail: shrink via max-width only - aspect-ratio:16/9 handles height */
       .hero__reel-btn { max-width: 300px; }
       .hero__reel-thumb-play-circle { width: 40px; height: 40px; }
       .hero__reel-thumb-play-circle svg { width: 12px; height: 12px; }
@@ -1377,7 +1390,7 @@
       object-fit: cover;
       flex-shrink: 0;
     }
-    /* Controls bar below the image — always visible */
+    /* Controls bar below the image - always visible */
     .panel-slider__controls {
       display: flex;
       align-items: center;
@@ -1681,11 +1694,59 @@
       margin: 0;
     }
 
-    .gallery__grid {
+    /* Two-row gallery — auto-scrolls right→left; also draggable + arrow nav */
+    .gallery__marquee {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .gallery__track {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 340px);
+      grid-auto-flow: column;
+      grid-auto-columns: clamp(300px, 30vw, 460px);
       gap: 2px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      cursor: grab;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+    }
+    .gallery__track::-webkit-scrollbar { display: none; }
+    .gallery__track.is-dragging { cursor: grabbing; scroll-behavior: auto; }
+    .gallery__track.is-dragging .gallery__item img { transition: none; }
+
+    /* arrow controls */
+    .gallery__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(237, 227, 208, 0.92);
+      color: var(--navi-blood-dune);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .gallery__nav:hover { background: var(--navi-first-light); transform: translateY(-50%) scale(1.06); }
+    .gallery__nav:focus-visible { outline: 2px solid var(--navi-first-light); outline-offset: 3px; }
+    .gallery__nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .gallery__nav--prev { left: clamp(12px, 2vw, 28px); }
+    .gallery__nav--next { right: clamp(12px, 2vw, 28px); }
+    @media (max-width: 768px) {
+      .gallery__nav { width: 42px; height: 42px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery__track { scroll-behavior: auto; }
     }
 
     .gallery__item {
@@ -1781,7 +1842,7 @@
        FOOTER
     ════════════════════════════════════════ */
     .page-footer {
-      padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) clamp(32px, 4vh, 48px);
+      padding: clamp(28px, 4vh, 48px) clamp(24px, 8vw, 120px) clamp(32px, 4vh, 48px);
       border-top: 1px solid rgba(245, 221, 213, 0.08);
     }
     .page-footer__closing {
@@ -1839,9 +1900,61 @@
        DONATE SECTION
     ════════════════════════════════════════ */
     .section--donate {
-      background: transparent;
       padding: clamp(64px,9vh,100px) clamp(24px,8vw,120px);
+      /* Translucent (~70%) dark-terracotta centrepiece, feathered out further
+         top & bottom so the wood texture still reads faintly through it. */
+      background:
+        radial-gradient(ellipse 120% 120% at 50% 45%, rgba(92, 37, 18, 0.22) 0%, rgba(52, 22, 11, 0.09) 52%, rgba(10, 3, 1, 0) 88%),
+        linear-gradient(to bottom, rgba(7, 1, 0, 0) 0%, rgba(7, 1, 0, 0.7) 28%, rgba(7, 1, 0, 0.7) 72%, rgba(7, 1, 0, 0) 100%);
     }
+
+    /* ── Full-bleed image break — motif between sections ── */
+    .image-break {
+      position: relative;
+      width: 100%;
+      /* taller, to give the long top/bottom fades room to breathe */
+      min-height: clamp(620px, 98vh, 1060px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(48px, 9vh, 110px) clamp(24px, 8vw, 120px);
+      overflow: hidden;
+    }
+    /* Drone image on its own masked layer — fades to transparent top & bottom
+       so it emerges from and melts back into the page texture (no hard line). */
+    .image-break__media {
+      position: absolute;
+      inset: 0;
+      background-image: url('MKASANGA%20PICS/DRONE%20MKASANGA.jpg');
+      background-size: cover;
+      background-position: center;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 32%, #000 68%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, #000 32%, #000 68%, transparent 100%);
+    }
+    .image-break__media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        /* darken the centre for legibility */
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(7,1,0,0.40) 0%, rgba(7,1,0,0) 60%),
+        /* very slight terracotta wash for page unity */
+        linear-gradient(rgba(74,22,10,0.20), rgba(74,22,10,0.20));
+    }
+    .image-break__title {
+      position: relative;
+      z-index: 2;
+      font-family: var(--ff-display);
+      font-size: clamp(40px, 7.5vw, 112px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--navi-first-light);
+      margin: 0;
+      max-width: 18ch;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.45);
+    }
+
     .donate__eyebrow {
       font-family: var(--ff-body);
       font-size: var(--fs-cap);
@@ -2007,19 +2120,24 @@
     }
 
     /* ════════════════════════════════════════
-       SECTION BACKGROUNDS — replaces inline styles
+       SECTION BACKGROUNDS - replaces inline styles
     ════════════════════════════════════════ */
-    /* Subtle dark-terracotta wash behind text-heavy sections — fades at the
+    /* Subtle dark-terracotta wash behind text-heavy sections - fades at the
        top/bottom edges so it calms the busy texture for readability without
        hard seams. */
-    .section--story    { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); }
+    .section--story {
+      /* Translucent (~70%) dark-terracotta centrepiece, feathered top & bottom */
+      background:
+        radial-gradient(ellipse 120% 120% at 50% 45%, rgba(92, 37, 18, 0.22) 0%, rgba(52, 22, 11, 0.09) 52%, rgba(10, 3, 1, 0) 88%),
+        linear-gradient(to bottom, rgba(7, 1, 0, 0) 0%, rgba(7, 1, 0, 0.7) 28%, rgba(7, 1, 0, 0.7) 72%, rgba(7, 1, 0, 0) 100%);
+    }
     .section--resilience { background: rgba(28, 13, 6, 0.55); padding: clamp(20px,2.5vh,28px) clamp(24px,8vw,120px); }
     .section--geographic { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
     .section--health     { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
     .section--hospital   { background: linear-gradient(to bottom, rgba(28, 13, 6, 0) 0%, rgba(28, 13, 6, 0.5) 20%, rgba(28, 13, 6, 0.5) 80%, rgba(28, 13, 6, 0) 100%); padding: clamp(48px,7vh,80px) clamp(24px,8vw,120px); }
     .section--cpv {
       padding: clamp(40px, 6vh, 72px) clamp(24px, 8vw, 120px);
-      /* Same deep terracotta ember as the hero — fades to transparent at the
+      /* Same deep terracotta ember as the hero - fades to transparent at the
          top and bottom so it blends into the neighbouring sections. */
       background:
         radial-gradient(ellipse 120% 120% at 50% 45%, rgba(92, 37, 18, 0.24) 0%, rgba(52, 22, 11, 0.10) 52%, rgba(10, 3, 1, 0) 86%),
@@ -2041,7 +2159,7 @@
     }
 
     /* ════════════════════════════════════════
-       NAV — backdrop on scroll
+       NAV - backdrop on scroll
     ════════════════════════════════════════ */
     .navi-nav.is-scrolled {
       background: rgba(8, 2, 0, 0.82);
@@ -2117,12 +2235,9 @@
         margin-bottom: 8px;
       }
 
-      .gallery__grid {
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto;
-      }
-      .gallery__item {
-        aspect-ratio: 4/3;
+      .gallery__track {
+        grid-template-rows: repeat(2, 260px);
+        grid-auto-columns: clamp(240px, 56vw, 360px);
       }
     }
 
@@ -2140,12 +2255,9 @@
     }
 
     @media (max-width: 480px) {
-      .gallery__grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto;
-      }
-      .gallery__item {
-        aspect-ratio: 4/3;
+      .gallery__track {
+        grid-template-rows: repeat(2, 200px);
+        grid-auto-columns: clamp(200px, 72vw, 300px);
       }
       .health-row {
         padding: 16px 0 16px 10px;
@@ -2210,7 +2322,7 @@
     <div class="hero__copy">
       <p class="hero__eyebrow">Mkasanga Community Clinic</p>
       <h1 class="hero__title">We're here to make sure they're heard.</h1>
-      <p class="hero__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains — and already half-built by the people who need it.</p>
+      <p class="hero__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains - and already half-built by the people who need it.</p>
       <button class="hero__reel-btn" id="reelBtn">
         <div class="hero__reel-thumb">
           <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Showreel thumbnail">
@@ -2244,12 +2356,12 @@
       </div>
 
       <div class="story__right reveal reveal-delay-1">
-        <p>Mkasanga sits at the edge of South Luangwa — one of Africa's last great wilderness areas, and one of its most isolated communities. The nearest hospital is six to eight hours away on a good day. During the rains, the roads close entirely. <em>Pregnant mothers travel alone. Children with fevers wait.</em></p>
+        <p>Mkasanga sits at the edge of South Luangwa - one of Africa's last great wilderness areas, and one of its most isolated communities. The nearest hospital is six to eight hours away on a good day. During the rains, the roads close entirely. <em>Pregnant mothers travel alone. Children with fevers wait.</em></p>
 
         <blockquote class="story__pullquote">Already half-built by the people who need it.</blockquote>
 
-        <p>The people of Mkasanga didn't wait for outside help. They started building their own clinic — by hand, with local materials, on the belief that <strong>their community deserved basic care</strong>. What they need now is for the rest of the world to notice.</p>
-        <p>House of Navi arrived with a spotlight, not a script. We're walking with Mkasanga for as long as it takes — documenting the build, amplifying the voices behind it, and connecting them to the donors and partners who believe what we believe: that <em>stories come first, and funding follows</em>.</p>
+        <p>The people of Mkasanga didn't wait for outside help. They started building their own clinic - by hand, with local materials, on the belief that <strong>their community deserved basic care</strong>. What they need now is for the rest of the world to notice.</p>
+        <p>House of Navi arrived with a spotlight, not a script. We're walking with Mkasanga for as long as it takes - documenting the build, amplifying the voices behind it, and connecting them to the donors and partners who believe what we believe: that <em>stories come first, and funding follows</em>.</p>
       </div>
 
     </div>
@@ -2267,7 +2379,7 @@
       <div class="isolation-bar__divider"></div>
       <div class="isolation-bar__body">
         <p class="isolation-bar__headline">Every year, Mkasanga becomes an island.</p>
-        <p class="isolation-bar__desc">December through April, the Luangwa River rises. Bridges wash away. Roads submerge. The village is completely cut off — no emergency vehicle in, no one out.</p>
+        <p class="isolation-bar__desc">December through April, the Luangwa River rises. Bridges wash away. Roads submerge. The village is completely cut off - no emergency vehicle in, no one out.</p>
       </div>
     </div>
   </div>
@@ -2276,12 +2388,12 @@
 
     <div class="cpv__panels">
 
-      <!-- PROGRESS PANEL — static, always visible -->
+      <!-- PROGRESS PANEL - static, always visible -->
       <div class="cpv__panel cpv__panel--static" id="panelProgress">
 
         <div class="cpv__static-header">
           <span class="cpv__trigger-label">Clinic Progress</span>
-          <p class="progress__phase-status" style="margin-top:4px;padding-top:0;border-top:none;"><span>Current phase —</span> Structure complete · Plumbing &amp; electrical underway</p>
+          <p class="progress__phase-status" style="margin-top:4px;padding-top:0;border-top:none;"><span>Current phase -</span> Structure complete · Plumbing &amp; electrical underway</p>
         </div>
 
         <div class="panel-slider" id="sliderProgress">
@@ -2310,17 +2422,17 @@
 
         <div class="cpv__writeup" style="padding:16px 0 4px;">
           <p>The Mkasanga Community Clinic is under construction and nearing completion. Walls are up, the roof is in place, and the building is taking its final form.</p>
-          <p>Phase One delivers a structurally sound shell — weather-tight, with running water, plumbing, and electricity. Once complete, it will be ready for full fit-out in the phases that follow.</p>
+          <p>Phase One delivers a structurally sound shell - weather-tight, with running water, plumbing, and electricity. Once complete, it will be ready for full fit-out in the phases that follow.</p>
         </div>
 
       </div>
 
-      <!-- VISION PANEL — static, always visible -->
+      <!-- VISION PANEL - static, always visible -->
       <div class="cpv__panel cpv__panel--static" id="panelVision">
 
         <div class="cpv__static-header">
           <span class="cpv__trigger-label">Clinic Vision</span>
-          <p class="progress__phase-status" style="margin-top:4px;padding-top:0;border-top:none;"><span>The goal —</span> A fully operational clinic serving South Luangwa permanently</p>
+          <p class="progress__phase-status" style="margin-top:4px;padding-top:0;border-top:none;"><span>The goal -</span> A fully operational clinic serving South Luangwa permanently</p>
         </div>
 
         <div class="panel-slider" id="sliderVision">
@@ -2348,7 +2460,7 @@
         </div>
 
         <div class="cpv__writeup" style="padding:16px 0 4px;">
-          <p>A fully equipped community clinic, painted with the stories of Mkasanga — open to every family in South Luangwa regardless of the season or the road.</p>
+          <p>A fully equipped community clinic, painted with the stories of Mkasanga - open to every family in South Luangwa regardless of the season or the road.</p>
           <p>Phase Two brings the fit-out: beds, equipment, medical supplies, and the staff to run it. Phase Three is the day it opens. Every contribution brings that day closer.</p>
         </div>
 
@@ -2358,7 +2470,7 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       RESILIENCE — clean stat strip
+       RESILIENCE - clean stat strip
   ════════════════════════════════════════ -->
   <section class="info-section reveal section--resilience">
     <span class="info-section__eyebrow" style="display:block;margin-bottom:16px;">A Place of Resilience</span>
@@ -2390,14 +2502,14 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       GEOGRAPHIC CHALLENGES — two-column editorial
+       GEOGRAPHIC CHALLENGES - two-column editorial
   ════════════════════════════════════════ -->
   <section class="info-section reveal section--geographic">
 
     <div class="geo-layout">
       <div class="geo-left">
         <span class="info-section__eyebrow">Geographic &amp; Access Challenges</span>
-        <p class="geo-statement">Getting to healthcare is not a matter of inconvenience. It is a life-or-death calculation made under pressure — in the dark, in the rain, with no vehicle and no bridge.</p>
+        <p class="geo-statement">Getting to healthcare is not a matter of inconvenience. It is a life-or-death calculation made under pressure - in the dark, in the rain, with no vehicle and no bridge.</p>
       </div>
       <div class="geo-right">
         <div class="geo-item">
@@ -2418,7 +2530,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"><line x1="50" y1="14" x2="50" y2="80"/><line x1="40" y1="80" x2="60" y2="80"/><path d="M30 30 Q 40 36 50 30"/><path d="M50 40 Q 62 46 72 40"/><path d="M30 56 Q 42 62 50 56"/><path d="M50 68 Q 60 72 70 66"/></svg>
           <div>
             <h4>Under-Resourced on Arrival</h4>
-            <p>Families who make it find a hospital stretched beyond capacity — limited staff, little equipment, and no guarantee of care.</p>
+            <p>Families who make it find a hospital stretched beyond capacity - limited staff, little equipment, and no guarantee of care.</p>
           </div>
         </div>
       </div>
@@ -2426,7 +2538,14 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       DONATE — goal + tiers + CTA
+       IMAGE BREAK 2 - motif
+  ════════════════════════════════════════ -->
+  <section class="image-break reveal" aria-label="Mkasanga, South Luangwa">
+    <div class="image-break__media" aria-hidden="true" style="background-image: url('MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg');"></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       DONATE - goal + tiers + CTA
   ════════════════════════════════════════ -->
   <section class="info-section reveal section--donate">
     <div class="donate__header">
@@ -2469,14 +2588,14 @@
       <div class="donate__tier donate__tier--wide">
         <p class="donate__tier-amount">$10,000+</p>
         <p class="donate__tier-name">Sponsor a ward or wing</p>
-        <p class="donate__tier-desc">Underwrite an entire room of the clinic — floor to roof.</p>
+        <p class="donate__tier-desc">Underwrite an entire room of the clinic - floor to roof.</p>
       </div>
     </div>
 
     <div class="donate__legacy">
       <div class="donate__legacy-left">
         <h3 class="donate__legacy-title">Leave a mark. Leave your name.</h3>
-        <p class="donate__legacy-desc">For larger gifts, we offer the chance to put your name where it matters — on a ward, an office, a bed, or the clinic's honorary wall. A permanent thank-you, in the place you helped build.</p>
+        <p class="donate__legacy-desc">For larger gifts, we offer the chance to put your name where it matters - on a ward, an office, a bed, or the clinic's honorary wall. A permanent thank-you, in the place you helped build.</p>
       </div>
       <div class="donate__legacy-right">
         <!-- TODO: replace href with real donation platform URL when ready -->
@@ -2487,7 +2606,15 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       HEALTH CHALLENGES — full-width rows
+       IMAGE BREAK - the edge of resilience
+  ════════════════════════════════════════ -->
+  <section class="image-break reveal" aria-label="The edge of resilience">
+    <div class="image-break__media" aria-hidden="true"></div>
+    <h2 class="image-break__title">The edge of resilience.</h2>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       HEALTH CHALLENGES - full-width rows
   ════════════════════════════════════════ -->
   <section class="info-section reveal section--health">
     <span class="info-section__eyebrow" style="display:block;margin-bottom:32px;">Health Challenges &amp; Vulnerabilities</span>
@@ -2511,7 +2638,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 52 H28 L34 40 L42 64 L49 28 L56 62 L62 52 H92"/></svg>
           <span>Untreated Conditions</span>
         </div>
-        <p class="health-row__desc">Minor injuries and common infections escalate rapidly without nearby care — particularly during the rainy season when the village is cut off.</p>
+        <p class="health-row__desc">Minor injuries and common infections escalate rapidly without nearby care - particularly during the rainy season when the village is cut off.</p>
       </div>
       <div class="health-row">
         <div class="health-row__left">
@@ -2524,7 +2651,7 @@
   </section>
 
   <!-- ════════════════════════════════════════
-       NEAREST HOSPITAL — quote + 4 steps below
+       NEAREST HOSPITAL - quote + 4 steps below
   ════════════════════════════════════════ -->
   <section class="info-section reveal section--hospital">
     <blockquote class="hospital-quote">
@@ -2553,7 +2680,7 @@
         <span class="hospital-step__num">04</span>
         <i data-lucide="x-circle"></i>
         <h3 class="hospital-step__title">Poor Outcomes</h3>
-        <p class="hospital-step__desc">Substandard care after a dangerous journey — or no arrival at all.</p>
+        <p class="hospital-step__desc">Substandard care after a dangerous journey - or no arrival at all.</p>
       </div>
     </div>
   </section>
@@ -2566,34 +2693,118 @@
       <h2 class="gallery__heading">Project Gallery</h2>
       <div class="gallery__header-right">
         <span class="gallery__eyebrow">From the field</span>
-        <p class="gallery__header-desc">South Luangwa · Zambia · 2024 — 2025</p>
+        <p class="gallery__header-desc">South Luangwa · Zambia · 2024 - 2025</p>
       </div>
     </div>
 
-    <div class="gallery__grid reveal reveal-delay-1">
-      <div class="gallery__item" role="button" tabindex="0" aria-label="View Two elders — open image">
-        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-4.jpg" alt="Two elders">
+    <div class="gallery__marquee reveal reveal-delay-1">
+      <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Scroll gallery left">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="gallery__nav gallery__nav--next" type="button" aria-label="Scroll gallery right">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <div class="gallery__track">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-22.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <div class="gallery__item" role="button" tabindex="0" aria-label="View Boy looking up — open image">
-        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-6.jpg" alt="Boy looking up">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-5.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <div class="gallery__item" role="button" tabindex="0" aria-label="View Mother and sleeping baby — open image">
-        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-19.jpg" alt="Mother and sleeping baby">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-31.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <div class="gallery__item" role="button" tabindex="0" aria-label="View Clinic consultation — open image">
-        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Clinic consultation">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-9.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <div class="gallery__item" role="button" tabindex="0" aria-label="View Community member — open image">
-        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-25.jpg" alt="Community member">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-14.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
       </div>
-      <div class="gallery__item" role="button" tabindex="0" aria-label="View Elder woman portrait — open image">
-        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-2.jpg" alt="Elder woman portrait" style="object-position: center top;">
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-27.jpg" alt="Mkasanga, South Luangwa · Zambia">
         <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-2.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-19.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-33.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-7.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-24.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-29.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-4.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-20.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-32.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-8.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-25.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-6.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-30.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-21.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-10.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-28.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-23.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
+      <div class="gallery__item" role="button" tabindex="0" aria-label="Open photograph">
+        <img loading="lazy" src="MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-26.jpg" alt="Mkasanga, South Luangwa · Zambia">
+        <div class="gallery__item-overlay" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></div>
+      </div>
       </div>
     </div>
 
@@ -2609,14 +2820,14 @@
   <section class="page-cta reveal" style="background:transparent;">
     <p class="page-cta__eyebrow">Walk with us</p>
     <h2 class="page-cta__heading">Every contribution carries a name,<br>a place, a thank-you.</h2>
-    <p class="page-cta__desc">Direct, transparent funding — no middle layer, no overhead skim. Whatever you give goes to the people building this clinic with their own hands.</p>
+    <p class="page-cta__desc">Direct, transparent funding - no middle layer, no overhead skim. Whatever you give goes to the people building this clinic with their own hands.</p>
     <div class="page-cta__actions">
       <a href="get-involved.html#donate" class="page-cta__btn page-cta__btn--primary">Support the Clinic</a>
       <a href="get-involved.html" class="page-cta__btn page-cta__btn--secondary">Other ways to help →</a>
     </div>
   </section>
 
-  <footer class="page-footer" style="background:transparent;">
+  <footer class="page-footer" style="background:#0e0300;">
     <div class="page-footer__closing">
       <p class="page-footer__tagline">Making hope visible.</p>
       <p class="page-footer__subline">Stories first. Funding follows. Walk with us.</p>
@@ -2644,7 +2855,7 @@
         <div class="reel-modal__bar">
           <div class="reel-modal__progress"></div>
           <div class="reel-modal__meta">
-            <span class="reel-modal__title">Mkasanga Community Clinic — Project Showreel · 2025</span>
+            <span class="reel-modal__title">Mkasanga Community Clinic - Project Showreel · 2025</span>
             <span class="reel-modal__duration">0:00 / 3:24</span>
           </div>
         </div>
@@ -2682,7 +2893,7 @@
   <!-- ── Scripts ── -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script>
-    // Lightbox — handles both gallery and vision image sets
+    // Lightbox - handles both gallery and vision image sets
     (function() {
       const lb      = document.getElementById('lightbox');
       const lbImg   = document.getElementById('lightboxImg');
@@ -2710,10 +2921,74 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Photography gallery
-      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
-      const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
-      galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
+      // Photography gallery — standard page-flip scroller, looped seamlessly
+      const galleryTrack = document.querySelector('.gallery__track');
+      const gallerySrcs = [...document.querySelectorAll('.gallery__item img')].map(img => img.src);
+
+      if (galleryTrack) {
+        // Duplicate the set to 4 copies: the loop hop spans two sets, which keeps
+        // it row-aligned (invisible) and the tiling continuous (no gaps).
+        const originals = [...galleryTrack.children];
+        for (let r = 0; r < 3; r++) {
+          originals.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('gallery__item--clone');
+            clone.setAttribute('aria-hidden', 'true');
+            clone.removeAttribute('role');
+            clone.removeAttribute('tabindex');
+            galleryTrack.appendChild(clone);
+          });
+        }
+
+        let H = galleryTrack.scrollWidth / 2;          // two sets — a row-aligned, invisible hop
+        let down = false, sx = 0, sl = 0, moved = false, idleTimer;
+        requestAnimationFrame(() => { H = galleryTrack.scrollWidth / 2; galleryTrack.scrollLeft = H; });
+        window.addEventListener('resize', () => { H = galleryTrack.scrollWidth / 2; });
+
+        // Hop back by one unit once scrolling has FULLY stopped — invisible, and
+        // never mid-animation, so the page-flip never walls and never drifts.
+        function reposition() {
+          if (down || H <= 0) return;
+          if (galleryTrack.scrollLeft >= 1.5 * H) galleryTrack.scrollLeft -= H;
+          else if (galleryTrack.scrollLeft < 0.5 * H) galleryTrack.scrollLeft += H;
+        }
+        galleryTrack.addEventListener('scroll', () => { clearTimeout(idleTimer); idleTimer = setTimeout(reposition, 120); }, { passive: true });
+
+        // Mouse drag-to-scroll (direct set, so it can wrap live without drifting)
+        galleryTrack.addEventListener('pointerdown', e => {
+          if (e.pointerType !== 'mouse') return;
+          down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
+          galleryTrack.classList.add('is-dragging');
+          galleryTrack.setPointerCapture(e.pointerId);
+        });
+        galleryTrack.addEventListener('pointermove', e => {
+          if (!down) return;
+          const dx = e.clientX - sx;
+          if (Math.abs(dx) > 4) moved = true;
+          galleryTrack.scrollLeft = sl - dx;
+          if (galleryTrack.scrollLeft >= 1.5 * H) { sl -= H; galleryTrack.scrollLeft -= H; }
+          else if (galleryTrack.scrollLeft < 0.5 * H) { sl += H; galleryTrack.scrollLeft += H; }
+        });
+        const endDrag = () => { down = false; galleryTrack.classList.remove('is-dragging'); };
+        galleryTrack.addEventListener('pointerup', endDrag);
+        galleryTrack.addEventListener('pointercancel', endDrag);
+
+        // Click a tile (original or clone) to open the lightbox — unless dragging
+        galleryTrack.addEventListener('click', e => {
+          if (moved) { moved = false; return; }
+          const item = e.target.closest('.gallery__item');
+          if (!item) return;
+          const i = gallerySrcs.indexOf(item.querySelector('img').src);
+          if (i >= 0) open(gallerySrcs, i);
+        });
+
+        // Arrow buttons — flip one page of images (the exact standard smooth scroll)
+        const step = () => Math.max(galleryTrack.clientWidth * 0.8, 320);
+        const prevBtn = document.querySelector('.gallery__nav--prev');
+        const nextBtn = document.querySelector('.gallery__nav--next');
+        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
+      }
 
       // No vision/progress panel galleries needed (they use inline sliders)
 
@@ -2726,6 +3001,25 @@
         if (e.key === 'ArrowLeft')  go(-1);
         if (e.key === 'ArrowRight') go(1);
         if (e.key === 'Escape')     close();
+      });
+
+      // Natural navigation in the large view — wheel/trackpad and swipe
+      let wheelLock = false;
+      lb.addEventListener('wheel', e => {
+        if (!lb.classList.contains('is-open')) return;
+        e.preventDefault();
+        if (wheelLock) return;
+        wheelLock = true;
+        setTimeout(() => { wheelLock = false; }, 320);
+        go((e.deltaY + e.deltaX) > 0 ? 1 : -1);
+      }, { passive: false });
+      let lbTouchX = null;
+      lb.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        if (lbTouchX === null) return;
+        const dx = e.changedTouches[0].clientX - lbTouchX;
+        lbTouchX = null;
+        if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
       });
     })();
 
@@ -2762,7 +3056,7 @@
       });
     });
 
-    // Panel sliders — click, dots + swipe
+    // Panel sliders - click, dots + swipe
     document.querySelectorAll('.panel-slider').forEach(slider => {
       const track  = slider.querySelector('.panel-slider__track');
       const imgs   = [...track.querySelectorAll('img')];
