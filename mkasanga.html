@@ -2914,43 +2914,45 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Photography gallery — standard scroller with a seamless infinite loop
+      // Photography gallery — continuous, seamless infinite scroller
       const galleryTrack = document.querySelector('.gallery__track');
       const gallerySrcs = [...document.querySelectorAll('.gallery__item img')].map(img => img.src);
 
       if (galleryTrack) {
-        // Duplicate the set once so it tiles continuously (no gap) and loops.
-        [...galleryTrack.children].forEach(item => {
-          const clone = item.cloneNode(true);
-          clone.classList.add('gallery__item--clone');
-          clone.setAttribute('aria-hidden', 'true');
-          clone.removeAttribute('role');
-          clone.removeAttribute('tabindex');
-          galleryTrack.appendChild(clone);
-        });
-
-        let setW = galleryTrack.scrollWidth / 2;
-        window.addEventListener('resize', () => { setW = galleryTrack.scrollWidth / 2; });
-        let down = false, sx = 0, sl = 0, moved = false;
-
-        // When scrolling settles, hop by one set-width if we've crossed into the
-        // duplicate — invisible because the content is identical (seamless loop).
-        function settle() {
-          if (setW <= 0) return;
-          if (galleryTrack.scrollLeft >= setW) galleryTrack.scrollLeft -= setW;
-          else if (galleryTrack.scrollLeft < 0) galleryTrack.scrollLeft += setW;
+        // Repeat the set 4× so a two-set hop lands row-aligned — the loop wrap
+        // is invisible (continuous timeline) and the tiling never gaps.
+        const originals = [...galleryTrack.children];
+        for (let r = 0; r < 3; r++) {
+          originals.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.classList.add('gallery__item--clone');
+            clone.setAttribute('aria-hidden', 'true');
+            clone.removeAttribute('role');
+            clone.removeAttribute('tabindex');
+            galleryTrack.appendChild(clone);
+          });
         }
-        let wrapTimer;
-        galleryTrack.addEventListener('scroll', () => {
-          clearTimeout(wrapTimer);
-          wrapTimer = setTimeout(settle, 90);
-        }, { passive: true });
-        galleryTrack.addEventListener('scrollend', settle);
+
+        let K = galleryTrack.scrollWidth / 2;   // two sets — a seamless, invisible hop
+        let arrowScrolling = false, arrowTimer, down = false, sx = 0, sl = 0, moved = false;
+
+        // Start in the middle so there's runway in both directions
+        requestAnimationFrame(() => { K = galleryTrack.scrollWidth / 2; galleryTrack.scrollLeft = K; });
+        window.addEventListener('resize', () => { K = galleryTrack.scrollWidth / 2; });
+
+        // Keep scrollLeft within a central band; hop by K (invisible) at the edges
+        function wrap() {
+          if (K <= 0) return;
+          if (galleryTrack.scrollLeft >= 1.5 * K) galleryTrack.scrollLeft -= K;
+          else if (galleryTrack.scrollLeft < 0.5 * K) galleryTrack.scrollLeft += K;
+        }
+        galleryTrack.addEventListener('scroll', () => { if (!arrowScrolling) wrap(); }, { passive: true });
+        galleryTrack.addEventListener('scrollend', () => { arrowScrolling = false; wrap(); });
 
         // Mouse drag-to-scroll (trackpad/touch use native scrolling)
         galleryTrack.addEventListener('pointerdown', e => {
           if (e.pointerType !== 'mouse') return;
-          down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
+          down = true; moved = false; arrowScrolling = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
           galleryTrack.classList.add('is-dragging');
           galleryTrack.setPointerCapture(e.pointerId);
         });
@@ -2959,9 +2961,8 @@
           const dx = e.clientX - sx;
           if (Math.abs(dx) > 4) moved = true;
           galleryTrack.scrollLeft = sl - dx;
-          // wrap live while dragging, keeping the reference point in sync
-          if (galleryTrack.scrollLeft >= setW) { sl -= setW; galleryTrack.scrollLeft -= setW; }
-          else if (galleryTrack.scrollLeft < 0) { sl += setW; galleryTrack.scrollLeft += setW; }
+          if (galleryTrack.scrollLeft >= 1.5 * K) { sl -= K; galleryTrack.scrollLeft -= K; }
+          else if (galleryTrack.scrollLeft < 0.5 * K) { sl += K; galleryTrack.scrollLeft += K; }
         });
         const endDrag = () => { down = false; galleryTrack.classList.remove('is-dragging'); };
         galleryTrack.addEventListener('pointerup', endDrag);
@@ -2976,12 +2977,18 @@
           if (i >= 0) open(gallerySrcs, i);
         });
 
-        // Arrows — standard smooth scroll by ~one view; loops via settle()
+        // Arrows — smooth scroll by ~one view; the loop hop applies once it settles
         const step = () => Math.max(galleryTrack.clientWidth * 0.8, 320);
+        function arrow(dir) {
+          arrowScrolling = true;
+          galleryTrack.scrollBy({ left: dir * step(), behavior: 'smooth' });
+          clearTimeout(arrowTimer);
+          arrowTimer = setTimeout(() => { arrowScrolling = false; wrap(); }, 700);
+        }
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
-        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
-        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
+        if (prevBtn) prevBtn.addEventListener('click', () => arrow(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => arrow(1));
       }
 
       // No vision/progress panel galleries needed (they use inline sliders)
