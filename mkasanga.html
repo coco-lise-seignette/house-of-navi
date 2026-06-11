@@ -2929,8 +2929,8 @@
         let half = galleryTrack.scrollWidth / 2;
         window.addEventListener('resize', () => { half = galleryTrack.scrollWidth / 2; });
 
-        let paused = reduce, dragging = false, startX = 0, startScroll = 0, moved = false;
-        const SPEED = 0.5;
+        let paused = reduce, dragging = false, startX = 0, startScroll = 0, moved = false, boost = 0;
+        const SPEED = 0.5, FAST = 10;
 
         function wrap() {
           if (half <= 0) return;
@@ -2938,7 +2938,8 @@
           else if (galleryTrack.scrollLeft < 0) galleryTrack.scrollLeft += half;
         }
         function frame() {
-          if (!paused && !dragging) galleryTrack.scrollLeft += SPEED;
+          if (boost !== 0) galleryTrack.scrollLeft += boost;
+          else if (!paused && !dragging) galleryTrack.scrollLeft += SPEED;
           wrap();
           requestAnimationFrame(frame);
         }
@@ -2970,12 +2971,27 @@
           if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
         }, true);
 
-        // Arrow controls
-        const step = () => Math.max(galleryTrack.clientWidth * 0.7, 320);
+        // Arrow controls — press & hold to scroll faster in that direction
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
-        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
-        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
+        function bindNav(btn, dir) {
+          if (!btn) return;
+          const start = e => { e.preventDefault(); boost = dir * FAST; };
+          const stop  = () => { boost = 0; };
+          btn.addEventListener('pointerdown', start);
+          btn.addEventListener('pointerup', stop);
+          btn.addEventListener('pointerleave', stop);
+          btn.addEventListener('pointercancel', stop);
+          // keyboard: a smooth nudge
+          btn.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              galleryTrack.scrollBy({ left: dir * Math.max(galleryTrack.clientWidth * 0.7, 320), behavior: 'smooth' });
+            }
+          });
+        }
+        bindNav(prevBtn, -1);
+        bindNav(nextBtn, 1);
       }
 
       // No vision/progress panel galleries needed (they use inline sliders)
