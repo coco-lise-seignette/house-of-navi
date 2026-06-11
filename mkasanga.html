@@ -2904,93 +2904,42 @@
         lbCount.textContent = (cur + 1) + ' / ' + srcs.length;
       }
 
-      // Gallery marquee — clone the items once so the right-to-left scroll
-      // loops seamlessly (clones are decorative: hidden from AT + lightbox).
+      // Photography gallery
       const galleryTrack = document.querySelector('.gallery__track');
-      if (galleryTrack) {
-        [...galleryTrack.children].forEach(item => {
-          const clone = item.cloneNode(true);
-          clone.classList.add('gallery__item--clone');
-          clone.setAttribute('aria-hidden', 'true');
-          clone.removeAttribute('role');
-          clone.removeAttribute('tabindex');
-          galleryTrack.appendChild(clone);
-        });
-      }
-
-      // Photography gallery (originals only — exclude marquee clones)
-      const galleryEls  = [...document.querySelectorAll('.gallery__item:not(.gallery__item--clone)')];
+      const galleryEls  = [...document.querySelectorAll('.gallery__item')];
       const gallerySrcs = galleryEls.map(el => el.querySelector('img').src);
       galleryEls.forEach((el, i) => el.addEventListener('click', () => open(gallerySrcs, i)));
 
-      // Gallery motion — slow auto-scroll + drag-to-scroll + arrow controls
+      // Standard horizontal scroll: native scroll/swipe + mouse drag + arrows
       if (galleryTrack) {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        let half = galleryTrack.scrollWidth / 2;
-        window.addEventListener('resize', () => { half = galleryTrack.scrollWidth / 2; });
-
-        let paused = reduce, dragging = false, startX = 0, startScroll = 0, moved = false, anim = null;
-        const SPEED = 0.5;
-        const easeInOut = t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
-
-        function wrap() {
-          if (half <= 0) return;
-          if (galleryTrack.scrollLeft >= half) galleryTrack.scrollLeft -= half;
-          else if (galleryTrack.scrollLeft < 0) galleryTrack.scrollLeft += half;
-        }
-        function frame(now) {
-          if (anim) {
-            const t = Math.min(1, (now - anim.start) / anim.dur);
-            const covered = easeInOut(t) * anim.dist;
-            galleryTrack.scrollLeft += covered - anim.prev;
-            anim.prev = covered;
-            if (t >= 1) anim = null;
-          } else if (!paused && !dragging) {
-            galleryTrack.scrollLeft += SPEED;
-          }
-          wrap();
-          requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-
-        galleryTrack.addEventListener('mouseenter', () => { paused = true; });
-        galleryTrack.addEventListener('mouseleave', () => { if (!reduce) paused = false; });
-
-        // Mouse drag-to-scroll (touch devices use native swipe)
+        // Mouse drag-to-scroll (trackpad/touch use native scrolling)
+        let down = false, sx = 0, sl = 0, moved = false;
         galleryTrack.addEventListener('pointerdown', e => {
           if (e.pointerType !== 'mouse') return;
-          dragging = true; moved = false;
-          startX = e.clientX; startScroll = galleryTrack.scrollLeft;
+          down = true; moved = false; sx = e.clientX; sl = galleryTrack.scrollLeft;
           galleryTrack.classList.add('is-dragging');
           galleryTrack.setPointerCapture(e.pointerId);
         });
         galleryTrack.addEventListener('pointermove', e => {
-          if (!dragging) return;
-          const dx = e.clientX - startX;
+          if (!down) return;
+          const dx = e.clientX - sx;
           if (Math.abs(dx) > 4) moved = true;
-          galleryTrack.scrollLeft = startScroll - dx;
-          wrap();
+          galleryTrack.scrollLeft = sl - dx;
         });
-        const endDrag = () => { dragging = false; galleryTrack.classList.remove('is-dragging'); };
+        const endDrag = () => { down = false; galleryTrack.classList.remove('is-dragging'); };
         galleryTrack.addEventListener('pointerup', endDrag);
         galleryTrack.addEventListener('pointercancel', endDrag);
-        // swallow the click that ends a drag so it doesn't open the lightbox
+        // don't let a drag end up opening the lightbox
         galleryTrack.addEventListener('click', e => {
           if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
         }, true);
 
-        // Arrow controls — click to glide ~2-3 photos in that direction
+        // Arrow buttons — smooth scroll by roughly one view
+        const step = () => Math.max(galleryTrack.clientWidth * 0.8, 320);
         const prevBtn = document.querySelector('.gallery__nav--prev');
         const nextBtn = document.querySelector('.gallery__nav--next');
-        function tileW() {
-          const it = galleryTrack.querySelector('.gallery__item');
-          return (it ? it.getBoundingClientRect().width : 320) + 2;
-        }
-        function jump(dir) {
-          anim = { start: performance.now(), dist: dir * tileW() * 1.5, prev: 0, dur: 480 };
-        }
-        if (prevBtn) prevBtn.addEventListener('click', () => jump(-1));
-        if (nextBtn) nextBtn.addEventListener('click', () => jump(1));
+        if (prevBtn) prevBtn.addEventListener('click', () => galleryTrack.scrollBy({ left: -step(), behavior: 'smooth' }));
+        if (nextBtn) nextBtn.addEventListener('click', () => galleryTrack.scrollBy({ left:  step(), behavior: 'smooth' }));
       }
 
       // No vision/progress panel galleries needed (they use inline sliders)
