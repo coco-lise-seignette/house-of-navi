@@ -76,7 +76,7 @@
     .landing-tagline {
       display: inline-flex; align-items: center; gap: 20px;
       font-family: var(--ff-body); font-size: var(--fs-cap);
-      font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      font-weight: 600; letter-spacing: 0.02em; font-size: clamp(13px, 1.2vw, 14px);
       color: rgba(245, 221, 213, 0.75);
       margin-bottom: clamp(36px, 5vh, 56px);
       opacity: 0;
@@ -134,7 +134,7 @@
 
     @media (max-width: 600px) {
       .landing-title { font-size: clamp(36px, 10vw, 56px); }
-      .landing-tagline { font-size: 10px; letter-spacing: 0.2em; }
+      .landing-tagline { letter-spacing: 0.02em; }
       .landing-tagline::before,
       .landing-tagline::after { width: 32px; }
     }
@@ -188,7 +188,7 @@
 
     <div class="section-content">
       <h1 class="landing-title">Stories can change the world.</h1>
-      <p class="landing-tagline">Making hope visible.</p>
+      <p class="landing-tagline">House of Navi connects people with initiatives already creating change, using storytelling to turn awareness into meaningful support.</p>
       <div class="landing-cta">
         <a href="projects.html" class="landing-cta__primary">See our work</a>
         <a href="about.html" class="landing-cta__secondary">Who we are</a>

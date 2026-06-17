@@ -242,65 +242,138 @@ a {
   position: relative;
   z-index: 10;
   background: #0e0300;
-  padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) clamp(64px, 8vh, 88px);
+  padding: clamp(48px, 7vh, 80px) clamp(24px, 8vw, 120px) 0;
   border-top: 1px solid rgba(245, 221, 213, 0.08);
 }
 
-.page-footer__closing {
-  text-align: center;
-  padding-bottom: clamp(36px, 5vh, 56px);
-  margin-bottom: clamp(24px, 3vh, 36px);
+/* Two-column grid: info left, nav+socials right */
+.page-footer__main {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(48px, 8vw, 120px);
+  padding-bottom: clamp(32px, 4vh, 48px);
   border-bottom: 1px solid rgba(245, 221, 213, 0.07);
 }
 
-.page-footer__tagline {
-  font-family: var(--ff-display);
-  font-size: clamp(24px, 3vw, 42px);
-  color: rgba(245, 221, 213, 0.55);
-  letter-spacing: -0.01em;
-  margin-bottom: 10px;
+.page-footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.page-footer__subline {
+.page-footer__info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.page-footer__col-label {
   font-family: var(--ff-body);
-  font-size: var(--fs-cap);
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(245, 221, 213, 0.25);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(245, 221, 213, 0.75);
+  margin: 0 0 3px 0;
 }
 
+.page-footer__info-line {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245, 221, 213, 0.38);
+  margin: 0;
+  line-height: 1.7;
+}
+
+.page-footer__info-line a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-footer__info-line a:hover { color: var(--navi-first-light); }
+
+/* Right column: nav links left, social icons right — both bottom-aligned */
+.page-footer__right {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 28px;
+}
+
+.page-footer__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.page-footer__links a {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(245, 221, 213, 0.45);
+  text-decoration: none;
+  line-height: 1.7;
+  transition: color 0.2s;
+}
+
+.page-footer__links a:hover { color: var(--navi-first-light); }
+
+.page-footer__socials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.page-footer__socials a {
+  color: rgba(245, 221, 213, 0.5);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.page-footer__socials a:hover { color: var(--navi-first-light); }
+
+/* Bottom bar: back to top left, copyright right — never behind Support pill */
 .page-footer__bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
+  /* bottom padding keeps all content above the fixed Support pill (≈70px tall incl. margin) */
+  padding: clamp(16px, 2vh, 24px) 0 clamp(88px, 10vh, 104px);
 }
 
 .page-footer__back {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   font-family: var(--ff-body);
-  font-size: var(--fs-cap);
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(245, 221, 213, 0.5);
+  color: rgba(245, 221, 213, 0.28);
+  text-decoration: none;
   transition: color 0.2s;
+  flex-shrink: 0;
 }
+
 .page-footer__back:hover { color: var(--navi-first-light); }
-.page-footer__back::before { content: '←'; font-size: 13px; }
+.page-footer__back::before { content: '←'; font-size: 12px; }
 
 .page-footer__meta {
   margin: 0;
   font-family: var(--ff-body);
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(245, 221, 213, 0.28);
+  color: rgba(245, 221, 213, 0.18);
+  /* keep clear of the fixed Support pill (≈160px wide incl. margin) */
+  padding-right: 50px;
 }
 
 .navi-pill {
@@ -345,13 +418,19 @@ a {
   }
 
   .page-footer {
-    padding: clamp(40px, 6vh, 64px) clamp(24px, 6vw, 48px) clamp(72px, 10vh, 96px);
+    padding: clamp(40px, 6vh, 64px) clamp(24px, 6vw, 48px) 0;
   }
-  /* stack the bottom row + keep it clear of the floating Support pill */
+  .page-footer__main {
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+  }
   .page-footer__bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 10px;
+  }
+  .page-footer__meta {
+    padding-right: 0;
   }
 }
 
