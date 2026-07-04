@@ -67,10 +67,9 @@
     .texture-stack .texture {
       position: absolute;
       inset: 0;
-      background-image: url('brand/assets/textures/TEXTURE%20WOOD.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      background:
+        radial-gradient(ellipse 135% 125% at 60% 44%, rgba(80, 32, 16, 0.15) 0%, rgba(44, 18, 9, 0.07) 50%, rgba(8, 2, 1, 0) 85%),
+        #050100;
     }
     .texture-stack .scrim {
       position: absolute;
@@ -2266,7 +2265,7 @@
 
   </style>
 </head>
-<body>
+<body data-page="mkasanga">
 
   <!-- ── Texture background ── -->
   <div class="texture-stack">
@@ -3156,6 +3155,7 @@
       lastY = y;
     }, { passive: true });
   </script>
+  <script src="brand/assets/js/preload-textures.js" defer></script>
 
 </body>
 </html>

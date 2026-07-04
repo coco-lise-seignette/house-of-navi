@@ -7,152 +7,22 @@
   <meta name="description" content="House of Navi is a South African non-profit shining a light on invisible communities and environments across Africa. Stories first. Funding follows.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <style>
-    html, body { height: 100%; overflow: hidden; }
-
-    body {
-      font-family: var(--ff-body);
-      background: var(--navi-midnight-dune);
-      color: var(--navi-first-light);
-    }
-
-    /* ── Grain overlay ── */
-    .grain-overlay {
-      position: fixed; inset: 0;
-      z-index: 50; pointer-events: none;
-      opacity: 0.045;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 180px;
-    }
-
-    /* ── Landing section ── */
-    #landing {
-      position: relative;
-      width: 100%; height: 100vh;
-      /* dark ground so the video fades in cleanly — no texture flash */
-      background: #170603;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
-    }
-    /* ── Background hero video ── */
-    .landing-video {
-      position: absolute;
-      inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.7s ease;
-    }
-    .landing-video.is-ready { opacity: 1; }
-    .section-scrim {
-      position: absolute; inset: 0;
-      /* warmer, deeper terracotta wash over the video */
-      background: rgba(74, 22, 10, 0.62);
-      mix-blend-mode: multiply; z-index: 1;
-    }
-    .section-vignette {
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 28%, rgba(34, 9, 3, 0.66) 100%);
-      mix-blend-mode: multiply; z-index: 1;
-    }
-    .section-content {
-      position: relative; z-index: 10;
-      text-align: center;
-      padding: 0 clamp(28px, 6vw, 96px);
-      max-width: 860px;
-    }
-    .landing-title {
-      font-family: var(--ff-display);
-      font-size: clamp(44px, 5.8vw, 84px);
-      line-height: 1.0; letter-spacing: -0.02em;
-      margin-bottom: clamp(24px, 3vw, 36px);
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
-    }
-    .landing-tagline {
-      display: inline-flex; align-items: center; gap: 20px;
-      font-family: var(--ff-body); font-size: var(--fs-cap);
-      font-weight: 600; letter-spacing: 0.02em; font-size: clamp(13px, 1.2vw, 14px);
-      color: rgba(245, 221, 213, 0.75);
-      margin-bottom: clamp(36px, 5vh, 56px);
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.38s forwards;
-    }
-    .landing-tagline::before,
-    .landing-tagline::after {
-      content: ''; display: block;
-      width: 60px; height: 1px;
-      background: rgba(245, 221, 213, 0.22);
-    }
-
-    /* ── CTA ── */
-    .landing-cta {
-      display: flex; align-items: center; justify-content: center;
-      gap: clamp(12px, 2vw, 20px);
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.55s forwards;
-    }
-    .landing-cta__primary {
-      display: inline-flex; align-items: center;
-      padding: 14px 32px;
-      background: var(--navi-clay-cream);
-      color: var(--navi-blood-dune);
-      font-family: var(--ff-body); font-size: 13px;
-      font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 6px 24px rgba(40,8,0,0.22);
-      min-height: 44px;
-    }
-    .landing-cta__primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 32px rgba(40,8,0,0.3);
-    }
-    .landing-cta__secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--ff-body); font-size: 12px;
-      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(245, 221, 213, 0.6);
-      text-decoration: none;
-      padding: 0 4px;
-      min-height: 44px;
-      transition: color 0.2s;
-    }
-    .landing-cta__secondary:hover { color: var(--navi-first-light); }
-    .landing-cta__secondary::after { content: '→'; font-size: 14px; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      .landing-title { font-size: clamp(36px, 10vw, 56px); }
-      .landing-tagline { letter-spacing: 0.02em; }
-      .landing-tagline::before,
-      .landing-tagline::after { width: 32px; }
-    }
-  </style>
 </head>
-<body>
+<body data-page="main">
 
-  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="Page scroll progress"></div>
   <div class="grain-overlay"></div>
 
-  <!-- ── Nav ── -->
+  <!-- ── Nav (single, shared across all sections) ── -->
   <nav class="navi-nav" id="nav">
     <div class="navi-nav__left">
       <a href="index.html" class="navi-logo">
         <img src="brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi" height="48">
       </a>
     </div>
-    <div class="navi-links">
+    <div class="navi-links" id="naviLinks">
       <a href="index.html" class="navi-link is-current">Home</a>
       <a href="projects.html" class="navi-link">Projects</a>
       <a href="get-involved.html" class="navi-link">Get Involved</a>
@@ -175,68 +45,442 @@
 
   <!-- ── Support pill ── -->
   <a href="get-involved.html#donate" class="navi-pill">
-    <span>♥</span> Support
+    <span class="navi-pill__heart">♥</span> Support
   </a>
 
-  <!-- ── Landing ── -->
-  <section id="landing">
-    <video class="landing-video" autoplay muted loop playsinline preload="auto">
-      <source src="brand/assets/HERO%20VIDEO.mp4" type="video/mp4">
-    </video>
-    <div class="section-scrim"></div>
-    <div class="section-vignette"></div>
-
-    <div class="section-content">
-      <h1 class="landing-title">Stories can change the world.</h1>
-      <p class="landing-tagline">HOUSE OF NAVI CONNECTS PEOPLE WITH INITIATIVES ALREADY CREATING CHANGE, USING STORYTELLING TO TURN AWARENESS INTO MEANINGFUL SUPPORT.</p>
-      <div class="landing-cta">
-        <a href="projects.html" class="landing-cta__primary">See our work</a>
-        <a href="about.html" class="landing-cta__secondary">Who we are</a>
-      </div>
+  <!-- ════════════════════════════════════════
+       SLIDE 1 — MAIN
+  ════════════════════════════════════════ -->
+  <section class="page-slide" id="slide-main">
+    <div class="texture-stack texture-stack--video">
+      <video class="landing-video" autoplay muted loop playsinline preload="auto">
+        <source src="brand/assets/HERO%20VIDEO.mp4" type="video/mp4">
+      </video>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
     </div>
 
+    <main class="page-content">
+      <div class="landing-slide">
+        <div class="section-content">
+          <h1 class="landing-title">Stories can change<br>the world.</h1>
+          <p class="landing-tagline"><span class="landing-tagline__text">House of Navi connects people with initiatives<br class="tagline-break"> already creating change.</span></p>
+          <div class="landing-cta">
+            <a href="projects.html" class="landing-cta__primary">See our work</a>
+            <a href="about.html" class="landing-cta__secondary">Who we are</a>
+          </div>
+        </div>
+      </div>
+    </main>
   </section>
 
-  <script>
-    // Mobile hamburger
-    const hamburger  = document.getElementById('naviHamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger.addEventListener('click', () => {
-      const open = hamburger.classList.toggle('is-open');
-      mobileMenu.classList.toggle('is-open', open);
-      hamburger.setAttribute('aria-expanded', open);
-      mobileMenu.setAttribute('aria-hidden', !open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    mobileMenu.querySelectorAll('.mobile-menu__link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('is-open');
-        mobileMenu.classList.remove('is-open');
-        document.body.style.overflow = '';
-      });
-    });
+  <!-- ════════════════════════════════════════
+       SLIDE 2 — PROJECTS
+  ════════════════════════════════════════ -->
+  <section class="page-slide" id="slide-projects">
+    <div class="texture-stack">
+      <div class="texture" data-bg="brand/assets/textures/TEXTURE%20WOOD.png"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+    </div>
 
-    // Scroll progress + nav backdrop
-    const progressBar = document.getElementById('scrollProgress');
-    const nav = document.getElementById('nav');
-    let lastY = 0;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      if (progressBar && max > 0) progressBar.style.width = (y / max * 100) + '%';
-      if (nav) nav.classList.toggle('is-scrolled', y > 60);
-      lastY = y;
-    }, { passive: true });
+    <main class="page-content projects-page">
+
+      <section class="projects-hero">
+        <p class="eyebrow reveal">THE WORK</p>
+        <div class="projects-hero__grid">
+          <h1 class="projects-title reveal reveal-delay-1">Projects.</h1>
+        </div>
+      </section>
+
+      <section class="projects-section">
+        <div class="projects-divider"></div>
+        <div class="projects-grid">
+
+          <article class="project-card reveal reveal-delay-1">
+            <div class="project-card__meta">
+              <span class="project-card__num">№ 01</span>
+              <span class="project-card__rule-line"></span>
+              <span class="project-card__cat">Healthcare</span>
+            </div>
+            <h2 class="project-card__title">Mkasanga Community Clinic</h2>
+            <p class="project-card__location">South Luangwa · Zambia</p>
+            <p class="project-card__desc">A community-built clinic on the edge of the wild. Six to eight hours from the nearest hospital, cut off entirely during the rains - and already half-built by the people who need it.</p>
+            <p class="project-card__status">Status: IN MOTION</p>
+            <a href="mkasanga.html" class="project-card__cta project-card__cta--highlight">Read the Story</a>
+          </article>
+
+          <article class="project-card reveal reveal-delay-2">
+            <div class="project-card__meta">
+              <span class="project-card__num">№ 02</span>
+              <span class="project-card__rule-line"></span>
+              <span class="project-card__cat">Coming Soon</span>
+            </div>
+            <h2 class="project-card__title">Next Story Loading</h2>
+            <p class="project-card__location">Africa</p>
+            <p class="project-card__desc">We are currently developing the next House of Navi project alongside local communities and long term partners.</p>
+            <p class="project-card__status">Status: IN DEVELOPMENT</p>
+            <span class="project-card__label">Coming Soon</span>
+          </article>
+
+          <div class="project-panel reveal reveal-delay-3">
+            <p class="project-panel__intro">Whether you are a donor, filmmaker, organisation, brand, or creative partner, we are always open to collaborating with people who believe in the power of storytelling and human connection.</p>
+            <a href="get-involved.html" class="project-panel__button">Get Involved</a>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SLIDE 3 — GET INVOLVED
+  ════════════════════════════════════════ -->
+  <section class="page-slide" id="slide-get-involved">
+    <div class="texture-stack">
+      <div class="texture" data-bg="brand/assets/textures/dried_river.png"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <main class="page-content gi-page">
+      <section class="gi-hero">
+        <p class="gi-eyebrow reveal">GET INVOLVED</p>
+        <h1 class="gi-title reveal reveal-delay-1">Walk with us.</h1>
+        <p class="gi-tagline reveal reveal-delay-2">Support stories that create real impact</p>
+        <p class="gi-intro reveal reveal-delay-3">Your support helps fund storytelling campaigns, community initiatives, documentary productions, and awareness projects connected to real people and places. Every donation contributes toward visibility, resources, and long term support for projects already creating change on the ground. We are committed to transparent, ethical, and accountable use of funds. Whenever possible, project updates and campaign progress will be shared directly with supporters and partners.</p>
+      </section>
+
+      <section class="gi-ways" id="donate">
+        <div class="gi-grid">
+
+          <article class="gi-way reveal reveal-delay-1">
+            <span class="gi-way__num">I</span>
+            <h2 class="gi-way__title">Donate</h2>
+            <p class="gi-way__desc">Help fund active projects, documentary storytelling, and community led initiatives.</p>
+            <!-- TODO: replace href with real donation platform URL when ready -->
+            <a href="https://donate.houseofnavi.org" class="gi-way__cta" target="_blank" rel="noopener">Donate Now</a>
+          </article>
+
+          <article class="gi-way reveal reveal-delay-2">
+            <span class="gi-way__num">II</span>
+            <h2 class="gi-way__title">Become A Partner</h2>
+            <p class="gi-way__desc">Collaborate as a brand, organisation, foundation, creative partner, or long term supporter.</p>
+            <a href="contact.html" class="gi-way__cta">Start the Conversation</a>
+          </article>
+
+          <article class="gi-way reveal reveal-delay-3">
+            <span class="gi-way__num">III</span>
+            <h2 class="gi-way__title">Share The Story</h2>
+            <p class="gi-way__desc">Awareness matters. Sometimes sharing a story is the thing that changes everything.</p>
+            <a href="projects.html" class="gi-way__cta">See the Stories</a>
+          </article>
+
+        </div>
+      </section>
+
+      <p class="gi-closing reveal">Every project starts with people already doing the work. We are simply here to help the world see them.</p>
+    </main>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SLIDE 4 — ABOUT
+  ════════════════════════════════════════ -->
+  <section class="page-slide" id="slide-about">
+    <div class="texture-stack">
+      <div class="texture" data-bg="brand/assets/textures/texture-knuckles.jpg"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <main class="page-content about-page">
+      <section class="about-hero">
+        <p class="about-eyebrow reveal">ABOUT</p>
+        <h1 class="about-title reveal reveal-delay-1">The world does not need more noise. <em class="about-title__highlight">It needs deeper connection.</em></h1>
+      </section>
+
+      <div class="about-rule"></div>
+
+      <section class="about-section">
+        <div class="about-mission-body">
+          <p class="reveal reveal-delay-1">House of Navi is a South African non-profit organisation. We shine a light on initiatives already creating change, connecting them with the people who want to help them go further.</p>
+          <p class="reveal reveal-delay-2">Through cinematic storytelling and creative campaigns, we help stories travel beyond the places they're rooted in, reaching the people who want to be part of what comes next.</p>
+          <p class="reveal reveal-delay-2">House of Navi collaborates with local communities, filmmakers, organisations, and changemakers to create films and campaigns that amplify initiatives already creating change on the ground.</p>
+          <p class="reveal reveal-delay-2">From remote villages to fragile ecosystems, we work to bring visibility to stories that matter.</p>
+        </div>
+      </section>
+
+      <section class="about-signature-section">
+        <p class="about-page-signature reveal">- the House of Navi team</p>
+      </section>
+
+      <div class="about-rule"></div>
+
+      <section class="about-section">
+        <p class="about-section-eyebrow reveal">STORYTELLING FOR IMPACT</p>
+        <div class="about-pillars-grid">
+
+          <div class="about-pillar reveal reveal-delay-1">
+            <span class="about-pillar__rule"></span>
+            <h3 class="about-pillar__title">Documentary &amp; Film</h3>
+            <p class="about-pillar__desc">We create emotionally grounded films that connect audiences to real human experiences.</p>
+          </div>
+
+          <div class="about-pillar reveal reveal-delay-2">
+            <span class="about-pillar__rule"></span>
+            <h3 class="about-pillar__title">Awareness Campaigns</h3>
+            <p class="about-pillar__desc">Creative campaigns designed to raise visibility, funding, and long term support.</p>
+          </div>
+
+          <div class="about-pillar reveal reveal-delay-3">
+            <span class="about-pillar__rule"></span>
+            <h3 class="about-pillar__title">Community Partnerships</h3>
+            <p class="about-pillar__desc">We collaborate directly with local initiatives and grassroots organisations already creating change.</p>
+          </div>
+
+          <div class="about-pillar reveal reveal-delay-4">
+            <span class="about-pillar__rule"></span>
+            <h3 class="about-pillar__title">Fundraising &amp; Activation</h3>
+            <p class="about-pillar__desc">From donor campaigns to creative activations, we help turn awareness into real world action.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="page-cta">
+        <p class="page-cta__eyebrow reveal">Get involved</p>
+        <h2 class="page-cta__heading reveal reveal-delay-1">Walk with us.</h2>
+        <p class="page-cta__desc reveal reveal-delay-2">If something here moved you, there is a way in.<br>Support a project, partner with us, or simply pass it on.</p>
+        <div class="page-cta__actions reveal reveal-delay-3">
+          <a href="get-involved.html#donate" class="page-cta__btn page-cta__btn--primary">Support our work</a>
+          <a href="projects.html" class="page-cta__btn page-cta__btn--secondary">See the work →</a>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SLIDE 5 — CONTACT
+  ════════════════════════════════════════ -->
+  <section class="page-slide" id="slide-contact">
+    <div class="texture-stack">
+      <div class="texture" data-bg="brand/assets/textures/texture-elephant-warm.jpg"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <main class="page-content contact-page">
+      <div class="contact-content">
+
+        <div class="contact-left">
+          <div class="contact-lower">
+            <p class="contact-eyebrow reveal">CONTACT</p>
+            <h1 class="contact-title reveal reveal-delay-1">Say hello.</h1>
+            <p class="contact-body reveal reveal-delay-2">Whether you have a project, an idea, a partnership, a question, or simply stumbled across us somewhere on the internet and felt curious, we would genuinely love to hear from you.</p>
+            <p class="contact-tagline reveal reveal-delay-3">A small house for big stories.</p>
+          </div>
+        </div>
+
+        <div class="contact-right reveal reveal-delay-2">
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-item__label">Email</span>
+              <a href="mailto:hello@houseofnavi.com" class="contact-item__value">hello@houseofnavi.com</a>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item__label">Post</span>
+              <span class="contact-item__value">Studio 307 · 34 High Level Rd · Cape Town · South Africa</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-item__label">Socials</span>
+              <a href="https://www.instagram.com/house.of.navi/" class="contact-item__value" target="_blank" rel="noopener">@house.of.navi</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <section class="page-cta">
+        <p class="page-cta__eyebrow reveal">While you're here</p>
+        <h2 class="page-cta__heading reveal reveal-delay-1">See who we walk with.</h2>
+        <p class="page-cta__desc reveal reveal-delay-2">Every message matters - but so does the work behind it. Take a look at the people and places we're shining a light on.</p>
+        <div class="page-cta__actions reveal reveal-delay-3">
+          <a href="projects.html" class="page-cta__btn page-cta__btn--primary">See the work</a>
+          <a href="get-involved.html#donate" class="page-cta__btn page-cta__btn--secondary">Get involved →</a>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- ── Footer (single, true end of the merged document) ── -->
+  <footer class="page-footer">
+    <div class="page-footer__main">
+      <div class="page-footer__info">
+        <div class="page-footer__info-group">
+          <p class="page-footer__col-label">Information</p>
+          <p class="page-footer__info-line"><a href="tel:+27798325200">+27(0)798325200</a></p>
+          <p class="page-footer__info-line"><a href="mailto:hello@houseofnavi.com">hello@houseofnavi.com</a></p>
+        </div>
+        <div class="page-footer__info-group">
+          <p class="page-footer__col-label">Reg. No. (South Africa)</p>
+          <p class="page-footer__info-line">NPO 246-813</p>
+        </div>
+      </div>
+      <div class="page-footer__right">
+        <nav class="page-footer__links">
+          <a href="index.html">Home</a>
+          <a href="projects.html">Projects</a>
+          <a href="get-involved.html">Get Involved</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="page-footer__socials">
+          <a href="https://www.instagram.com/house.of.navi/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5.5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/house-of-navi/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="M7 10.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="7.5" r="0.75" fill="currentColor"/><path d="M11.5 17v-3.5c0-1.5.8-2.5 2.5-2.5s2.5 1 2.5 2.5V17M11.5 10.5V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer__bottom">
+      <a href="#slide-main" class="page-footer__back">Back to top</a>
+      <p class="page-footer__meta">© House of Navi. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal-on-scroll — one observer covers every section's .reveal elements
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+
+    // Scroll-spy: highlight whichever section's nav link matches the page
+    // currently in view — visual only, doesn't touch the URL or history.
+    var sectionNavHref = {
+      'slide-main': 'index.html',
+      'slide-projects': 'projects.html',
+      'slide-get-involved': 'get-involved.html',
+      'slide-about': 'about.html',
+      'slide-contact': 'contact.html'
+    };
+    var navLinkEls = document.querySelectorAll('.navi-link, .mobile-menu__link');
+    var sectionObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var href = sectionNavHref[entry.target.id];
+        if (!href) return;
+        navLinkEls.forEach(function (link) {
+          link.classList.toggle('is-current', link.getAttribute('href') === href);
+        });
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.page-slide').forEach(function (el) { sectionObserver.observe(el); });
+
+    // Mobile hamburger: open/close, close-on-link-click, body scroll lock
+    var hamburger = document.getElementById('naviHamburger');
+    var mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', function () {
+        var open = hamburger.classList.toggle('is-open');
+        mobileMenu.classList.toggle('is-open', open);
+        hamburger.setAttribute('aria-expanded', open);
+        mobileMenu.setAttribute('aria-hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      mobileMenu.querySelectorAll('.mobile-menu__link').forEach(function (link) {
+        link.addEventListener('click', function () {
+          hamburger.classList.remove('is-open');
+          mobileMenu.classList.remove('is-open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
 
     // Fade the hero video in once it has data — avoids any poster/texture flash
-    const heroVideo = document.querySelector('.landing-video');
+    var heroVideo = document.querySelector('.landing-video');
     if (heroVideo) {
-      const showVideo = () => heroVideo.classList.add('is-ready');
+      var showVideo = function () { heroVideo.classList.add('is-ready'); };
       if (heroVideo.readyState >= 2) showVideo();
       heroVideo.addEventListener('loadeddata', showVideo);
       heroVideo.addEventListener('playing', showVideo);
     }
+
+    // Tagline must never be wider than "Stories can change / the world." —
+    // measure both as one line; only reveal the designated break point
+    // (before "already") if the one-line tagline would be wider.
+    var landingTitle = document.querySelector('.landing-title');
+    var taglineText = document.querySelector('.landing-tagline__text');
+    var taglineBreak = document.querySelector('.tagline-break');
+    if (landingTitle && taglineText && taglineBreak) {
+      var fitTagline = function () {
+        var titleWidth = landingTitle.getBoundingClientRect().width;
+        // Measure the tagline's true one-line width off-flow — as a flex
+        // item its layout box can be shrunk by the container, which would
+        // otherwise make getBoundingClientRect() under-report its width.
+        var style = getComputedStyle(taglineText);
+        var measurer = document.createElement('span');
+        measurer.style.position = 'absolute';
+        measurer.style.visibility = 'hidden';
+        measurer.style.whiteSpace = 'nowrap';
+        measurer.style.fontFamily = style.fontFamily;
+        measurer.style.fontSize = style.fontSize;
+        measurer.style.fontWeight = style.fontWeight;
+        measurer.style.letterSpacing = style.letterSpacing;
+        measurer.style.textTransform = style.textTransform;
+        measurer.textContent = taglineText.textContent.replace(/\s+/g, ' ').trim();
+        document.body.appendChild(measurer);
+        var taglineWidth = measurer.getBoundingClientRect().width;
+        document.body.removeChild(measurer);
+        taglineBreak.style.display = taglineWidth > titleWidth ? 'inline' : 'none';
+      };
+      fitTagline();
+      window.addEventListener('resize', fitTagline);
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitTagline);
+      }
+    }
+
+    // Landing-only initial scroll position: land this file's load on its own
+    // section (or a same-document hash target like #donate), instantly —
+    // this runs BEFORE the nav scroll-listener attaches below, so the jump
+    // itself is never mistaken for the user scrolling down.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var hashTarget = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    var page = document.body.getAttribute('data-page');
+    var target = hashTarget || document.getElementById('slide-' + page);
+    if (target) target.scrollIntoView({ block: 'start' });
+
+    // Scroll progress + nav show/hide — lastY starts from wherever we just
+    // landed, so the initial jump above is never read as a user scroll.
+    var lastY = window.scrollY;
+    var nav = document.getElementById('nav');
+    var progress = document.getElementById('scrollProgress');
+    var scrollEndTimer;
+    window.addEventListener('scroll', function () {
+      var y = window.scrollY;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      if (progress) progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+      if (nav) {
+        nav.classList.toggle('is-scrolled', y > 60);
+        if (y > lastY && y > 80) nav.classList.add('nav-hidden');
+        else nav.classList.remove('nav-hidden');
+      }
+      lastY = y;
+      // Once scrolling settles (e.g. after a snap lands on a new page),
+      // bring the nav back rather than leaving it hidden.
+      clearTimeout(scrollEndTimer);
+      scrollEndTimer = setTimeout(function () {
+        if (nav) nav.classList.remove('nav-hidden');
+      }, 200);
+    }, { passive: true });
   </script>
+  <script src="brand/assets/js/preload-textures.js" defer></script>
 
 </body>
 </html>

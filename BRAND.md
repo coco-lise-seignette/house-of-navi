@@ -109,6 +109,8 @@ House of Navi is a cinematic, earth-first, artisan non-profit — not a corporat
 --fs-cap:        12px;                       /* Eyebrows — uppercase, 0.32em tracking */
 ```
 
+**Body-copy rule (mandatory on every page):** every general paragraph of body copy — project card descriptions, Get Involved way/intro text, About mission body and pillar descriptions, Contact body copy — must use `font-size: clamp(14px, 1.2vw, 17px)`. This applies consistently across Projects, Get Involved, About, and Contact; do not give one page a smaller or larger clamp range than another. Smaller, label-like text (contact list values, eyebrows, captions) is a different role and is exempt from this rule.
+
 ---
 
 ## Textures — the backbone of every page
