@@ -1,0 +1,157 @@
+/* ─────────────────────────────────────────────
+   House of Navi — Instagram carousel previews
+   Shared styles for every campaign carousel.
+   Tiles are square (1080 × 1080 export) and sized
+   with container units so they scale as one image.
+   ───────────────────────────────────────────── */
+
+:root {
+  --navi-first-light:         #F5DDD5;
+  --navi-clay-cream:          #EDE3D0;
+  --navi-blood-dune:          #6B1A0E;
+  --navi-midnight-dune:       #280800;
+  --navi-near-black:          #0e0300;
+  --navi-warm-sand:           #DDD0B8;
+  --navi-original-terracotta: #9B4420;
+  --navi-sunlit-face:         #B85040;
+  --navi-mid-dune:            #D9907A;
+
+  --ff-display: 'Lilita One', cursive;
+  --ff-body:    'Baloo 2', sans-serif;
+  --ff-script:  'Caveat', cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; background: var(--navi-near-black); }
+
+body {
+  min-height: 100vh;
+  color: var(--navi-first-light);
+  font-family: var(--ff-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 40px 24px 56px;
+}
+
+a { color: var(--navi-first-light); text-decoration: none; }
+a:hover { color: var(--navi-mid-dune); }
+
+/* ── Header meta bar ── */
+.meta-bar {
+  width: min(620px, 92vw);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+}
+.eyebrow-x {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.eyebrow-x.accent { color: var(--navi-mid-dune); }
+.eyebrow-x.mute   { color: rgba(245,221,213,0.45); }
+.meta-bar a.eyebrow-x:hover { color: var(--navi-first-light); }
+
+/* ── Scroll strip ── */
+.strip {
+  width: min(620px, 92vw);
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 2px;
+}
+.strip::-webkit-scrollbar { display: none; }
+
+.tile {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  aspect-ratio: 1 / 1;
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  background: var(--navi-near-black);
+}
+.pad {
+  position: absolute;
+  inset: 0;
+  padding: 6.6cqw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── Texture stack helpers ── */
+.tex { position: absolute; inset: 0; background-size: cover; background-position: center; background-repeat: no-repeat; }
+.scrim { position: absolute; inset: 0; background: rgba(20,4,0,0.6); mix-blend-mode: multiply; }
+.vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 70% at 50% 50%, transparent 30%, rgba(15,4,0,0.6) 100%); mix-blend-mode: multiply; }
+.grain {
+  position: absolute; inset: 0; opacity: 0.05; mix-blend-mode: overlay; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+.grain.on-light { opacity: 0.09; mix-blend-mode: multiply; }
+
+/* ── Shared type roles (container-relative) ── */
+.top-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 3cqw; }
+.logo { height: 5cqw; width: auto; }
+.num { margin: 0; font-size: 1.35cqw; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(245,221,213,0.55); }
+.num.dark { color: rgba(107,26,14,0.5); }
+.num.on-photo { color: rgba(245,221,213,0.85); text-shadow: 0 1px 10px rgba(8,2,0,0.65); }
+.kicker { margin: 0; font-size: 1.45cqw; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--navi-mid-dune); }
+.kicker.dark { color: var(--navi-original-terracotta); }
+
+.rule-label { display: flex; align-items: center; gap: 1.6cqw; font-size: 1.4cqw; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(245,221,213,0.72); }
+.rule-label .line { display: block; width: 4.4cqw; height: 1px; background: rgba(245,221,213,0.35); }
+
+.display { margin: 0; font-family: var(--ff-display); font-weight: 400; letter-spacing: -0.02em; color: var(--navi-first-light); text-wrap: pretty; }
+.body { margin: 0; font-weight: 400; line-height: 1.55; color: rgba(245,221,213,0.86); text-wrap: pretty; }
+em.hl { font-style: normal; color: var(--navi-mid-dune); }
+
+.hint { margin: 0; font-size: 1.4cqw; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: var(--navi-mid-dune); }
+
+/* ── Split tile: photo on top, dark panel below ── */
+.split { display: flex; flex-direction: column; background: var(--navi-midnight-dune); }
+.split .photo { position: relative; overflow: hidden; }
+.split .photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.split .photo .fade { position: absolute; inset: 0; }
+.split .photo > .num { position: absolute; top: 6.6cqw; right: 6.6cqw; color: rgba(245,221,213,0.8); }
+.place { position: absolute; left: 6.6cqw; bottom: 3.2cqw; margin: 0; font-size: 1.4cqw; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(245,221,213,0.85); text-shadow: 0 1px 10px rgba(8,2,0,0.65); }
+
+/* ── CTA tile (closing slide, shared by every campaign) ── */
+.cta { background: var(--navi-near-black); }
+.cta .photo { flex: 0 0 38%; }
+.cta .photo .fade { background: linear-gradient(180deg, rgba(14,3,0,0.42) 0%, rgba(14,3,0,0.06) 34%, rgba(14,3,0,0.6) 100%); }
+.cta .photo .pad { justify-content: flex-start; }
+.cta .panel { position: relative; flex: 1; background: var(--navi-near-black); padding: 6.6cqw; display: flex; flex-direction: column; justify-content: space-between; }
+.cta .display { font-size: 8cqw; line-height: 0.96; }
+.cta .body { font-size: 2.25cqw; line-height: 1.5; max-width: 80%; color: rgba(245,221,213,0.85); }
+.cta .links { display: flex; align-items: center; gap: 2.4cqw; flex-wrap: wrap; }
+.cta .pill { display: inline-flex; align-items: center; padding: 1.7cqw 3.4cqw; background: var(--navi-clay-cream); color: var(--navi-blood-dune); font-size: 1.55cqw; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border-radius: 100px; }
+.cta .link { font-size: 1.55cqw; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(245,221,213,0.8); }
+.cta .footer { display: flex; align-items: center; justify-content: space-between; gap: 2cqw; padding-top: 2.4cqw; border-top: 1px solid rgba(245,221,213,0.18); font-size: 1.25cqw; font-weight: 600; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(245,221,213,0.45); }
+.cta .stack-top { position: relative; display: flex; flex-direction: column; gap: 2.4cqw; }
+.cta .stack-btm { position: relative; display: flex; flex-direction: column; gap: 3.2cqw; }
+
+/* ── Controls ── */
+.controls { width: min(620px, 92vw); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.nav-btns { display: flex; align-items: center; gap: 10px; }
+.nav-btns button { width: 38px; height: 38px; border-radius: 100px; border: 1px solid rgba(245,221,213,0.28); background: transparent; color: var(--navi-first-light); font-family: var(--ff-body); font-size: 15px; cursor: pointer; transition: border-color 0.2s ease, transform 0.2s ease; }
+.nav-btns button:hover { border-color: var(--navi-first-light); transform: translateY(-1px); }
+.nav-btns button:active { transform: translateY(0); }
+.dots { display: flex; align-items: center; gap: 14px; }
+.dots button { border: 0; background: transparent; padding: 6px 2px; cursor: pointer; font-family: var(--ff-body); font-size: 11px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--navi-first-light); opacity: 0.32; transition: opacity 0.2s ease; }
+.dots button.active { opacity: 1; }
+.counter { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(245,221,213,0.45); }
+
+@media (max-width: 520px) {
+  .num, .kicker, .rule-label, .hint { font-size: 2.6cqw; }
+  .dots { gap: 8px; }
+}
