@@ -22,26 +22,21 @@
   .stuck .q em{font-style:normal;color:var(--navi-mid-dune);}
   .stuck .attrib{margin:0;font-size:1.5cqw;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,221,213,0.6);}
 
-  /* ── TILE 05 · Where we come from (dark, bark) ── */
-  .origin{background:var(--navi-midnight-dune);}
-  .origin .tex{background-image:url("../brand/assets/textures/texture-knuckles.jpg");}
-  .origin .scrim{background:rgba(20,4,0,0.64);}
-  .origin .display{font-size:6.6cqw;line-height:0.98;max-width:90%;}
-  .origin .body{font-size:2.3cqw;max-width:86%;}
-  .origin .mid{display:flex;flex-direction:column;gap:3cqw;}
-  .origin .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;padding-top:2.4cqw;border-top:1px solid rgba(245,221,213,0.18);}
-  .origin .tri p{margin:0;font-size:1.7cqw;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navi-first-light);line-height:1.4;}
-  .origin .tri span{display:block;font-size:1.4cqw;font-weight:500;letter-spacing:0.04em;text-transform:none;color:rgba(245,221,213,0.55);margin-top:0.6cqw;}
+  /* ── TILE 03 · Three roots (dark, wood) ── */
+  .roots{background:var(--navi-midnight-dune);}
+  .roots .tex{background-image:url("../brand/assets/textures/TEXTURE%20WOOD.png");}
+  .roots .scrim{background:rgba(18,4,0,0.72);}
+  .roots .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3.4cqw;}
+  .root .rn{margin:0 0 1.8cqw;font-size:1.5cqw;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--navi-mid-dune);}
+  .root .native{margin:0 0 0.6cqw;font-family:var(--ff-display);font-weight:400;font-size:5.6cqw;line-height:1;color:var(--navi-first-light);}
+  .root .roman{margin:0 0 1.8cqw;font-size:1.5cqw;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,221,213,0.55);}
+  .root .gloss{margin:0;font-size:1.75cqw;font-weight:400;line-height:1.5;color:rgba(245,221,213,0.82);}
+  .root .gloss em{font-style:normal;color:var(--navi-mid-dune);font-weight:600;}
+  .roots .synth{display:flex;align-items:center;gap:2cqw;font-size:1.45cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(245,221,213,0.5);}
+  .roots .synth .line{flex:1;height:1px;background:rgba(245,221,213,0.2);}
 
-  /* ── TILE 06 · Why it matters (split photo) ── */
-  .matters .photo{flex:0 0 52%;}
-  .matters .photo > img{object-position:center 42%;}
-  .matters .photo .fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,3,0,0.34) 0%,rgba(14,3,0,0) 38%,rgba(14,3,0,0.4) 100%);}
-  .matters .body-wrap{position:relative;flex:1;padding:5.4cqw 6.6cqw;display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;background:var(--navi-midnight-dune);}
-  .matters .kicker{color:var(--navi-mid-dune);}
-  .matters .display{font-size:5cqw;line-height:1.0;}
-  .matters .body{font-size:2.15cqw;line-height:1.5;max-width:94%;color:rgba(245,221,213,0.82);}
-  .matters .body em{font-style:normal;color:var(--navi-mid-dune);}
+  /* ── TILE 07 · CTA overrides ── */
+  .cta .photo > img{object-position:center 40%;}
 
 </style>
 </head>
@@ -72,41 +67,72 @@
       </div>
     </div>
 
-    <!-- TILE 05 · WHERE WE COME FROM -->
-    <div class="tile origin" data-label="02">
+    <!-- TILE 03 · THREE ROOTS -->
+    <div class="tile roots" data-label="02">
       <div class="tex"></div>
       <div class="scrim"></div>
       <div class="vignette"></div>
       <div class="grain"></div>
       <div class="pad">
         <div class="top-row">
-          <p class="kicker">Where we come from</p>
+          <p class="kicker">Three roots</p>
           <p class="num">Parked · from 02</p>
         </div>
-        <div class="mid">
-          <h2 class="display">We come from the agency world.</h2>
-          <p class="body">Brand, film, story — the craft that makes people stop and look. We took those tools off the billboard and pointed them at <em class="hl">the work that actually matters.</em></p>
+        <div class="grid">
+          <div class="root">
+            <p class="rn">I · Hebrew</p>
+            <p class="native">נָבִיא</p>
+            <p class="roman">navi</p>
+            <p class="gloss"><em>Prophet.</em> One who speaks truth — and gives voice to the unseen.</p>
+          </div>
+          <div class="root">
+            <p class="rn">II · Sanskrit</p>
+            <p class="native">नव</p>
+            <p class="roman">nava</p>
+            <p class="gloss"><em>New.</em> A new way to tell a story the world keeps overlooking.</p>
+          </div>
+          <div class="root">
+            <p class="rn">III · Na'vi</p>
+            <p class="native">Na'vi</p>
+            <p class="roman">the people</p>
+            <p class="gloss"><em>Of the land.</em> Those who live closest to what the rest of us miss.</p>
+          </div>
         </div>
-        <div class="tri">
-          <p>Strategy<span>the through-line</span></p>
-          <p>Film<span>the witness</span></p>
-          <p>Design<span>the frame</span></p>
-        </div>
+        <div class="synth"><span>Speak</span><span class="line"></span><span>Renew</span><span class="line"></span><span>Belong</span></div>
       </div>
     </div>
 
-    <!-- TILE 06 · WHY IT MATTERS -->
-    <div class="tile split matters" data-label="03">
+
+    <!-- TILE 07 · CTA -->
+    <div class="tile split cta" data-label="03">
       <div class="photo">
-        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg" alt="A mother and child inside the Mkasanga clinic">
+        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-24.jpg" alt="Schoolchildren in Mkasanga village">
         <div class="fade"></div>
-        <p class="num on-photo">Parked · from 02</p>
-        <p class="place">South Luangwa · Zambia</p>
+        <div class="pad">
+          <div class="top-row">
+            <img class="logo" src="../brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi">
+            <p class="num on-photo">Parked · from 02</p>
+          </div>
+        </div>
       </div>
-      <div class="body-wrap">
-        <p class="kicker">Why it matters</p>
-        <h2 class="display">The work leaves no time to be heard.</h2>
-        <p class="body">The people on the ground are consumed by what's urgent — the clinic, the rains, the next season. Telling the world rarely makes the list. So we hold the <em>magnifying glass</em> over quiet, noble work, and let it speak.</p>
+      <div class="panel">
+        <div class="grain"></div>
+        <div class="stack-top">
+          <p class="kicker">Walk with us</p>
+          <h2 class="display">Hold the light with us.</h2>
+          <p class="body">Follow the stories, share the work, or help fund the people doing it. Every bit of attention is a spotlight.</p>
+        </div>
+        <div class="stack-btm">
+          <div class="links">
+            <a class="pill" href="https://houseofnavi.com">houseofnavi.com</a>
+            <a class="link" href="https://www.instagram.com/house.of.navi/">@house.of.navi</a>
+            <a class="link" href="mailto:hello@houseofnavi.com">hello@houseofnavi.com</a>
+          </div>
+          <div class="footer">
+            <span>Stories first · funding follows</span>
+            <span>NPO 246-813 · South Africa</span>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -24,29 +24,16 @@
   .word .num{color:rgba(107,26,14,0.5);}
   .word-center{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.4cqw;}
   .word-mark{margin:0;font-family:var(--ff-display);font-weight:400;font-size:22cqw;line-height:0.9;letter-spacing:0.02em;color:var(--navi-blood-dune);}
-  .word-pron{margin:0;font-size:3cqw;font-weight:600;letter-spacing:0.06em;color:rgba(40,8,0,0.62);}
+  .word-pron{margin:0;font-size:4.2cqw;font-weight:600;letter-spacing:0.06em;color:rgba(40,8,0,0.62);}
   .word-pron span{color:var(--navi-sunlit-face);}
-  .word-sub{margin:1.6cqw 0 0;font-size:3.3cqw;font-weight:500;line-height:1.4;color:rgba(40,8,0,0.86);max-width:84%;}
+  .word-sub{margin:2cqw 0 0;font-size:4.8cqw;font-weight:500;line-height:1.3;color:rgba(40,8,0,0.88);max-width:88%;}
   .word-sub em{font-style:normal;color:var(--navi-sunlit-face);font-weight:600;}
-  .word-langs{display:flex;align-items:center;justify-content:center;gap:2.4cqw;font-size:2.1cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(40,8,0,0.5);}
+  .word-langs{display:flex;align-items:center;justify-content:center;gap:2.4cqw;font-size:2.9cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(40,8,0,0.5);}
   .word-langs .dot{opacity:0.5;}
 
-  /* ── TILE 03 · Three roots (dark, wood) ── */
-  .roots{background:var(--navi-midnight-dune);}
-  .roots .tex{background-image:url("../brand/assets/textures/TEXTURE%20WOOD.png");}
-  .roots .scrim{background:rgba(18,4,0,0.72);}
-  .roots .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3.4cqw;}
-  .root .rn{margin:0 0 1.8cqw;font-size:1.5cqw;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--navi-mid-dune);}
-  .root .native{margin:0 0 0.6cqw;font-family:var(--ff-display);font-weight:400;font-size:5.6cqw;line-height:1;color:var(--navi-first-light);}
-  .root .roman{margin:0 0 1.8cqw;font-size:1.5cqw;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(245,221,213,0.55);}
-  .root .gloss{margin:0;font-size:1.75cqw;font-weight:400;line-height:1.5;color:rgba(245,221,213,0.82);}
-  .root .gloss em{font-style:normal;color:var(--navi-mid-dune);font-weight:600;}
-  .roots .synth{display:flex;align-items:center;gap:2cqw;font-size:1.45cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(245,221,213,0.5);}
-  .roots .synth .line{flex:1;height:1px;background:rgba(245,221,213,0.2);}
-
-  /* ── TILES 04–06 · Dictionary entries: the three meanings of Navi (light) ── */
+  /* ── TILES 03–05 · Dictionary entries: the three meanings of Navi (light) ── */
   .def { background: var(--navi-clay-cream); color: var(--navi-midnight-dune); }
-  .def .tex { background-image: url("../brand/assets/textures/texture-knuckles-lighter.png"); opacity: 0.14; mix-blend-mode: multiply; }
+  .def .tex { background-image: url("../brand/assets/textures/texture-knuckles.jpg"); opacity: 0.14; mix-blend-mode: multiply; }
   .def .kicker { color: var(--navi-original-terracotta); }
   .def .num { color: rgba(107,26,14,0.5); }
   .def__entry { display: flex; flex-direction: column; gap: 2.4cqw; }
@@ -67,8 +54,26 @@
   .def__coda { grid-column: 2; margin: 0.6cqw 0 0; font-family: var(--ff-display); font-size: 4cqw; line-height: 1.05; color: var(--navi-sunlit-face); }
   .def__foot { display: flex; align-items: center; gap: 2.2cqw; padding-top: 2cqw; border-top: 1px solid rgba(107,26,14,0.22); font-size: 1.5cqw; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(40,8,0,0.38); }
   .def__foot .is-on { color: var(--navi-blood-dune); }
-  /* ── TILE 07 · CTA overrides ── */
-  .cta .photo > img{object-position:center 40%;}
+  /* ── TILE 07 · Where we come from (dark, bark) ── */
+  .origin{background:var(--navi-midnight-dune);}
+  .origin .tex{background-image:url("../brand/assets/textures/texture-knuckles.jpg");}
+  .origin .scrim{background:rgba(20,4,0,0.64);}
+  .origin .display{font-size:6.6cqw;line-height:0.98;max-width:90%;}
+  .origin .body{font-size:2.3cqw;max-width:86%;}
+  .origin .mid{display:flex;flex-direction:column;gap:3cqw;}
+  .origin .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;padding-top:2.4cqw;border-top:1px solid rgba(245,221,213,0.18);}
+  .origin .tri p{margin:0;font-size:1.7cqw;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navi-first-light);line-height:1.4;}
+  .origin .tri span{display:block;font-size:1.4cqw;font-weight:500;letter-spacing:0.04em;text-transform:none;color:rgba(245,221,213,0.55);margin-top:0.6cqw;}
+
+  /* ── TILE 06 · A small house for big stories (split photo) ── */
+  .matters .photo{flex:0 0 52%;}
+  .matters .photo > img{object-position:center 42%;}
+  .matters .photo .fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,3,0,0.34) 0%,rgba(14,3,0,0) 38%,rgba(14,3,0,0.4) 100%);}
+  .matters .body-wrap{position:relative;flex:1;padding:5.4cqw 6.6cqw;display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;background:var(--navi-midnight-dune);}
+  .matters .kicker{color:var(--navi-mid-dune);}
+  .matters .display{font-size:5cqw;line-height:1.0;}
+  .matters .body{font-size:2.15cqw;line-height:1.5;max-width:94%;color:rgba(245,221,213,0.82);}
+  .matters .body em{font-style:normal;color:var(--navi-mid-dune);}
 
 </style>
 </head>
@@ -123,49 +128,14 @@
       </div>
     </div>
 
-    <!-- TILE 03 · THREE ROOTS -->
-    <div class="tile roots" data-label="03">
-      <div class="tex"></div>
-      <div class="scrim"></div>
-      <div class="vignette"></div>
-      <div class="grain"></div>
-      <div class="pad">
-        <div class="top-row">
-          <p class="kicker">Three roots</p>
-          <p class="num">№ 03</p>
-        </div>
-        <div class="grid">
-          <div class="root">
-            <p class="rn">I · Hebrew</p>
-            <p class="native">נָבִיא</p>
-            <p class="roman">navi</p>
-            <p class="gloss"><em>Prophet.</em> One who speaks truth — and gives voice to the unseen.</p>
-          </div>
-          <div class="root">
-            <p class="rn">II · Sanskrit</p>
-            <p class="native">नव</p>
-            <p class="roman">nava</p>
-            <p class="gloss"><em>New.</em> A new way to tell a story the world keeps overlooking.</p>
-          </div>
-          <div class="root">
-            <p class="rn">III · Na'vi</p>
-            <p class="native">Na'vi</p>
-            <p class="roman">the people</p>
-            <p class="gloss"><em>Of the land.</em> Those who live closest to what the rest of us miss.</p>
-          </div>
-        </div>
-        <div class="synth"><span>Speak</span><span class="line"></span><span>Renew</span><span class="line"></span><span>Belong</span></div>
-      </div>
-    </div>
-
-    <!-- TILE 04 · NAVI1 · VOICE -->
-    <div class="tile def" data-label="04">
+    <!-- TILE 03 · NAVI1 · VOICE -->
+    <div class="tile def" data-label="03">
       <div class="tex"></div>
       <div class="grain on-light"></div>
       <div class="pad">
         <div class="top-row">
           <p class="kicker">What does Navi mean?</p>
-          <p class="num">№ 04</p>
+          <p class="num">№ 03</p>
         </div>
         <div class="def__entry">
           <div class="def__head">
@@ -184,14 +154,14 @@
       </div>
     </div>
 
-    <!-- TILE 05 · NAVI2 · NAVIGATION -->
-    <div class="tile def" data-label="05">
+    <!-- TILE 04 · NAVI2 · NAVIGATION -->
+    <div class="tile def" data-label="04">
       <div class="tex"></div>
       <div class="grain on-light"></div>
       <div class="pad">
         <div class="top-row">
           <p class="kicker">What does Navi mean?</p>
-          <p class="num">№ 05</p>
+          <p class="num">№ 04</p>
         </div>
         <div class="def__entry">
           <div class="def__head">
@@ -218,14 +188,14 @@
       </div>
     </div>
 
-    <!-- TILE 06 · NAVI3 · NEW BEGINNINGS -->
-    <div class="tile def" data-label="06">
+    <!-- TILE 05 · NAVI3 · NEW BEGINNINGS -->
+    <div class="tile def" data-label="05">
       <div class="tex"></div>
       <div class="grain on-light"></div>
       <div class="pad">
         <div class="top-row">
           <p class="kicker">What does Navi mean?</p>
-          <p class="num">№ 06</p>
+          <p class="num">№ 05</p>
         </div>
         <div class="def__entry">
           <div class="def__head">
@@ -237,7 +207,7 @@
             <p class="def__n">3</p>
             <h2 class="def__label">New beginnings</h2>
             <p class="def__gloss">The next chapter of something already in motion.</p>
-            <p class="def__note">We don't arrive to create change from scratch. In Mkasanga, the community is already building its clinic. Our role is to amplify that effort and bring more people into the story, so it can be completed.</p>
+            <p class="def__note">We don't arrive to create change from scratch. Our role is to amplify effort and bring more people into the story, so it can be completed.</p>
             <p class="def__coda">Hope in action, rather than charity.</p>
           </div>
         </div>
@@ -245,35 +215,41 @@
       </div>
     </div>
 
-    <!-- TILE 07 · CTA -->
-    <div class="tile split cta" data-label="07">
+    <!-- TILE 06 · A SMALL HOUSE FOR BIG STORIES -->
+    <div class="tile split matters" data-label="06">
       <div class="photo">
-        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-24.jpg" alt="Schoolchildren in Mkasanga village">
+        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg" alt="A mother and child inside the Mkasanga clinic">
         <div class="fade"></div>
-        <div class="pad">
-          <div class="top-row">
-            <img class="logo" src="../brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi">
-            <p class="num on-photo">№ 07</p>
-          </div>
-        </div>
+        <p class="num on-photo">№ 06</p>
+        <p class="place">South Luangwa · Zambia</p>
       </div>
-      <div class="panel">
-        <div class="grain"></div>
-        <div class="stack-top">
-          <p class="kicker">Walk with us</p>
-          <h2 class="display">Hold the light with us.</h2>
-          <p class="body">Follow the stories, share the work, or help fund the people doing it. Every bit of attention is a spotlight.</p>
+      <div class="body-wrap">
+        <p class="kicker">Why it matters</p>
+        <h2 class="display">A small house for big stories</h2>
+        <p class="body">We could have called it Navi Foundation, Navi Initiative or Navi Organisation. But House of Navi says something different.</p>
+        <p class="body">A house is a place that holds things. It can hold different people, different stories, different disciplines and different projects <em>without forcing all of them to look the same.</em></p>
+      </div>
+    </div>
+
+    <!-- TILE 07 · WHERE WE COME FROM -->
+    <div class="tile origin" data-label="07">
+      <div class="tex"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">Where we come from</p>
+          <p class="num">№ 07</p>
         </div>
-        <div class="stack-btm">
-          <div class="links">
-            <a class="pill" href="https://houseofnavi.com">houseofnavi.com</a>
-            <a class="link" href="https://www.instagram.com/house.of.navi/">@house.of.navi</a>
-            <a class="link" href="mailto:hello@houseofnavi.com">hello@houseofnavi.com</a>
-          </div>
-          <div class="footer">
-            <span>Stories first · funding follows</span>
-            <span>NPO 246-813 · South Africa</span>
-          </div>
+        <div class="mid">
+          <h2 class="display">We come from the agency world.</h2>
+          <p class="body">Brand, film, story — the craft that makes people stop and look. We took those tools off the billboard and pointed them at <em class="hl">the work that actually matters.</em></p>
+        </div>
+        <div class="tri">
+          <p>Strategy<span>the through-line</span></p>
+          <p>Film<span>the witness</span></p>
+          <p>Design<span>the frame</span></p>
         </div>
       </div>
     </div>
