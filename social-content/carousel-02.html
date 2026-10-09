@@ -24,11 +24,11 @@
   .word .num{color:rgba(107,26,14,0.5);}
   .word-center{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.4cqw;}
   .word-mark{margin:0;font-family:var(--ff-display);font-weight:400;font-size:22cqw;line-height:0.9;letter-spacing:0.02em;color:var(--navi-blood-dune);}
-  .word-pron{margin:0;font-size:2.3cqw;font-weight:600;letter-spacing:0.06em;color:rgba(40,8,0,0.62);}
+  .word-pron{margin:0;font-size:3cqw;font-weight:600;letter-spacing:0.06em;color:rgba(40,8,0,0.62);}
   .word-pron span{color:var(--navi-sunlit-face);}
-  .word-sub{margin:1.6cqw 0 0;font-size:2.35cqw;font-weight:400;line-height:1.5;color:rgba(40,8,0,0.8);max-width:74%;}
+  .word-sub{margin:1.6cqw 0 0;font-size:3.3cqw;font-weight:500;line-height:1.4;color:rgba(40,8,0,0.86);max-width:84%;}
   .word-sub em{font-style:normal;color:var(--navi-sunlit-face);font-weight:600;}
-  .word-langs{display:flex;align-items:center;justify-content:center;gap:2.4cqw;font-size:1.5cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(40,8,0,0.5);}
+  .word-langs{display:flex;align-items:center;justify-content:center;gap:2.4cqw;font-size:2.1cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(40,8,0,0.5);}
   .word-langs .dot{opacity:0.5;}
 
   /* ── TILE 03 · Three roots (dark, wood) ── */
@@ -44,42 +44,31 @@
   .roots .synth{display:flex;align-items:center;gap:2cqw;font-size:1.45cqw;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:rgba(245,221,213,0.5);}
   .roots .synth .line{flex:1;height:1px;background:rgba(245,221,213,0.2);}
 
-  /* ── TILE 04 · The one that stuck (full-bleed photo) ── */
-  .stuck{background:#080200;}
-  .stuck img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:22% center;}
-  .stuck .fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,2,0,0) 34%,rgba(8,2,0,0.55) 58%,rgba(8,2,0,0.86) 100%);}
-  .stuck .fade-b{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,2,0,0.35) 0%,rgba(8,2,0,0) 22%,rgba(8,2,0,0) 70%,rgba(8,2,0,0.5) 100%);}
-  .stuck .pad{align-items:flex-end;text-align:right;}
-  .stuck .top-row{width:100%;}
-  .stuck .kicker{color:rgba(245,221,213,0.9);text-shadow:0 1px 10px rgba(8,2,0,0.7);}
-  .stuck blockquote{margin:0;display:flex;flex-direction:column;align-items:flex-end;gap:2.4cqw;max-width:64%;}
-  .stuck .q{margin:0;font-family:var(--ff-display);font-weight:400;font-size:5.6cqw;line-height:1.02;letter-spacing:-0.02em;color:var(--navi-first-light);}
-  .stuck .q em{font-style:normal;color:var(--navi-mid-dune);}
-  .stuck .attrib{margin:0;font-size:1.5cqw;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,221,213,0.6);}
-
-  /* ── TILE 05 · Where we come from (dark, bark) ── */
-  .origin{background:var(--navi-midnight-dune);}
-  .origin .tex{background-image:url("../brand/assets/textures/texture-knuckles.jpg");}
-  .origin .scrim{background:rgba(20,4,0,0.64);}
-  .origin .display{font-size:6.6cqw;line-height:0.98;max-width:90%;}
-  .origin .body{font-size:2.3cqw;max-width:86%;}
-  .origin .mid{display:flex;flex-direction:column;gap:3cqw;}
-  .origin .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;padding-top:2.4cqw;border-top:1px solid rgba(245,221,213,0.18);}
-  .origin .tri p{margin:0;font-size:1.7cqw;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navi-first-light);line-height:1.4;}
-  .origin .tri span{display:block;font-size:1.4cqw;font-weight:500;letter-spacing:0.04em;text-transform:none;color:rgba(245,221,213,0.55);margin-top:0.6cqw;}
-
+  /* ── TILES 04–06 · Dictionary entries: the three meanings of Navi (light) ── */
+  .def { background: var(--navi-clay-cream); color: var(--navi-midnight-dune); }
+  .def .tex { background-image: url("../brand/assets/textures/texture-knuckles-lighter.png"); opacity: 0.14; mix-blend-mode: multiply; }
+  .def .kicker { color: var(--navi-original-terracotta); }
+  .def .num { color: rgba(107,26,14,0.5); }
+  .def__entry { display: flex; flex-direction: column; gap: 2.4cqw; }
+  .def__head { display: flex; flex-direction: column; align-items: flex-start; gap: 1.6cqw; }
+  .def__word { margin: 0; font-family: var(--ff-display); font-weight: 400; font-size: 16cqw; line-height: 0.85; letter-spacing: 0.01em; color: var(--navi-blood-dune); }
+  .def__word sup { position: relative; top: -0.15em; margin-left: 0.04em; font-size: 0.36em; vertical-align: super; color: var(--navi-sunlit-face); }
+  .def__pron { margin: 0; font-size: 2.5cqw; font-weight: 600; letter-spacing: 0.04em; color: rgba(40,8,0,0.62); }
+  .def__pron b { font-weight: 700; color: var(--navi-sunlit-face); }
+  .def__rule { height: 1px; background: rgba(107,26,14,0.3); }
+  .def__sense { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.4cqw 2.6cqw; align-items: baseline; }
+  .def__n { margin: 0; font-family: var(--ff-display); font-size: 6cqw; line-height: 1; color: var(--navi-sunlit-face); }
+  .def__label { margin: 0; font-family: var(--ff-display); font-weight: 400; font-size: 6cqw; line-height: 1; color: var(--navi-blood-dune); }
+  .def__gloss { grid-column: 2; margin: 0; font-size: 3.1cqw; font-weight: 600; line-height: 1.35; color: var(--navi-midnight-dune); text-wrap: pretty; }
+  .def__note { grid-column: 2; margin: 0; font-size: 2.35cqw; line-height: 1.55; color: rgba(40,8,0,0.8); text-wrap: pretty; }
+  .def__note em { font-style: normal; font-weight: 700; color: var(--navi-sunlit-face); }
+  .def__pairs { grid-column: 2; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1cqw 3cqw; font-size: 2.45cqw; font-weight: 600; line-height: 1.35; color: var(--navi-midnight-dune); }
+  .def__pairs span { color: var(--navi-sunlit-face); }
+  .def__coda { grid-column: 2; margin: 0.6cqw 0 0; font-family: var(--ff-display); font-size: 4cqw; line-height: 1.05; color: var(--navi-sunlit-face); }
+  .def__foot { display: flex; align-items: center; gap: 2.2cqw; padding-top: 2cqw; border-top: 1px solid rgba(107,26,14,0.22); font-size: 1.5cqw; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(40,8,0,0.38); }
+  .def__foot .is-on { color: var(--navi-blood-dune); }
   /* ── TILE 07 · CTA overrides ── */
   .cta .photo > img{object-position:center 40%;}
-
-  /* ── TILE 06 · Why it matters (split photo) ── */
-  .matters .photo{flex:0 0 52%;}
-  .matters .photo > img{object-position:center 42%;}
-  .matters .photo .fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,3,0,0.34) 0%,rgba(14,3,0,0) 38%,rgba(14,3,0,0.4) 100%);}
-  .matters .body-wrap{position:relative;flex:1;padding:5.4cqw 6.6cqw;display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;background:var(--navi-midnight-dune);}
-  .matters .kicker{color:var(--navi-mid-dune);}
-  .matters .display{font-size:5cqw;line-height:1.0;}
-  .matters .body{font-size:2.15cqw;line-height:1.5;max-width:94%;color:rgba(245,221,213,0.82);}
-  .matters .body em{font-style:normal;color:var(--navi-mid-dune);}
 
 </style>
 </head>
@@ -169,59 +158,90 @@
       </div>
     </div>
 
-    <!-- TILE 04 · THE ONE THAT STUCK -->
-    <div class="tile stuck" data-label="04">
-      <img class="bg" src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY_HERO%20IMAGE.jpg" alt="An elder of Mkasanga village">
-      <div class="fade"></div>
-      <div class="fade-b"></div>
-      <div class="grain"></div>
+    <!-- TILE 04 · NAVI1 · VOICE -->
+    <div class="tile def" data-label="04">
+      <div class="tex"></div>
+      <div class="grain on-light"></div>
       <div class="pad">
         <div class="top-row">
-          <p class="kicker">The one that stuck</p>
-          <p class="num on-photo">№ 04</p>
+          <p class="kicker">What does Navi mean?</p>
+          <p class="num">№ 04</p>
         </div>
-        <blockquote>
-          <p class="q">A prophet isn't a fortune-teller. It's someone who gives <em>voice to the unseen.</em></p>
-          <p class="attrib">— what Navi means to us</p>
-        </blockquote>
+        <div class="def__entry">
+          <div class="def__head">
+            <p class="def__word">na·vi<sup>1</sup></p>
+            <p class="def__pron">/ˈnɑː·vi/ &nbsp;·&nbsp; <b>noun · from the Hebrew <span lang="he">נָבִיא</span></b></p>
+          </div>
+          <div class="def__rule"></div>
+          <div class="def__sense">
+            <p class="def__n">1</p>
+            <h2 class="def__label">Voice</h2>
+            <p class="def__gloss">One who speaks, communicates or carries a message.</p>
+            <p class="def__note">House of Navi is, at heart, a storytelling organisation. The ambition isn't to give people a voice: the communities we work with already have one. It is to create the platform, storytelling and reach that let those voices, ideas and initiatives <em>travel further.</em></p>
+          </div>
+        </div>
+        <div class="def__foot"><span class="is-on">Voice</span><span>·</span><span>Navigation</span><span>·</span><span>New beginnings</span></div>
       </div>
     </div>
 
-    <!-- TILE 05 · WHERE WE COME FROM -->
-    <div class="tile origin" data-label="05">
+    <!-- TILE 05 · NAVI2 · NAVIGATION -->
+    <div class="tile def" data-label="05">
       <div class="tex"></div>
-      <div class="scrim"></div>
-      <div class="vignette"></div>
-      <div class="grain"></div>
+      <div class="grain on-light"></div>
       <div class="pad">
         <div class="top-row">
-          <p class="kicker">Where we come from</p>
+          <p class="kicker">What does Navi mean?</p>
           <p class="num">№ 05</p>
         </div>
-        <div class="mid">
-          <h2 class="display">We come from the agency world.</h2>
-          <p class="body">Brand, film, story — the craft that makes people stop and look. We took those tools off the billboard and pointed them at <em class="hl">the work that actually matters.</em></p>
+        <div class="def__entry">
+          <div class="def__head">
+            <p class="def__word">na·vi<sup>2</sup></p>
+            <p class="def__pron">/ˈnɑː·vi/ &nbsp;·&nbsp; <b>verb · as in navigate</b></p>
+          </div>
+          <div class="def__rule"></div>
+          <div class="def__sense">
+            <p class="def__n">2</p>
+            <h2 class="def__label">Navigation</h2>
+            <p class="def__gloss">To find the way between; to help the right people find one another.</p>
+            <p class="def__note">House of Navi isn't the protagonist. It is the bridge between:</p>
+            <ul class="def__pairs">
+              <li>local initiatives <span>↔</span> global audiences</li>
+              <li>stories <span>↔</span> action</li>
+              <li>awareness <span>↔</span> funding</li>
+              <li>creatives <span>↔</span> changemakers</li>
+              <li>communities <span>↔</span> partners</li>
+              <li>people <span>↔</span> the natural world</li>
+            </ul>
+          </div>
         </div>
-        <div class="tri">
-          <p>Strategy<span>the through-line</span></p>
-          <p>Film<span>the witness</span></p>
-          <p>Design<span>the frame</span></p>
-        </div>
+        <div class="def__foot"><span>Voice</span><span>·</span><span class="is-on">Navigation</span><span>·</span><span>New beginnings</span></div>
       </div>
     </div>
 
-    <!-- TILE 06 · WHY IT MATTERS -->
-    <div class="tile split matters" data-label="06">
-      <div class="photo">
-        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg" alt="A mother and child inside the Mkasanga clinic">
-        <div class="fade"></div>
-        <p class="num on-photo">№ 06</p>
-        <p class="place">South Luangwa · Zambia</p>
-      </div>
-      <div class="body-wrap">
-        <p class="kicker">Why it matters</p>
-        <h2 class="display">The work leaves no time to be heard.</h2>
-        <p class="body">The people on the ground are consumed by what's urgent — the clinic, the rains, the next season. Telling the world rarely makes the list. So we hold the <em>magnifying glass</em> over quiet, noble work, and let it speak.</p>
+    <!-- TILE 06 · NAVI3 · NEW BEGINNINGS -->
+    <div class="tile def" data-label="06">
+      <div class="tex"></div>
+      <div class="grain on-light"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">What does Navi mean?</p>
+          <p class="num">№ 06</p>
+        </div>
+        <div class="def__entry">
+          <div class="def__head">
+            <p class="def__word">na·vi<sup>3</sup></p>
+            <p class="def__pron">/ˈnɑː·vi/ &nbsp;·&nbsp; <b>noun · newness, a beginning</b></p>
+          </div>
+          <div class="def__rule"></div>
+          <div class="def__sense">
+            <p class="def__n">3</p>
+            <h2 class="def__label">New beginnings</h2>
+            <p class="def__gloss">The next chapter of something already in motion.</p>
+            <p class="def__note">We don't arrive to create change from scratch. In Mkasanga, the community is already building its clinic. Our role is to amplify that effort and bring more people into the story, so it can be completed.</p>
+            <p class="def__coda">Hope in action, rather than charity.</p>
+          </div>
+        </div>
+        <div class="def__foot"><span>Voice</span><span>·</span><span>Navigation</span><span>·</span><span class="is-on">New beginnings</span></div>
       </div>
     </div>
 

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Navi — Parked tiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="carousel.css">
+<style>
+  /* ── TILE 04 · The one that stuck (full-bleed photo) ── */
+  .stuck{background:#080200;}
+  .stuck img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:22% center;}
+  .stuck .fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,2,0,0) 34%,rgba(8,2,0,0.55) 58%,rgba(8,2,0,0.86) 100%);}
+  .stuck .fade-b{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,2,0,0.35) 0%,rgba(8,2,0,0) 22%,rgba(8,2,0,0) 70%,rgba(8,2,0,0.5) 100%);}
+  .stuck .pad{align-items:flex-end;text-align:right;}
+  .stuck .top-row{width:100%;}
+  .stuck .kicker{color:rgba(245,221,213,0.9);text-shadow:0 1px 10px rgba(8,2,0,0.7);}
+  .stuck blockquote{margin:0;display:flex;flex-direction:column;align-items:flex-end;gap:2.4cqw;max-width:64%;}
+  .stuck .q{margin:0;font-family:var(--ff-display);font-weight:400;font-size:5.6cqw;line-height:1.02;letter-spacing:-0.02em;color:var(--navi-first-light);}
+  .stuck .q em{font-style:normal;color:var(--navi-mid-dune);}
+  .stuck .attrib{margin:0;font-size:1.5cqw;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:rgba(245,221,213,0.6);}
+
+  /* ── TILE 05 · Where we come from (dark, bark) ── */
+  .origin{background:var(--navi-midnight-dune);}
+  .origin .tex{background-image:url("../brand/assets/textures/texture-knuckles.jpg");}
+  .origin .scrim{background:rgba(20,4,0,0.64);}
+  .origin .display{font-size:6.6cqw;line-height:0.98;max-width:90%;}
+  .origin .body{font-size:2.3cqw;max-width:86%;}
+  .origin .mid{display:flex;flex-direction:column;gap:3cqw;}
+  .origin .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:3cqw;padding-top:2.4cqw;border-top:1px solid rgba(245,221,213,0.18);}
+  .origin .tri p{margin:0;font-size:1.7cqw;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--navi-first-light);line-height:1.4;}
+  .origin .tri span{display:block;font-size:1.4cqw;font-weight:500;letter-spacing:0.04em;text-transform:none;color:rgba(245,221,213,0.55);margin-top:0.6cqw;}
+
+  /* ── TILE 06 · Why it matters (split photo) ── */
+  .matters .photo{flex:0 0 52%;}
+  .matters .photo > img{object-position:center 42%;}
+  .matters .photo .fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,3,0,0.34) 0%,rgba(14,3,0,0) 38%,rgba(14,3,0,0.4) 100%);}
+  .matters .body-wrap{position:relative;flex:1;padding:5.4cqw 6.6cqw;display:flex;flex-direction:column;justify-content:center;gap:2.2cqw;background:var(--navi-midnight-dune);}
+  .matters .kicker{color:var(--navi-mid-dune);}
+  .matters .display{font-size:5cqw;line-height:1.0;}
+  .matters .body{font-size:2.15cqw;line-height:1.5;max-width:94%;color:rgba(245,221,213,0.82);}
+  .matters .body em{font-style:normal;color:var(--navi-mid-dune);}
+
+</style>
+</head>
+<body>
+
+  <div class="meta-bar">
+    <p class="eyebrow-x accent">Parked tiles · for a future campaign</p>
+    <p class="eyebrow-x mute">From Campaign 02 · three tiles</p>
+  </div>
+
+  <div class="strip" id="strip">
+
+    <!-- TILE 04 · THE ONE THAT STUCK -->
+    <div class="tile stuck" data-label="01">
+      <img class="bg" src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY_HERO%20IMAGE.jpg" alt="An elder of Mkasanga village">
+      <div class="fade"></div>
+      <div class="fade-b"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">The one that stuck</p>
+          <p class="num on-photo">Parked · from 02</p>
+        </div>
+        <blockquote>
+          <p class="q">A prophet isn't a fortune-teller. It's someone who gives <em>voice to the unseen.</em></p>
+          <p class="attrib">— what Navi means to us</p>
+        </blockquote>
+      </div>
+    </div>
+
+    <!-- TILE 05 · WHERE WE COME FROM -->
+    <div class="tile origin" data-label="02">
+      <div class="tex"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">Where we come from</p>
+          <p class="num">Parked · from 02</p>
+        </div>
+        <div class="mid">
+          <h2 class="display">We come from the agency world.</h2>
+          <p class="body">Brand, film, story — the craft that makes people stop and look. We took those tools off the billboard and pointed them at <em class="hl">the work that actually matters.</em></p>
+        </div>
+        <div class="tri">
+          <p>Strategy<span>the through-line</span></p>
+          <p>Film<span>the witness</span></p>
+          <p>Design<span>the frame</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TILE 06 · WHY IT MATTERS -->
+    <div class="tile split matters" data-label="03">
+      <div class="photo">
+        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-12.jpg" alt="A mother and child inside the Mkasanga clinic">
+        <div class="fade"></div>
+        <p class="num on-photo">Parked · from 02</p>
+        <p class="place">South Luangwa · Zambia</p>
+      </div>
+      <div class="body-wrap">
+        <p class="kicker">Why it matters</p>
+        <h2 class="display">The work leaves no time to be heard.</h2>
+        <p class="body">The people on the ground are consumed by what's urgent — the clinic, the rains, the next season. Telling the world rarely makes the list. So we hold the <em>magnifying glass</em> over quiet, noble work, and let it speak.</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="nav-btns">
+      <button type="button" id="prev" aria-label="Previous tile">←</button>
+      <button type="button" id="next" aria-label="Next tile">→</button>
+    </div>
+    <div class="dots" id="dots"></div>
+    <p class="counter" id="counter">01 / 03</p>
+  </div>
+
+  <div class="meta-bar">
+    <a class="eyebrow-x mute" href="carousel-02.html">← Campaign 02</a>
+    <a class="eyebrow-x mute" href="index.html">All social content →</a>
+  </div>
+
+<script src="carousel.js"></script>
+</body>
+</html>

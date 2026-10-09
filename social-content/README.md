@@ -15,6 +15,7 @@ This folder lives in GitHub for internal review only. It is listed in
 | `dashboard.css` / `dashboard.js` | Dashboard styles and behaviour |
 | `carousel-01.html` | Campaign 01 · Introduction (5 tiles) |
 | `carousel-02.html` | Campaign 02 · The Name (7 tiles) |
+| `parked.html` | Tiles taken out of a campaign, kept for a future one |
 | `carousel.css` / `carousel.js` | Shared tile styles and swipe controls |
 
 ## Viewing locally

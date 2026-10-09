@@ -262,7 +262,7 @@
       "id": "c02",
       "stage": "ideas",
       "title": "Campaign 02 · The Name",
-      "angle": "What \"Navi\" means — three roots, one promise.",
+      "angle": "What \"Navi\" means: the word, its three roots, and three dictionary entries.",
       "page": "carousel-02.html",
       "date": "",
       "notes": "",
@@ -286,6 +286,53 @@
           "body": "Prophet. New. Of the land. Speak — renew — belong."
         },
         {
+          "layout": "definition",
+          "sense": 1,
+          "kicker": "noun · from the Hebrew נָבִיא",
+          "headline": "Voice",
+          "gloss": "One who speaks, communicates or carries a message.",
+          "body": "House of Navi is, at heart, a storytelling organisation. The ambition isn't to give people a voice: the communities we work with already have one. It is to create the platform, storytelling and reach that let those voices, ideas and initiatives travel further.",
+          "closing": "",
+          "image": "brand/assets/textures/texture-knuckles-lighter.png"
+        },
+        {
+          "layout": "definition",
+          "sense": 2,
+          "kicker": "verb · as in navigate",
+          "headline": "Navigation",
+          "gloss": "To find the way between; to help the right people find one another.",
+          "body": "House of Navi isn't the protagonist. It is the bridge between:\n- local initiatives ↔ global audiences\n- stories ↔ action\n- awareness ↔ funding\n- creatives ↔ changemakers\n- communities ↔ partners\n- people ↔ the natural world",
+          "closing": "",
+          "image": "brand/assets/textures/texture-knuckles-lighter.png"
+        },
+        {
+          "layout": "definition",
+          "sense": 3,
+          "kicker": "noun · newness, a beginning",
+          "headline": "New beginnings",
+          "gloss": "The next chapter of something already in motion.",
+          "body": "We don't arrive to create change from scratch. In Mkasanga, the community is already building its clinic. Our role is to amplify that effort and bring more people into the story, so it can be completed.",
+          "closing": "Hope in action, rather than charity.",
+          "image": "brand/assets/textures/texture-knuckles-lighter.png"
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-24.jpg",
+          "kicker": "Walk with us",
+          "headline": "Hold the light with us.",
+          "body": "Follow the stories, share the work, or help fund the people doing it. Every bit of attention is a spotlight."
+        }
+      ]
+    },
+    {
+      "id": "parked",
+      "stage": "ideas",
+      "title": "Parked tiles · for a future campaign",
+      "angle": "Taken out of Campaign 02, kept to reuse later.",
+      "page": "parked.html",
+      "date": "",
+      "notes": "",
+      "tiles": [
+        {
           "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY_HERO IMAGE.jpg",
           "kicker": "The one that stuck",
           "headline": "A prophet isn't a fortune-teller. It's someone who gives voice to the unseen.",
@@ -302,12 +349,6 @@
           "kicker": "Why it matters",
           "headline": "The work leaves no time to be heard.",
           "body": "The people on the ground are consumed by what's urgent — the clinic, the rains, the next season. Telling the world rarely makes the list. So we hold the magnifying glass over quiet, noble work, and let it speak."
-        },
-        {
-          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-24.jpg",
-          "kicker": "Walk with us",
-          "headline": "Hold the light with us.",
-          "body": "Follow the stories, share the work, or help fund the people doing it. Every bit of attention is a spotlight."
         }
       ]
     }
