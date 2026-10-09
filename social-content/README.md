@@ -9,7 +9,10 @@ This folder lives in GitHub for internal review only. It is listed in
 
 | File | What it is |
 |---|---|
-| `index.html` | List of all carousels |
+| `index.html` | List of all carousels and the dashboard |
+| `dashboard.html` | Content pipeline board: Ideas → Approved → Scheduled content |
+| `pipeline.json` | The board's data: every card, its stage, and the copy and image per tile |
+| `dashboard.css` / `dashboard.js` | Dashboard styles and behaviour |
 | `carousel-01.html` | Campaign 01 · Introduction (5 tiles) |
 | `carousel-02.html` | Campaign 02 · The Name (7 tiles) |
 | `carousel.css` / `carousel.js` | Shared tile styles and swipe controls |
@@ -23,6 +26,15 @@ python3 -m http.server 8001
 ```
 
 Then open `http://localhost:8001/social-content/`.
+
+## Content pipeline dashboard
+
+Open `http://localhost:8001/social-content/dashboard.html`.
+
+- Cards move left to right through **1. Ideas**, **2. Approved** and **3. Scheduled content**, by dragging or with the move buttons.
+- **Edit** on a card opens a panel to change the title, angle, posting date, board sign-off and feedback for Claude, and the image, kicker, headline and body of every tile.
+- Edits are saved in your browser only. To keep them, click **Download pipeline.json** and give the file to Claude, who replaces `social-content/pipeline.json` in the repo and applies the changes to the carousel pages.
+- **Reset to repo version** throws away your browser's changes.
 
 ## Rules
 

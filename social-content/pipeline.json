@@ -1,0 +1,314 @@
+{
+  "version": 1,
+  "stages": [
+    {
+      "id": "ideas",
+      "name": "Ideas",
+      "no": "1"
+    },
+    {
+      "id": "approved",
+      "name": "Approved",
+      "no": "2"
+    },
+    {
+      "id": "scheduled",
+      "name": "Scheduled content",
+      "no": "3"
+    }
+  ],
+  "images": [
+    {
+      "label": "No image (cream ground)",
+      "src": ""
+    },
+    {
+      "label": "Mkasanga · DRONE MKASANGA",
+      "src": "MKASANGA PICS/DRONE MKASANGA.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 1",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-1.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 2",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-2.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 4",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-4.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 5",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-5.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 6",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-6.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 7",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-7.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 8",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-8.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 9",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-9.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 10",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-10.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 11",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-11.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 12",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-12.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 13",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-13.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 14",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-14.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 15",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-15.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 16",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-16.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 17",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-17.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 18",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-18.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 19",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-19.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 20",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-20.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 21",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-21.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 22",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-22.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 23",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-23.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 24",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-24.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 25",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-25.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 26",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-26.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 27",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-27.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 28",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-28.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 29",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-29.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 30",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-30.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 31",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-31.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 32",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-32.jpg"
+    },
+    {
+      "label": "Mkasanga · Community 33",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-33.jpg"
+    },
+    {
+      "label": "Mkasanga · Community HERO IMAGE",
+      "src": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY_HERO IMAGE.jpg"
+    },
+    {
+      "label": "Texture · HANND TEXTURE",
+      "src": "brand/assets/textures/HANND TEXTURE.png"
+    },
+    {
+      "label": "Texture · TEXTURE WOOD",
+      "src": "brand/assets/textures/TEXTURE WOOD.png"
+    },
+    {
+      "label": "Texture · dried_river",
+      "src": "brand/assets/textures/dried_river.png"
+    },
+    {
+      "label": "Texture · texture-croc",
+      "src": "brand/assets/textures/texture-croc.png"
+    },
+    {
+      "label": "Texture · texture-dry-landscape",
+      "src": "brand/assets/textures/texture-dry-landscape.png"
+    },
+    {
+      "label": "Texture · texture-elephant-warm-light",
+      "src": "brand/assets/textures/texture-elephant-warm-light.jpg"
+    },
+    {
+      "label": "Texture · texture-elephant-warm",
+      "src": "brand/assets/textures/texture-elephant-warm.jpg"
+    },
+    {
+      "label": "Texture · texture-footsteps-sand-2",
+      "src": "brand/assets/textures/texture-footsteps-sand-2.png"
+    },
+    {
+      "label": "Texture · texture-footsteps-sand-old",
+      "src": "brand/assets/textures/texture-footsteps-sand-old.png"
+    },
+    {
+      "label": "Texture · texture-footsteps-sand",
+      "src": "brand/assets/textures/texture-footsteps-sand.png"
+    },
+    {
+      "label": "Texture · texture-knuckles-lighter",
+      "src": "brand/assets/textures/texture-knuckles-lighter.png"
+    },
+    {
+      "label": "Texture · texture-knuckles",
+      "src": "brand/assets/textures/texture-knuckles.jpg"
+    },
+    {
+      "label": "Texture · texture-terracotta",
+      "src": "brand/assets/textures/texture-terracotta.png"
+    },
+    {
+      "label": "Texture · texture-tree-water",
+      "src": "brand/assets/textures/texture-tree-water.png"
+    }
+  ],
+  "cards": [
+    {
+      "id": "c01",
+      "stage": "ideas",
+      "title": "Campaign 01 · Introduction",
+      "angle": "Who House of Navi is, and the first project we walk with.",
+      "page": "carousel-01.html",
+      "date": "",
+      "notes": "",
+      "tiles": [
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY_HERO IMAGE.jpg",
+          "kicker": "A spotlight · not a solution",
+          "headline": "Stories can change the world.",
+          "body": ""
+        },
+        {
+          "image": "brand/assets/textures/texture-terracotta.png",
+          "kicker": "Who we are",
+          "headline": "A small house for big stories.",
+          "body": "House of Navi is a South African non-profit. We shine a light on initiatives already creating change — and connect them to the people who want to carry them further."
+        },
+        {
+          "image": "",
+          "kicker": "Why it matters",
+          "headline": "The world does not need more noise. It needs deeper connection.",
+          "body": "We don't lead with statistics. We lead with the people on the ground, and the work already in motion — and we let the rest of the world catch up."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-14.jpg",
+          "kicker": "№ 01 · Healthcare",
+          "headline": "Mkasanga Community Clinic",
+          "body": "Six to eight hours from the nearest hospital. Cut off entirely during the rains. Already half-built by the people who need it."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-26.jpg",
+          "kicker": "Get involved",
+          "headline": "Walk with us.",
+          "body": "Support a project, partner with us, or simply pass the story on."
+        }
+      ]
+    },
+    {
+      "id": "c02",
+      "stage": "ideas",
+      "title": "Campaign 02 · The Name",
+      "angle": "What \"Navi\" means — three roots, one promise.",
+      "page": "carousel-02.html",
+      "date": "",
+      "notes": "",
+      "tiles": [
+        {
+          "image": "brand/assets/textures/texture-footsteps-sand.png",
+          "kicker": "A name is a promise",
+          "headline": "Every name carries a story.",
+          "body": "Ours carries three."
+        },
+        {
+          "image": "",
+          "kicker": "The word",
+          "headline": "Navi",
+          "body": "Three languages, one quiet instruction — speak for those who go unheard."
+        },
+        {
+          "image": "brand/assets/textures/TEXTURE WOOD.png",
+          "kicker": "Three roots",
+          "headline": "Hebrew · Sanskrit · Na'vi",
+          "body": "Prophet. New. Of the land. Speak — renew — belong."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY_HERO IMAGE.jpg",
+          "kicker": "The one that stuck",
+          "headline": "A prophet isn't a fortune-teller. It's someone who gives voice to the unseen.",
+          "body": "— what Navi means to us"
+        },
+        {
+          "image": "brand/assets/textures/texture-knuckles.jpg",
+          "kicker": "Where we come from",
+          "headline": "We come from the agency world.",
+          "body": "Brand, film, story — the craft that makes people stop and look. We took those tools off the billboard and pointed them at the work that actually matters."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-12.jpg",
+          "kicker": "Why it matters",
+          "headline": "The work leaves no time to be heard.",
+          "body": "The people on the ground are consumed by what's urgent — the clinic, the rains, the next season. Telling the world rarely makes the list. So we hold the magnifying glass over quiet, noble work, and let it speak."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-24.jpg",
+          "kicker": "Walk with us",
+          "headline": "Hold the light with us.",
+          "body": "Follow the stories, share the work, or help fund the people doing it. Every bit of attention is a spotlight."
+        }
+      ]
+    }
+  ]
+}
