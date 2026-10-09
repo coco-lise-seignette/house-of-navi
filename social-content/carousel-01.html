@@ -29,23 +29,20 @@
   .who .tri { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3cqw; }
   .who .tri p { margin: 0; font-size: 1.7cqw; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--navi-first-light); line-height: 1.4; }
 
-  /* ── TILE 03 · The quote (light) ── */
-  .quote { background: var(--navi-clay-cream); }
-  .quote .grain.on-light { opacity: 0.08; }
-  .quote blockquote { margin: 0; display: flex; flex-direction: column; gap: 3cqw; }
-  .quote .q { margin: 0; font-family: var(--ff-display); font-weight: 400; font-size: 7cqw; line-height: 1.0; letter-spacing: -0.02em; color: var(--navi-blood-dune); text-wrap: pretty; }
-  .quote .q em { font-style: normal; color: var(--navi-sunlit-face); }
-  .quote .qbody { margin: 0; font-size: 2.3cqw; font-weight: 400; line-height: 1.55; color: rgba(40,8,0,0.78); max-width: 82%; text-wrap: pretty; }
-  .quote .sign { display: flex; flex-direction: column; gap: 1.8cqw; }
-  .quote .sign .rule { width: 14cqw; height: 1px; background: rgba(107,26,14,0.35); }
-  .quote .sign p { margin: 0; font-family: var(--ff-script); font-size: 3.2cqw; color: var(--navi-blood-dune); }
+  /* ── TILE 03 · We are House of Navi (logo statement) ── */
+  .we-are { background: var(--navi-midnight-dune); }
+  .we-are .tex { background-image: url("../brand/assets/textures/texture-knuckles.jpg"); }
+  .we-are .scrim { background: rgba(20,4,0,0.66); }
+  .we-are__lockup { display: flex; flex-direction: column; align-items: center; gap: 3.4cqw; }
+  .we-are__lead { margin: 0; font-family: var(--ff-display); font-weight: 400; font-size: 9cqw; line-height: 0.9; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navi-first-light); }
+  .we-are__logo { width: 62cqw; height: auto; }
 
   /* ── TILE 04 · Project (split photo) ── */
   .project .photo { flex: 0 0 56%; }
   .project .photo > img { object-position: center 58%; }
   .project .photo .fade { background: linear-gradient(180deg, rgba(14,3,0,0.32) 0%, rgba(14,3,0,0) 40%, rgba(14,3,0,0.35) 100%); }
   .project .body-wrap { position: relative; flex: 1; padding: 5.6cqw 6.6cqw; display: flex; flex-direction: column; justify-content: center; gap: 2.2cqw; background: var(--navi-midnight-dune); }
-  .project .meta { display: flex; align-items: center; gap: 1.6cqw; font-size: 1.4cqw; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--navi-mid-dune); }
+  .project .meta { display: flex; align-items: center; gap: 1.6cqw; font-size: 1.4cqw; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--navi-first-light); }
   .project .meta .line { display: block; width: 5cqw; height: 1px; background: rgba(217,144,122,0.45); }
   .project .display { font-size: 5.4cqw; line-height: 1.0; text-wrap: wrap; }
   .project .body { font-size: 2.2cqw; line-height: 1.5; max-width: 92%; color: rgba(245,221,213,0.82); }
@@ -113,22 +110,22 @@
       </div>
     </div>
 
-    <!-- TILE 03 · THE QUOTE -->
-    <div class="tile quote" data-label="03">
-      <div class="grain on-light"></div>
+    <!-- TILE 03 · WE ARE HOUSE OF NAVI -->
+    <div class="tile we-are" data-label="03">
+      <div class="tex"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
       <div class="pad">
         <div class="top-row">
-          <p class="kicker dark">Why it matters</p>
-          <p class="num dark">№ 03</p>
+          <span></span>
+          <p class="num">№ 03</p>
         </div>
-        <blockquote>
-          <p class="q">The world does not need more noise. <em>It needs deeper connection.</em></p>
-          <p class="qbody">We don't lead with statistics. We lead with the people on the ground, and the work already in motion — and we let the rest of the world catch up.</p>
-        </blockquote>
-        <div class="sign">
-          <div class="rule"></div>
-          <p>— the House of Navi team</p>
+        <div class="we-are__lockup">
+          <p class="we-are__lead">We are</p>
+          <img class="we-are__logo" src="../brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi">
         </div>
+        <span></span>
       </div>
     </div>
 

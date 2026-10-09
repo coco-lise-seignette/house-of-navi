@@ -238,10 +238,11 @@
           "body": "House of Navi is a South African non-profit. We shine a light on initiatives already creating change — and connect them to the people who want to carry them further."
         },
         {
-          "image": "",
-          "kicker": "Why it matters",
-          "headline": "The world does not need more noise. It needs deeper connection.",
-          "body": "We don't lead with statistics. We lead with the people on the ground, and the work already in motion — and we let the rest of the world catch up."
+          "layout": "logo",
+          "image": "brand/assets/textures/texture-knuckles.jpg",
+          "kicker": "",
+          "headline": "We are",
+          "body": ""
         },
         {
           "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-14.jpg",
