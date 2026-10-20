@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Navi — Carousel 04 · Walk with us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="carousel.css">
+<style>
+  /* Shared: full-bleed photo with a warm fade towards the copy */
+  .photo-tile img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .photo-tile .fade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,3,0,0.5) 0%, rgba(14,3,0,0.08) 34%, rgba(14,3,0,0.55) 60%, rgba(14,3,0,0.92) 100%); }
+
+  /* ── TILE 01 · Walk with us ── */
+  .walk img.bg { object-position: center 40%; }
+  .walk .logo { height: 7cqw; }
+  .walk .stack-btm { display: flex; flex-direction: column; gap: 2.8cqw; }
+  .walk .display { font-size: 17cqw; line-height: 0.86; text-transform: uppercase; letter-spacing: 0.01em; }
+  .walk .sub { margin: 0; font-family: var(--ff-display); font-size: 6cqw; line-height: 1; color: var(--navi-mid-dune); }
+
+  /* ── TILES 02–04 · Three ways in ── */
+  .way .stack-btm { display: flex; flex-direction: column; gap: 2.6cqw; }
+  .way__numeral { margin: 0 0 -1cqw; font-family: var(--ff-display); font-size: 7cqw; line-height: 1; color: var(--navi-mid-dune); }
+  .way .display { font-size: 12cqw; line-height: 0.9; }
+  .way .body { font-size: 3.4cqw; line-height: 1.4; max-width: 86%; color: rgba(245,221,213,0.92); }
+  .way__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 2.2cqw; margin-top: 1.6cqw; padding-top: 2.2cqw; border-top: 1px solid rgba(245,221,213,0.22); font-size: 1.5cqw; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(245,221,213,0.42); }
+  .way__foot .is-on { color: var(--navi-first-light); }
+  .donate img.bg { object-position: center 45%; }
+  .partner img.bg { object-position: center 35%; }
+  .share img.bg { object-position: 70% 30%; }
+
+  /* ── TILE 05 · The logo ── */
+  .mark { background: var(--navi-midnight-dune); }
+  .mark .tex { background-image: url("../brand/assets/textures/texture-terracotta.png"); }
+  .mark .scrim { background: rgba(20,4,0,0.5); }
+  .mark .pad { align-items: center; justify-content: center; }
+  .mark .big-logo { width: 72cqw; height: auto; }
+</style>
+</head>
+<body>
+
+  <div class="meta-bar">
+    <p class="eyebrow-x accent">Campaign 04 · Walk with us</p>
+    <p class="eyebrow-x mute">1080 × 1080 · five tiles</p>
+  </div>
+
+  <div class="strip" id="strip">
+
+    <!-- TILE 01 · WALK WITH US -->
+    <div class="tile photo-tile walk" data-label="01">
+      <img class="bg" src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-28.jpg" alt="Mothers and children of Mkasanga gathered together">
+      <div class="fade"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <img class="logo" src="../brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi">
+          <p class="num on-photo">№ 01</p>
+        </div>
+        <div class="stack-btm">
+          <h1 class="display">Walk with us</h1>
+          <p class="sub">So how can you help us?</p>
+          <p class="hint">Swipe →</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TILE 02 · I · DONATE -->
+    <div class="tile photo-tile way donate" data-label="02">
+      <img class="bg" src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-16.jpg" alt="Inside the Mkasanga clinic while it is being built">
+      <div class="fade"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">Walk with us</p>
+          <p class="num on-photo">№ 02</p>
+        </div>
+        <div class="stack-btm">
+          <p class="way__numeral">I</p>
+          <h2 class="display">Donate</h2>
+          <p class="body">Help fund active projects, documentary storytelling and <em class="hl">community-led initiatives.</em></p>
+          <div class="way__foot"><span class="is-on">Donate</span><span>·</span><span>Partner</span><span>·</span><span>Share the story</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TILE 03 · II · BECOME A PARTNER -->
+    <div class="tile photo-tile way partner" data-label="03">
+      <img class="bg" src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-15.jpg" alt="A Mkasanga elder and a visitor side by side">
+      <div class="fade"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">Walk with us</p>
+          <p class="num on-photo">№ 03</p>
+        </div>
+        <div class="stack-btm">
+          <p class="way__numeral">II</p>
+          <h2 class="display">Become a partner</h2>
+          <p class="body">Collaborate as a brand, organisation, foundation, creative partner or <em class="hl">long-term supporter.</em></p>
+          <div class="way__foot"><span>Donate</span><span>·</span><span class="is-on">Partner</span><span>·</span><span>Share the story</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TILE 04 · III · SHARE THE STORY -->
+    <div class="tile photo-tile way share" data-label="04">
+      <img class="bg" src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-24.jpg" alt="Schoolchildren in Mkasanga laughing together">
+      <div class="fade"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker">Walk with us</p>
+          <p class="num on-photo">№ 04</p>
+        </div>
+        <div class="stack-btm">
+          <p class="way__numeral">III</p>
+          <h2 class="display">Share the story</h2>
+          <p class="body">Awareness matters. Sometimes sharing a story is <em class="hl">the thing that changes everything.</em></p>
+          <div class="way__foot"><span>Donate</span><span>·</span><span>Partner</span><span>·</span><span class="is-on">Share the story</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TILE 05 · THE LOGO -->
+    <div class="tile mark" data-label="05">
+      <div class="tex"></div>
+      <div class="scrim"></div>
+      <div class="vignette"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <img class="big-logo" src="../brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <div class="nav-btns">
+      <button type="button" id="prev" aria-label="Previous tile">←</button>
+      <button type="button" id="next" aria-label="Next tile">→</button>
+    </div>
+    <div class="dots" id="dots"></div>
+    <p class="counter" id="counter">01 / 05</p>
+  </div>
+
+  <div class="meta-bar">
+    <a class="eyebrow-x mute" href="carousel-03.html">← Campaign 03</a>
+    <a class="eyebrow-x mute" href="index.html">All social content →</a>
+  </div>
+
+<script src="carousel.js"></script>
+</body>
+</html>

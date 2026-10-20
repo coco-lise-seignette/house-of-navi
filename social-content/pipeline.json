@@ -353,6 +353,48 @@
       ]
     },
     {
+      "id": "c04",
+      "stage": "ideas",
+      "title": "Campaign 04 · Walk with us",
+      "angle": "Three ways to help: donate, partner, share the story.",
+      "page": "carousel-04.html",
+      "date": "",
+      "notes": "",
+      "tiles": [
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-28.jpg",
+          "kicker": "",
+          "headline": "Walk with us",
+          "body": "So how can you help us?"
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-16.jpg",
+          "kicker": "I · Walk with us",
+          "headline": "Donate",
+          "body": "Help fund active projects, documentary storytelling and community-led initiatives."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-15.jpg",
+          "kicker": "II · Walk with us",
+          "headline": "Become a partner",
+          "body": "Collaborate as a brand, organisation, foundation, creative partner or long-term supporter."
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-24.jpg",
+          "kicker": "III · Walk with us",
+          "headline": "Share the story",
+          "body": "Awareness matters. Sometimes sharing a story is the thing that changes everything."
+        },
+        {
+          "layout": "logo",
+          "image": "brand/assets/textures/texture-terracotta.png",
+          "kicker": "",
+          "headline": "",
+          "body": ""
+        }
+      ]
+    },
+    {
       "id": "parked",
       "stage": "ideas",
       "title": "Parked tiles · for a future campaign",

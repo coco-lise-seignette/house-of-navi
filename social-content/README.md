@@ -16,6 +16,7 @@ This folder lives in GitHub for internal review only. It is listed in
 | `carousel-01.html` | Campaign 01 · Introduction (5 tiles) |
 | `carousel-02.html` | Campaign 02 · The Name (7 tiles) |
 | `carousel-03.html` | Campaign 03 · Why are we here? (3 tiles) |
+| `carousel-04.html` | Campaign 04 · Walk with us (5 tiles) |
 | `parked.html` | Tiles taken out of a campaign, kept for a future one |
 | `carousel.css` / `carousel.js` | Shared tile styles and swipe controls |
 
