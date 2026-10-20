@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House of Navi — Carousel 03 · Why are we here?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Baloo+2:wght@400;500;600;700;800&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="carousel.css">
+<style>
+  /* ── TILE 01 · Why are we here? (drone photo, big type) ── */
+  .why { background: var(--navi-near-black); }
+  .why img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
+  .why .scrim { background: rgba(20,4,0,0.58); }
+  .why .fade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,3,0,0.45) 0%, rgba(14,3,0,0.05) 40%, rgba(14,3,0,0.7) 100%); }
+  .why .logo { height: 7cqw; }
+  .why .stack-btm { display: flex; flex-direction: column; gap: 3cqw; }
+  .why .display { font-size: 15cqw; line-height: 0.88; max-width: 90%; text-wrap: balance; }
+
+  /* ── TILE 02 · The problem (split photo) ── */
+  .problem .photo { flex: 0 0 50%; }
+  .problem .photo > img { object-position: center 55%; }
+  .problem .photo .fade { background: linear-gradient(180deg, rgba(14,3,0,0.34) 0%, rgba(14,3,0,0) 38%, rgba(14,3,0,0.42) 100%); }
+  .problem .body-wrap { position: relative; flex: 1; padding: 5cqw 6.6cqw; display: flex; flex-direction: column; justify-content: center; gap: 2.2cqw; background: var(--navi-midnight-dune); }
+  .problem .display { font-size: 5.6cqw; line-height: 1; }
+  .problem .body { font-size: 2.55cqw; line-height: 1.5; max-width: 96%; color: rgba(245,221,213,0.86); }
+
+  /* ── TILE 03 · This is where we come in (cream, service grid) ── */
+  .comein { background: var(--navi-clay-cream); color: var(--navi-midnight-dune); }
+  .comein .tex { background-image: url("../brand/assets/textures/texture-knuckles.jpg"); opacity: 0.14; mix-blend-mode: multiply; }
+  .comein .num { color: rgba(107,26,14,0.5); }
+  .comein .mid { display: flex; flex-direction: column; gap: 2.6cqw; }
+  .comein .display { font-size: 7.4cqw; line-height: 0.95; color: var(--navi-blood-dune); }
+  .comein .lead { margin: 0; font-size: 2.7cqw; line-height: 1.5; color: rgba(40,8,0,0.82); max-width: 92%; text-wrap: pretty; }
+  .comein .lead em { font-style: normal; font-weight: 700; color: var(--navi-sunlit-face); }
+  .services { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4cqw 4cqw; margin: 0; padding: 2.6cqw 0 0; list-style: none; border-top: 1px solid rgba(107,26,14,0.25); }
+  .services li { display: flex; align-items: center; gap: 2.2cqw; font-family: var(--ff-display); font-size: 3.6cqw; line-height: 1.05; color: var(--navi-blood-dune); }
+  .services img { width: 8cqw; height: 8cqw; flex: none; }
+  .comein .foot { display: flex; justify-content: space-between; gap: 2cqw; font-size: 1.4cqw; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(40,8,0,0.45); }
+</style>
+</head>
+<body>
+
+  <div class="meta-bar">
+    <p class="eyebrow-x accent">Campaign 03 · Why are we here?</p>
+    <p class="eyebrow-x mute">1080 × 1080 · three tiles</p>
+  </div>
+
+  <div class="strip" id="strip">
+
+    <!-- TILE 01 · WHY ARE WE HERE? -->
+    <div class="tile why" data-label="01">
+      <img class="bg" src="../MKASANGA%20PICS/DRONE%20MKASANGA.jpg" alt="Aerial view of Mkasanga village and the bush around it">
+      <div class="scrim"></div>
+      <div class="fade"></div>
+      <div class="grain"></div>
+      <div class="pad">
+        <div class="top-row">
+          <img class="logo" src="../brand/assets/logos/logo-navi-firstlight.png" alt="House of Navi">
+          <p class="num on-photo">№ 01</p>
+        </div>
+        <div class="stack-btm">
+          <h1 class="display">Why are we here?</h1>
+          <p class="hint">Swipe →</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TILE 02 · THE PROBLEM -->
+    <div class="tile split problem" data-label="02">
+      <div class="photo">
+        <img src="../MKASANGA%20PICS/LION%20CAMP_MKASAGA%20VILLAGE_COMMUNITY-17.jpg" alt="The half-built Mkasanga clinic, brick walls and a new roof">
+        <div class="fade"></div>
+        <p class="num on-photo">№ 02</p>
+        <p class="place">Mkasanga clinic · South Luangwa</p>
+      </div>
+      <div class="body-wrap">
+        <p class="kicker">The problem</p>
+        <h2 class="display">People tackling problems bigger than themselves.</h2>
+        <p class="body">With hard work and limited resources, they build solutions for their communities. It's difficult, and it leaves little time to share their stories with the world. Yet in today's digital world, that is essential to <em class="hl">gather the support and resources</em> needed to keep making an impact.</p>
+      </div>
+    </div>
+
+    <!-- TILE 03 · THIS IS WHERE WE COME IN -->
+    <div class="tile comein" data-label="03">
+      <div class="tex"></div>
+      <div class="grain on-light"></div>
+      <div class="pad">
+        <div class="top-row">
+          <p class="kicker dark">This is where we come in</p>
+          <p class="num">№ 03</p>
+        </div>
+        <div class="mid">
+          <h2 class="display">From awareness to change.</h2>
+          <p class="lead">We use skills learned in the agency world to support communities and campaigns <em>already creating change.</em> We help turn awareness into change through:</p>
+          <ul class="services">
+            <li><img src="../brand/assets/icons/icon-eye.svg" alt="">Documentary &amp; film</li>
+            <li><img src="../brand/assets/icons/icon-sun.svg" alt="">Awareness campaigns</li>
+            <li><img src="../brand/assets/icons/icon-community.svg" alt="">Community partnerships</li>
+            <li><img src="../brand/assets/icons/icon-seed.svg" alt="">Fundraising &amp; activation</li>
+          </ul>
+        </div>
+        <div class="foot">
+          <span>Stories first · funding follows</span>
+          <span>houseofnavi.com</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="controls">
+    <div class="nav-btns">
+      <button type="button" id="prev" aria-label="Previous tile">←</button>
+      <button type="button" id="next" aria-label="Next tile">→</button>
+    </div>
+    <div class="dots" id="dots"></div>
+    <p class="counter" id="counter">01 / 03</p>
+  </div>
+
+  <div class="meta-bar">
+    <a class="eyebrow-x mute" href="carousel-02.html">← Campaign 02</a>
+    <a class="eyebrow-x mute" href="index.html">All social content →</a>
+  </div>
+
+<script src="carousel.js"></script>
+</body>
+</html>

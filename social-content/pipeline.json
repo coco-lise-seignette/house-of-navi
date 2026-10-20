@@ -324,6 +324,35 @@
       ]
     },
     {
+      "id": "c03",
+      "stage": "ideas",
+      "title": "Campaign 03 · Why are we here?",
+      "angle": "The problem House of Navi exists to solve, and how we help.",
+      "page": "carousel-03.html",
+      "date": "",
+      "notes": "",
+      "tiles": [
+        {
+          "image": "MKASANGA PICS/DRONE MKASANGA.jpg",
+          "kicker": "",
+          "headline": "Why are we here?",
+          "body": ""
+        },
+        {
+          "image": "MKASANGA PICS/LION CAMP_MKASAGA VILLAGE_COMMUNITY-17.jpg",
+          "kicker": "The problem",
+          "headline": "People tackling problems bigger than themselves.",
+          "body": "With hard work and limited resources, they build solutions for their communities. It's difficult, and it leaves little time to share their stories with the world. Yet in today's digital world, that is essential to gather the support and resources needed to keep making an impact."
+        },
+        {
+          "image": "",
+          "kicker": "This is where we come in",
+          "headline": "From awareness to change.",
+          "body": "We use skills learned in the agency world to support communities and campaigns already creating change. We help turn awareness into change through:\n- Documentary & film\n- Awareness campaigns\n- Community partnerships\n- Fundraising & activation"
+        }
+      ]
+    },
+    {
       "id": "parked",
       "stage": "ideas",
       "title": "Parked tiles · for a future campaign",
